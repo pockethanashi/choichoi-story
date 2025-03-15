@@ -12,7 +12,8 @@ let currentPage = 1;
 // 🔹 小噺一覧を取得して表示
 function fetchStories() {
     console.log("📢 データ取得を開始...");
-    fetch(`${API_URL}?action=get`)
+//    fetch(`${API_URL}?action=get`)
+    fetch(`${API_URL}?action=get`, { mode: "cors" }) // 🔥 CORSを有効化
     .then(response => response.json())
     .then(data => {
         console.log("✅ レスポンス受信:", data);
