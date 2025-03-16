@@ -1,8 +1,8 @@
 //const API_URL = "https://script.google.com/macros/s/AKfycbySmKN_CVGf7pOD6QPfSJ1qLQvpA5GBBsRMyrpxQIpy-elMUmkGVBjM2z_ZKTeUwrd2Xg/exec?action=post";
-const API_URL = "https://script.google.com/macros/s/AKfycbyulAkkCtRCDoihyMtEeA47tW_UNUps5-Kv4Zs-0ybRPAvDh1HorIn1PbwUoBDGbRxO4A/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbxuBnwMPDCwFdEANYAAu_RMH2RRMQ2fUs9gPMhNaBzbH-lOU42Xz6Lq2FAKF3-LBRtoWw/exec";
 
 document.getElementById("post-form").addEventListener("submit", function(event) {
-    event.preventDefault();
+    event.preventDefault(); // フォームのデフォルト送信を防ぐ
 
     const title = document.getElementById("title").value.trim();
     const body = document.getElementById("body").value.trim();
@@ -15,11 +15,11 @@ document.getElementById("post-form").addEventListener("submit", function(event) 
         return;
     }
 
+    // **✅ `action: "post"` を追加！**
     const postData = { action: "post", title, body, genre, author, profile };
 
     fetch(API_URL, {
         method: "POST",
-        mode: "cors",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(postData)
     })
@@ -32,7 +32,7 @@ document.getElementById("post-form").addEventListener("submit", function(event) 
     .then(data => {
         if (data.success) {
             alert("投稿が完了しました！");
-            window.location.href = "index.html";
+            window.location.href = "index.html"; // ✅ 投稿完了後にトップページへリダイレクト
         } else {
             alert("投稿に失敗しました。エラー: " + data.error);
         }
