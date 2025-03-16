@@ -1,4 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbwv_nIGbefNBDLPEPOrZIc2RnbQIy4NOpHNGDokaz1AJiYbGK0dvInqaTgyurHbX27T0w/exec?action=post";
+const API_URL = "https://script.google.com/macros/s/AKfycbxQVV-S2y2uAXjEN6g-HbXF9B3RkcW9hR0QDr1zV91YuN8xLUHpId9I0WNXEgji2p9gqA/exec?action=post";
 
 document.getElementById("post-form").addEventListener("submit", function(event) {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
@@ -14,11 +14,12 @@ document.getElementById("post-form").addEventListener("submit", function(event) 
         return;
     }
 
-    const postData = { title, body, genre, author, profile };
+    // **✅ `action: "post"` を追加！**
+    const postData = { action: "post", title, body, genre, author, profile };
 
     fetch(API_URL, {
         method: "POST",
-        mode: "cors",  // ✅ CORS対応
+        mode: "cors", // ✅ ここを追加！
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(postData)
     })
@@ -41,3 +42,4 @@ document.getElementById("post-form").addEventListener("submit", function(event) 
         alert("エラーが発生しました。再試行してください。");
     });
 });
+
