@@ -12,6 +12,7 @@ let currentPage = 1;
 // 🔹 小噺一覧を取得して表示
 function fetchStories() {
     console.log("📢 データ取得を開始...");
+//    fetch(`${API_URL}?action=get`)
     fetch(`${API_URL}?action=get`, { mode: "cors" }) // 🔥 CORSを有効化
     .then(response => response.json())
     .then(data => {
@@ -27,6 +28,10 @@ function fetchStories() {
 // 🔹 ページネーション対応の表示処理
 function displayStories() {
     const container = document.getElementById("stories-container");
+    if (!container) {
+        console.error("⚠️ stories-container が見つかりません");
+        return;
+    }
     container.innerHTML = "";
 
     const startIndex = (currentPage - 1) * STORIES_PER_PAGE;
@@ -41,13 +46,14 @@ function displayStories() {
     updatePagination();
 }
 
-// 🔹 小噺の HTML 要素を作成
+// 🔹 小噺の HTML 要素を作成（PREVIEW_LINES に対応）
 function createStoryElement(story) {
     const storyDiv = document.createElement("div");
     storyDiv.classList.add("story");
 
+    // 🔸 改行を `<br>` に変換して表示し、指定行数だけ表示
     const storyLines = story.body.split("\n");
-    const previewText = storyLines.slice(0, PREVIEW_LINES).join("<br>");
+    const previewText = storyLines.slice(0, PREVIEW_LINES).join("<br>"); // **PREVIEW_LINES 行まで表示**
 
     storyDiv.innerHTML = `
         <h2>${story.title}</h2>
@@ -65,7 +71,11 @@ function createStoryElement(story) {
 // 🔹 ページネーションの更新
 function updatePagination() {
     const totalPages = Math.ceil(stories.length / STORIES_PER_PAGE);
-    document.getElementById("pageNumber").innerText = `${currentPage} / ${totalPages}`;
+    const pageNumberElem = document.getElementById("pageNumber");
+    if (pageNumberElem) {
+        pageNumberElem.innerText = `${currentPage} / ${totalPages}`;
+    }
+
     document.getElementById("prevPage").disabled = currentPage === 1;
     document.getElementById("nextPage").disabled = currentPage === totalPages;
 }
@@ -87,6 +97,27 @@ document.getElementById("nextPage").addEventListener("click", () => {
     }
 });
 
+// 🔹 プロフィールモーダルを表示
+function showProfile(author, profile) {
+    const modal = document.getElementById("profile-modal");
+    const profileTitle = document.getElementById("profile-title");
+    const profileText = document.getElementById("profile-text");
 
+    profileTitle.innerText = `作者: ${author}`;
+    profileText.innerText = profile;
 
+    modal.style.display = "block";
+
+    // ✅ モーダルを閉じる処理
+    document.querySelector(".close").addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+
+    // ✅ モーダル外をクリックして閉じる
+    window.addEventListener("click", (event) => {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+}
 
