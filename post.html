@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小噺投稿</title>
+    <link rel="stylesheet" href="styles/post.css">
+</head>
+<body>
+    <header>
+        <h1>小噺投稿</h1>
+    </header>
+    <main>
+        <form id="post-form">
+            <label for="title">タイトル:</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="body">本文:</label>
+            <textarea id="body" name="body" rows="6" required></textarea>
+
+            <label for="genre">ジャンル:</label>
+            <select id="genre" name="genre" required>
+                <option value="日常">日常</option>
+                <option value="SF">SF</option>
+                <option value="ファンタジー">ファンタジー</option>
+                <option value="ホラー">ホラー</option>
+                <option value="コメディ">コメディ</option>
+            </select>
+
+            <label for="author">作者名:</label>
+            <input type="text" id="author" name="author" required>
+
+            <label for="profile">自己紹介:</label>
+            <textarea id="profile" name="profile" rows="3"></textarea>
+
+            <button type="submit">投稿する</button>
+        </form>
+    </main>
+    <script src="scripts/post.js"></script>
+</body>
+</html>
