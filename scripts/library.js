@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", fetchStories);
 
-const API_URL = "https://script.google.com/macros/s/AKfycbzJMaRiwhcr7BHdRnysuCIv_O-cGVSiI1U_c-mWWvnsaquVlNtvpg-cRlCsrN4PsGlRZw/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbzMb318qIcqS2gnBz4wCuP5bbcestD_yOzgADghcRfYLdn9B7ORHdY6CUbhjAf0R12ksA/exec";
 
 
 const STORIES_PER_PAGE = 5; // 1ページあたりの最大表示数
@@ -13,16 +13,19 @@ let currentPage = 1;
 function fetchStories() {
     console.log("📢 データ取得を開始...");
 //    fetch(`${API_URL}?action=get`)
-    fetch(`${API_URL}?action=get`, { mode: "cors" }) // 🔥 CORSを有効化
-    .then(response => response.json())
-    .then(data => {
-        console.log("✅ レスポンス受信:", data);
-        stories = data;
-        displayStories();
-    })
-    .catch(error => {
-        console.error("❌ データ取得エラー:", error);
-    });
+    fetch(`${API_URL}?action=get`)
+     .then(response => {
+       if (!response.ok) throw new Error(`HTTPエラー! ステータス: ${response.status}`);
+       return response.json();
+     })
+     .then(data => {
+       console.log("✅ データ取得成功:", data);
+       displayStories(data);
+     })
+     .catch(error => {
+      console.error("❌ データ取得エラー:", error);
+     });
+
 }
 
 // 🔹 ページネーション対応の表示処理
