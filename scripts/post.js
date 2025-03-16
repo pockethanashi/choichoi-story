@@ -1,4 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbwXGJHbKqVekRJeQVeoQc1rByKUC5HwXSuniWhlEx-C201-bEZNoIn5yGTsbjFryHfifg/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbzhWpf4bjPK8V6LYKGkRlx9YH9qaeqYx9BLIL8K_h0NOQpRogFYgWuyHcjfEFA-7vOPLg/exec?action=post";
 
 document.getElementById("post-form").addEventListener("submit", function(event) {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
@@ -14,7 +14,7 @@ document.getElementById("post-form").addEventListener("submit", function(event) 
         return;
     }
 
-    // **✅ `action: "post"` を追加！**
+    // **✅ `action: "post"` を追加**
     const postData = { action: "post", title, body, genre, author, profile };
 
     fetch(API_URL, {
@@ -22,13 +22,12 @@ document.getElementById("post-form").addEventListener("submit", function(event) 
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(postData)
     })
-//    .then(response => {
-//        if (!response.ok) {
-//            throw new Error(`HTTPエラー! ステータス: ${response.status}`);
-//        }
-//        return response.json();
-//    })
-    .then(response => response.json()) 
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTPエラー! ステータス: ${response.status}`);
+        }
+        return response.json();
+    })
     .then(data => {
         if (data.success) {
             alert("投稿が完了しました！");
@@ -42,12 +41,3 @@ document.getElementById("post-form").addEventListener("submit", function(event) 
         alert("エラーが発生しました。再試行してください。");
     });
 });
-
-
-
-
-
-
-
-
-
