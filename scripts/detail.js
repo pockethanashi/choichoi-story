@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", fetchStoryDetail);
 
-const API_URL = "https://script.google.com/macros/s/AKfycbwOXXZ_kzDfvhN3BR1dxkerTKeKVJF6hXSM9aCrZMCcmbWrH-K8wQugHrnT54vMRPoW-g/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbwXGJHbKqVekRJeQVeoQc1rByKUC5HwXSuniWhlEx-C201-bEZNoIn5yGTsbjFryHfifg/exec";
 
 // 🔹 URLからタイトルを取得
 function getStoryTitleFromURL() {
