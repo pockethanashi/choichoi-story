@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", fetchStories);
 
-const API_URL = "https://script.google.com/macros/s/AKfycbzlx7JOBtuMO2K8NPPTAO3R0iDNKImnpNrZ_zlLsG80bt1znF2g8ZJ3-b4q4hPbMrPorg/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbwdmoy_43KsjMLt-UdA87xk5tIZrpXKhI58BJleBYkQQiloyaiGl_G6Eil1fFf4v9uK7Q/exec";
 
 
-const STORIES_PER_PAGE = 5; // 1ページあたりの最大表示数
-const PREVIEW_LINES = 10; // トップページで表示する本文の行数
+const STORIES_PER_PAGE = 5;
+const PREVIEW_LINES = 10;
 
 let stories = [];
 let currentPage = 1;
@@ -12,8 +12,7 @@ let currentPage = 1;
 // 🔹 小噺一覧を取得して表示
 function fetchStories() {
     console.log("📢 データ取得を開始...");
-//    fetch(`${API_URL}?action=get`)
-    fetch(`${API_URL}?action=get`, { mode: "cors" }) // 🔥 CORSを有効化
+    fetch(`${API_URL}?action=get`, { mode: "cors" })
     .then(response => response.json())
     .then(data => {
         console.log("✅ レスポンス受信:", data);
@@ -25,7 +24,7 @@ function fetchStories() {
     });
 }
 
-// 🔹 ページネーション対応の表示処理
+// 🔹 取得したデータを HTML に表示
 function displayStories() {
     const container = document.getElementById("stories-container");
     if (!container) {
@@ -46,14 +45,13 @@ function displayStories() {
     updatePagination();
 }
 
-// 🔹 小噺の HTML 要素を作成（PREVIEW_LINES に対応）
+// 🔹 小噺の HTML 要素を作成
 function createStoryElement(story) {
     const storyDiv = document.createElement("div");
     storyDiv.classList.add("story");
 
-    // 🔸 改行を `<br>` に変換して表示し、指定行数だけ表示
     const storyLines = story.body.split("\n");
-    const previewText = storyLines.slice(0, PREVIEW_LINES).join("<br>"); // **PREVIEW_LINES 行まで表示**
+    const previewText = storyLines.slice(0, PREVIEW_LINES).join("<br>");
 
     storyDiv.innerHTML = `
         <h2>${story.title}</h2>
@@ -66,6 +64,29 @@ function createStoryElement(story) {
     `;
 
     return storyDiv;
+}
+
+// 🔹 いいねボタンを押したときの処理
+function likeStory(title) {
+    console.log(`👍 いいねボタンが押されました: ${title}`);
+
+    fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "like", title }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            console.log("✅ いいね更新成功", data);
+            document.getElementById(`likes-${title}`).innerText = data.likes;
+        } else {
+            console.error("❌ いいね更新失敗:", data.error);
+        }
+    })
+    .catch(error => {
+        console.error("❌ いいね送信エラー:", error);
+    });
 }
 
 // 🔹 ページネーションの更新
@@ -97,28 +118,6 @@ document.getElementById("nextPage").addEventListener("click", () => {
     }
 });
 
-// 🔹 プロフィールモーダルを表示
-function showProfile(author, profile) {
-    const modal = document.getElementById("profile-modal");
-    const profileTitle = document.getElementById("profile-title");
-    const profileText = document.getElementById("profile-text");
 
-    profileTitle.innerText = `作者: ${author}`;
-    profileText.innerText = profile;
-
-    modal.style.display = "block";
-
-    // ✅ モーダルを閉じる処理
-    document.querySelector(".close").addEventListener("click", () => {
-        modal.style.display = "none";
-    });
-
-    // ✅ モーダル外をクリックして閉じる
-    window.addEventListener("click", (event) => {
-        if (event.target === modal) {
-            modal.style.display = "none";
-        }
-    });
-}
 
 
