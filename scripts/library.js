@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", fetchStories);
 
-const API_URL = "https://script.google.com/macros/s/AKfycbw3c-nDajMqRibcPQTWtk0yy80JX3gbAOJ5oSI1W11E7Qcg4ZsZZC87Qg8cpyfWDtICyQ/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbxkn0e_k_2wTwUITx9rr22f9-Ka19411RwXKb-oK3wNyDvSDYt3-HhYJJVwEpd41RXOrg/exec";
 
 
-const STORIES_PER_PAGE = 5;
-const PREVIEW_LINES = 10;
+const STORIES_PER_PAGE = 5; // 1ページあたりの最大表示数
+const PREVIEW_LINES = 10; // トップページで表示する本文の行数
 
 let stories = [];
 let currentPage = 1;
@@ -12,7 +12,7 @@ let currentPage = 1;
 // 🔹 小噺一覧を取得して表示
 function fetchStories() {
     console.log("📢 データ取得を開始...");
-    fetch(`${API_URL}?action=get`, { mode: "cors" })
+    fetch(`${API_URL}?action=get`, { mode: "cors" }) // 🔥 CORSを有効化
     .then(response => response.json())
     .then(data => {
         console.log("✅ レスポンス受信:", data);
@@ -24,13 +24,9 @@ function fetchStories() {
     });
 }
 
-// 🔹 取得したデータを HTML に表示
+// 🔹 ページネーション対応の表示処理
 function displayStories() {
     const container = document.getElementById("stories-container");
-    if (!container) {
-        console.error("⚠️ stories-container が見つかりません");
-        return;
-    }
     container.innerHTML = "";
 
     const startIndex = (currentPage - 1) * STORIES_PER_PAGE;
@@ -66,37 +62,10 @@ function createStoryElement(story) {
     return storyDiv;
 }
 
-// 🔹 いいねボタンを押したときの処理
-function likeStory(title) {
-    console.log(`👍 いいねボタンが押されました: ${title}`);
-
-    fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "like", title }),
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            console.log("✅ いいね更新成功", data);
-            document.getElementById(`likes-${title}`).innerText = data.likes;
-        } else {
-            console.error("❌ いいね更新失敗:", data.error);
-        }
-    })
-    .catch(error => {
-        console.error("❌ いいね送信エラー:", error);
-    });
-}
-
 // 🔹 ページネーションの更新
 function updatePagination() {
     const totalPages = Math.ceil(stories.length / STORIES_PER_PAGE);
-    const pageNumberElem = document.getElementById("pageNumber");
-    if (pageNumberElem) {
-        pageNumberElem.innerText = `${currentPage} / ${totalPages}`;
-    }
-
+    document.getElementById("pageNumber").innerText = `${currentPage} / ${totalPages}`;
     document.getElementById("prevPage").disabled = currentPage === 1;
     document.getElementById("nextPage").disabled = currentPage === totalPages;
 }

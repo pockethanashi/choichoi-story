@@ -3,36 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>小噺共有サイト</title>
-    <link rel="stylesheet" href="styles/library.css">
+    <title>小噺ライブラリ</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>小噺共有サイト</h1>
-    </header>
-    <main>
-        <div id="stories-container"></div>
-        
-        <!-- 🔹 ページネーション用のボタン -->
-        <div class="pagination">
-            <button id="prevPage">＜ 前へ</button>
-            <span id="pageNumber">1 / 1</span>
-            <button id="nextPage">次へ ＞</button>
+    <h1>小噺ライブラリ</h1>
+    <div id="stories-container"></div>
+    <div class="pagination">
+        <button id="prevPage">前へ</button>
+        <span id="pageNumber"></span>
+        <button id="nextPage">次へ</button>
+    </div>
+
+    <!-- プロフィールモーダル -->
+    <div id="profile-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="profile-title"></h2>
+            <p id="profile-text"></p>
         </div>
-        
-        <div id="profile-modal" class="modal">
-        　<div class="modal-content">
-    　　　　　<span class="close">&times;</span>
-   　　　　　 <h2 id="profile-title"></h2>
-    　　　　　<p id="profile-text"></p>
-  　　　　　　</div>
-　　　　　　</div>
-        
-        
-    </main>
-    <script src="scripts/library.js"></script>
+    </div>
+
+    <script src="library.js"></script>
 </body>
 </html>
-
-
-
