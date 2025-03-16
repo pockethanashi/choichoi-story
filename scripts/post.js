@@ -1,4 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbyQWszPI_QLvhJOBzwm1SqiFgd2AoRGV3hQ4_VBwhP9K_yY5CzbNW1ZIfT7h8br9d2Lyg/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbwOXXZ_kzDfvhN3BR1dxkerTKeKVJF6hXSM9aCrZMCcmbWrH-K8wQugHrnT54vMRPoW-g/exec";
 
 document.getElementById("post-form").addEventListener("submit", function(event) {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
