@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", fetchStoryDetail);
 
-const API_URL = "https://script.google.com/macros/s/AKfycbzKiwxtMNfSz_LGRJGrReXlTHsmLfUqlEKquH3mEVXbyfQ6KUdzZYqo2k2fs0aunZFSWQ/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbxeEKeiycbVScaWJW0Sky6NiXh6LvE-9wd6EjwVkqeTuA3vlNwt-q_oql3PLHvIsKNxXg/exec";
 
 // 🔹 URLからタイトルを取得
 function getStoryTitleFromURL() {
@@ -46,17 +46,19 @@ function displayStory(story) {
 }
 
 // 🔹 いいねボタンを押したときの処理（スプレッドシートに反映）
+// 🔹 いいねボタンを押したときの処理
 function likeStory(title) {
     console.log(`👍 いいねボタンが押されました: ${title}`);
 
     fetch(API_URL, {
         method: "POST",
-        mode: "no-cors",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title }),
+        body: JSON.stringify({ action: "like", title }),
     })
     .then(response => {
-        console.log("🔄 いいね送信完了", response);
+        if (!response.ok) {
+            throw new Error(`HTTPエラー! ステータス: ${response.status}`);
+        }
         return response.json();
     })
     .then(data => {
@@ -72,6 +74,7 @@ function likeStory(title) {
         console.error("❌ いいね送信エラー:", error);
     });
 }
+
 
 // 🔹 いいね数を更新
 function updateLikeCount(title, newLikes) {
