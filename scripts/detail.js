@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", fetchStoryDetail);
 
-const API_URL = "https://script.google.com/macros/s/AKfycbxkn0e_k_2wTwUITx9rr22f9-Ka19411RwXKb-oK3wNyDvSDYt3-HhYJJVwEpd41RXOrg/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbwO5c8c79CmEquDriBSr_6eSrP53lkLZ_BJl8M7BHF_UyVrWcZYE_G9hf01NHy6le7pPg/exec";
 
 // 🔹 URLからタイトルを取得
 function getStoryTitleFromURL() {
@@ -45,6 +45,44 @@ function displayStory(story) {
     `;
 }
 
+// 🔹 いいねボタンを押したときの処理（スプレッドシートに反映）
+function likeStory(title) {
+    console.log(`👍 いいねボタンが押されました: ${title}`);
+
+    fetch(API_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title }),
+    })
+    .then(response => {
+        console.log("🔄 いいね送信完了", response);
+        return response.json();
+    })
+    .then(data => {
+        console.log("✅ いいね更新成功", data);
+        if (data.success) {
+            alert(`「${title}」のいいねが ${data.likes} に増えました！`);
+            updateLikeCount(title, data.likes);
+        } else {
+            console.error("❌ いいね更新失敗:", data.error);
+        }
+    })
+    .catch(error => {
+        console.error("❌ いいね送信エラー:", error);
+    });
+}
+
+// 🔹 いいね数を更新
+function updateLikeCount(title, newLikes) {
+    const likeElement = document.getElementById(`likes-${title}`);
+    if (likeElement) {
+        likeElement.innerText = newLikes;
+    } else {
+        console.error(`⚠️ いいね表示要素が見つかりませんでした: ${title}`);
+    }
+}
+
 // 🔹 プロフィールモーダルを表示
 function showProfile(author, profile) {
     const modal = document.getElementById("profile-modal");
@@ -56,7 +94,7 @@ function showProfile(author, profile) {
 
     modal.style.display = "block";
 
-    // ✅ モーダルを閉じる処理を関数内で設定
+    // ✅ モーダルを閉じる処理
     document.querySelector(".close").addEventListener("click", () => {
         modal.style.display = "none";
     });
