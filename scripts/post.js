@@ -1,6 +1,5 @@
 const API_URL = "https://script.google.com/macros/s/AKfycbzqJtouU5qJhlKeFTrb9EVWW9TKFhjYCRidvh_bvm2j4QzYIqNbqGY2G0eRVWupwJbkww/exec";
 
-
 document.getElementById("post-form").addEventListener("submit", function(event) {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
 
@@ -15,14 +14,20 @@ document.getElementById("post-form").addEventListener("submit", function(event) 
         return;
     }
 
-    const postData = { title, body, genre, author, profile };
+    // **✅ `action: "post"` を追加！**
+    const postData = { action: "post", title, body, genre, author, profile };
 
     fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(postData)
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTPエラー! ステータス: ${response.status}`);
+        }
+        return response.json();
+    })
     .then(data => {
         if (data.success) {
             alert("投稿が完了しました！");
@@ -36,10 +41,6 @@ document.getElementById("post-form").addEventListener("submit", function(event) 
         alert("エラーが発生しました。再試行してください。");
     });
 });
-
-
-
-
 
 
 
