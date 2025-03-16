@@ -1,5 +1,5 @@
 //const API_URL = "https://script.google.com/macros/s/AKfycbySmKN_CVGf7pOD6QPfSJ1qLQvpA5GBBsRMyrpxQIpy-elMUmkGVBjM2z_ZKTeUwrd2Xg/exec?action=post";
-const API_URL = "https://script.google.com/macros/s/AKfycbxeEKeiycbVScaWJW0Sky6NiXh6LvE-9wd6EjwVkqeTuA3vlNwt-q_oql3PLHvIsKNxXg/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbxUWNr-kxxpN8n_LBpu9UKeSspYmdwQgyQnnrYBrxsgEtEXZbl1xr5F3Y0fTZI3v0Hylg/exec";
 
 document.getElementById("post-form").addEventListener("submit", function(event) {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
