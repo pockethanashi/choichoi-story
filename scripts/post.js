@@ -1,28 +1,23 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbzKUrcNdNsF_-Z1lFnDD9ggZXTROw1oPby0sTyR283ENjnmPYaePaOrIYOyjjn0fuOvTw/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbx765nfPmvXK06ghoG3x_SzZf5L6fYx_q5u9cDtQeqrQJOUoV_sUzuTV70y0qU0zqCkyQ/exec";
 
-document.getElementById("post-form").addEventListener("submit", function (event) {
-    event.preventDefault();
+
+document.getElementById("post-form").addEventListener("submit", function(event) {
+    event.preventDefault(); // フォームのデフォルト送信を防ぐ
 
     const title = document.getElementById("title").value.trim();
     const body = document.getElementById("body").value.trim();
-    const genre = document.getElementById("genre").value.trim();
+    const genre = document.getElementById("genre").value;
     const author = document.getElementById("author").value.trim();
     const profile = document.getElementById("profile").value.trim();
 
-    if (!title || !body || !genre || !author) {
-        alert("タイトル・本文・ジャンル・作者名は必須です！");
+    if (!title || !body || !author) {
+        alert("タイトル、本文、作者名は必須です。");
         return;
     }
 
-    const postData = {
-        title: title,
-        body: body,
-        genre: genre,
-        author: author,
-        profile: profile
-    };
+    const postData = { title, body, genre, author, profile };
 
-    fetch(API_URL, {  // ✅ ここで `API_URL` を適用
+    fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(postData)
@@ -30,15 +25,27 @@ document.getElementById("post-form").addEventListener("submit", function (event)
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            alert("✅ 投稿が完了しました！");
-            window.location.href = "index.html"; // 投稿後にトップページへリダイレクト
+            alert("投稿が完了しました！");
+            window.location.href = "index.html"; // 投稿完了後にトップページへリダイレクト
         } else {
-            console.error("❌ 投稿エラー:", data.error);
-            alert("投稿に失敗しました：" + data.error);
+            alert("投稿に失敗しました。エラー: " + data.error);
         }
     })
     .catch(error => {
         console.error("❌ 投稿エラー:", error);
-        alert("投稿中にエラーが発生しました。");
+        alert("エラーが発生しました。再試行してください。");
     });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
