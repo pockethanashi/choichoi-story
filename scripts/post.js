@@ -1,5 +1,6 @@
 //const API_URL = "https://script.google.com/macros/s/AKfycbySmKN_CVGf7pOD6QPfSJ1qLQvpA5GBBsRMyrpxQIpy-elMUmkGVBjM2z_ZKTeUwrd2Xg/exec?action=post";
-const API_URL = "https://script.google.com/macros/s/AKfycbz7LCbkSU_bmxnfBMU64gKw-cEkVXNacjE53e9bpImucAKMedm6oW9jEZPLTQcazP9UUQ/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbyy7gCW_gcQxJBw1KveLckwKZ-v0jwhpQciad5g7k77GyFEPnBAIgCRFGg064XMwr7zZQ/exec";
+
 
 document.getElementById("post-form").addEventListener("submit", function(event) {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
@@ -23,10 +24,10 @@ document.getElementById("post-form").addEventListener("submit", function(event) 
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(postData)
     })
-    .then(response => response.json())  // ✅ `no-cors` は不要に
+    .then(response => response.json())
     .then(data => {
         if (data.success) {
-            alert("投稿が完了しました！");
+            alert("投稿が送信されました！");
             window.location.href = "index.html"; // ✅ 投稿完了後にトップページへリダイレクト
         } else {
             alert("投稿に失敗しました。エラー: " + data.error);
