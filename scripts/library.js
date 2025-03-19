@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", fetchStories);
 
-const API_URL = "https://script.google.com/macros/s/AKfycbzCMBjmUVuve4ioFxXQRcFbZqZbYCmSDw-eO7ierCNFtWws1VkFS8MNZOo3b3GW9dmqsQ/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbzg6-CFR-46ZvkjkmQ0Ij0CKjTegTqdl73NG8KYYIGYcqixyjzHcN5V4wyd-TqpyIFPwQ/exec";
 
 
 
@@ -76,14 +76,13 @@ function likeStory(title) {
 
     fetch(API_URL, {
         method: "POST",
+        mode: "no-cors",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title }),
     })
     .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTPエラー! ステータス: ${response.status}`);
-        }
-        return response.json();  // ✅ `no-cors` を削除したので、正常にレスポンスを解析
+        console.log("🔄 いいね送信完了", response);
+        return response.json();
     })
     .then(data => {
         console.log("✅ いいね更新成功", data);
