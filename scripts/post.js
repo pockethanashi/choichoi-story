@@ -15,12 +15,11 @@ document.getElementById("post-form").addEventListener("submit", function(event) 
         return;
     }
 
-    // **✅ `action: "post"` を追加**
+    // **✅ `action: "post"` を追加！**
     const postData = { action: "post", title, body, genre, author, profile };
 
     fetch(API_URL, {
         method: "POST",
-        mode: "cors",  // ✅ `no-cors` ではなく `cors` を指定
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(postData)
     })
@@ -32,7 +31,7 @@ document.getElementById("post-form").addEventListener("submit", function(event) 
     })
     .then(data => {
         if (data.success) {
-            alert("投稿が送信されました！");
+            alert("投稿が完了しました！");
             window.location.href = "index.html"; // ✅ 投稿完了後にトップページへリダイレクト
         } else {
             alert("投稿に失敗しました。エラー: " + data.error);
