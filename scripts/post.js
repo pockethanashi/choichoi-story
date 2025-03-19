@@ -1,5 +1,5 @@
 //const API_URL = "https://script.google.com/macros/s/AKfycbySmKN_CVGf7pOD6QPfSJ1qLQvpA5GBBsRMyrpxQIpy-elMUmkGVBjM2z_ZKTeUwrd2Xg/exec?action=post";
-const API_URL = "https://script.google.com/macros/s/AKfycbxUWNr-kxxpN8n_LBpu9UKeSspYmdwQgyQnnrYBrxsgEtEXZbl1xr5F3Y0fTZI3v0Hylg/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbz7LCbkSU_bmxnfBMU64gKw-cEkVXNacjE53e9bpImucAKMedm6oW9jEZPLTQcazP9UUQ/exec";
 
 document.getElementById("post-form").addEventListener("submit", function(event) {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
@@ -15,6 +15,7 @@ document.getElementById("post-form").addEventListener("submit", function(event) 
         return;
     }
 
+    // **✅ `action: "post"` を追加して GAS 側と連携**
     const postData = { action: "post", title, body, genre, author, profile };
 
     fetch(API_URL, {
@@ -22,7 +23,7 @@ document.getElementById("post-form").addEventListener("submit", function(event) 
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(postData)
     })
-    .then(response => response.json()) 
+    .then(response => response.json())  // ✅ `no-cors` は不要に
     .then(data => {
         if (data.success) {
             alert("投稿が完了しました！");
