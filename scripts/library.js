@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", fetchStories);
 
-const API_URL = "https://script.google.com/macros/s/AKfycbxl8Pitjrns6WbEuHa1al22OA4EvedAERaV9VNYBuYomwVe-ssuH2eRhgLW7lnKc88dqg/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbzaMYpD-r1tCmtklG6n2sKhI3Y4O8M_lC34VDARHdg1JsnZ2Rw6139A6OLTaHqoIvhZuw/exec";
 
 
 
