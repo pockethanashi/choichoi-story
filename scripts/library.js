@@ -76,13 +76,14 @@ function likeStory(title) {
 
     fetch(API_URL, {
         method: "POST",
-        mode: "no-cors",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title }),
     })
     .then(response => {
-        console.log("🔄 いいね送信完了", response);
-        return response.json();
+        if (!response.ok) {
+            throw new Error(`HTTPエラー! ステータス: ${response.status}`);
+        }
+        return response.json();  // ✅ `no-cors` を削除したので、正常にレスポンスを解析
     })
     .then(data => {
         console.log("✅ いいね更新成功", data);
@@ -97,6 +98,7 @@ function likeStory(title) {
         console.error("❌ いいね送信エラー:", error);
     });
 }
+
 
 // 🔹 いいね数を更新
 function updateLikeCount(title, newLikes) {
