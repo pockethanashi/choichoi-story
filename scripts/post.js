@@ -13,17 +13,14 @@ document.getElementById("confirm-btn").addEventListener("click", function () {
         return;
     }
 
-    // URLにデータをエンコードして渡す
     const params = new URLSearchParams({
-        title: encodeURIComponent(title),
-        body: encodeURIComponent(body),
-        genre: encodeURIComponent(genre),
-        author: encodeURIComponent(author),
-        profile: encodeURIComponent(profile),
+        title,
+        body,
+        genre,
+        author,
+        profile,
     });
 
     window.location.href = `confirm.html?${params.toString()}`;
 });
-
-
 
