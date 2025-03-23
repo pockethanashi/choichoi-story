@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", fetchStories);
 
-const API_URL = "https://script.google.com/macros/s/AKfycbx3ue1B1R_UU3wZrZ_jY4X11Ius_K8P1f36IB15KF-9aA14xufVd2bbzZ4MWJBLNIKckA/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbx-_ZWmwFS4-dOlzJtwnLjuO5qAoKp3XKrtibin9jD628rDHEH47T_H3_wrJODSSYIq_g/exec";
 
 console.log("📤 投稿データを送信:", postData);
 
