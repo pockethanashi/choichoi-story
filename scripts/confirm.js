@@ -37,7 +37,7 @@ document.getElementById("submit-btn").addEventListener("click", function () {
         profile
     };
 
-    const API_URL = "https://script.google.com/macros/s/AKfycbx3ue1B1R_UU3wZrZ_jY4X11Ius_K8P1f36IB15KF-9aA14xufVd2bbzZ4MWJBLNIKckA/exec"; 
+    const API_URL = "https://script.google.com/macros/s/AKfycbzuZhyFiJsY0OPIkiR3tpEo-tAQP2qT-e4Q0-x6ztbT9pwvIgAeYiGiJEPv713P-Iwk/exec"; 
 
     fetch(API_URL, {
         method: "POST",
