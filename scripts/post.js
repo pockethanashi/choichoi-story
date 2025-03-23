@@ -1,5 +1,5 @@
 //const API_URL = "https://script.google.com/macros/s/AKfycbySmKN_CVGf7pOD6QPfSJ1qLQvpA5GBBsRMyrpxQIpy-elMUmkGVBjM2z_ZKTeUwrd2Xg/exec?action=post";
-const API_URL = "https://script.google.com/macros/s/AKfycbwoByFYlBKi6oDKze7ENI2JmzCN6S6x41IkfJXjibyp_aWeIlY6_7hXt_Xn-EDF1-pojg/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbw-bKXrXRt77f8Q6DwMVZCaEJ0VjFpI3fvAtMw2vHl3IU9eT0Mqq77lUOoCRLjMGhSdEw/exec";
 
 document.getElementById("post-form").addEventListener("submit", function(event) {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
@@ -15,13 +15,20 @@ document.getElementById("post-form").addEventListener("submit", function(event) 
         return;
     }
 
-    // **📨 投稿データ**
-    const postData = { title, body, genre, author, profile };
+    // ✅ action を含める
+    const postData = {
+        action: "post",
+        title,
+        body,
+        genre,
+        author,
+        profile
+    };
     
     fetch(API_URL, {
         method: "POST",
         headers: {
-        "Content-Type": "application/json"
+            "Content-Type": "application/json"
         },
         body: JSON.stringify(postData)
     })    
