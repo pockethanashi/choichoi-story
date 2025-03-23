@@ -70,33 +70,28 @@ function createStoryElement(story) {
     return storyDiv;
 }
 
+
 // 🔹 いいねボタンを押したときの処理（スプレッドシートに反映）
 function likeStory(title) {
     console.log(`👍 いいねボタンが押されました: ${title}`);
 
     fetch(API_URL, {
         method: "POST",
-        mode: "no-cors",
+        mode: "no-cors",  // no-corsモードではレスポンスの内容を取得できない
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title }),
     })
-    .then(response => {
-        console.log("🔄 いいね送信完了", response);
-        return response.json();
-    })
-    .then(data => {
-        console.log("✅ いいね更新成功", data);
-        if (data.success) {
-            alert(`「${title}」のいいねが ${data.likes} に増えました！`);
-            updateLikeCount(title, data.likes);
-        } else {
-            console.error("❌ いいね更新失敗:", data.error);
-        }
+    .then(() => {
+        // レスポンスが取れないため、成功した前提で通知
+        alert(`「${title}」に いいねしました！（反映まで少し時間がかかる場合があります）`);
     })
     .catch(error => {
         console.error("❌ いいね送信エラー:", error);
+        alert("いいねに失敗しました。もう一度お試しください。");
     });
 }
+
+
 
 
 // 🔹 いいね数を更新
