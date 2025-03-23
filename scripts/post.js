@@ -1,5 +1,6 @@
 //const API_URL = "https://script.google.com/macros/s/AKfycbySmKN_CVGf7pOD6QPfSJ1qLQvpA5GBBsRMyrpxQIpy-elMUmkGVBjM2z_ZKTeUwrd2Xg/exec?action=post";
-const API_URL = "https://script.google.com/macros/s/AKfycbw-bKXrXRt77f8Q6DwMVZCaEJ0VjFpI3fvAtMw2vHl3IU9eT0Mqq77lUOoCRLjMGhSdEw/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbz2-cHKNVuoBbCVLIuh9Vx9L6UaZJ_Pk09zJj9qBueDgbUhtf0MOPawtY7Bh4ZgcRt9NA/exec";
+
 
 document.getElementById("post-form").addEventListener("submit", function(event) {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
@@ -46,4 +47,5 @@ document.getElementById("post-form").addEventListener("submit", function(event) 
         alert("エラーが発生しました。再試行してください。");
     });
 });
+
 
