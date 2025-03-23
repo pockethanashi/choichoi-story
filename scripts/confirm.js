@@ -1,37 +1,35 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbymcSD-LKzCXuKJTSuCIBywQoggRNlXL--CmYTHsUPT2IcdiY5CzNtgZLUEzyz1C5ZuaQ/exec";
+//const API_URL = "https://script.google.com/macros/s/AKfycbymcSD-LKzCXuKJTSuCIBywQoggRNlXL--CmYTHsUPT2IcdiY5CzNtgZLUEzyz1C5ZuaQ/exec";
 
-// ページ読み込み時にローカルストレージからデータを表示
-document.addEventListener("DOMContentLoaded", () => {
+// 📌 URLパラメータから値を取得し、HTMLに表示
+document.addEventListener("DOMContentLoaded", function () {
     const params = new URLSearchParams(window.location.search);
 
-    const title = params.get("title") || "";
-    const body = params.get("body") || "";
-    const genre = params.get("genre") || "";
-    const author = params.get("author") || "";
-    const profile = params.get("profile") || "";
+    const title = decodeURIComponent(params.get("title") || "");
+    const body = decodeURIComponent(params.get("body") || "");
+    const genre = decodeURIComponent(params.get("genre") || "");
+    const author = decodeURIComponent(params.get("author") || "");
+    const profile = decodeURIComponent(params.get("profile") || "");
 
-    // 表示用要素にセット（表示部分のIDはそれぞれのHTMLと一致させてね）
-    document.getElementById("confirm-title").innerText = title;
-    document.getElementById("confirm-body").innerText = body;
-    document.getElementById("confirm-genre").innerText = genre;
-    document.getElementById("confirm-author").innerText = author;
-    document.getElementById("confirm-profile").innerText = profile;
-
-    // 投稿ボタン押下時に送信する用にグローバル変数として保持しておいてもOK
-    window.postData = { title, body, genre, author, profile };
+    // 表示用エレメントに反映
+    document.getElementById("confirm-title").textContent = title;
+    document.getElementById("confirm-body").innerHTML = body.replace(/\n/g, "<br>");
+    document.getElementById("confirm-genre").textContent = genre;
+    document.getElementById("confirm-author").textContent = author;
+    document.getElementById("confirm-profile").innerHTML = profile.replace(/\n/g, "<br>");
 });
 
-
-// 投稿ボタンが押されたときの処理
+// 📌 「投稿」ボタンを押したときの処理
 document.getElementById("submit-btn").addEventListener("click", function () {
-    const title = decodeURIComponent(new URLSearchParams(window.location.search).get("title"));
-    const body = decodeURIComponent(new URLSearchParams(window.location.search).get("body"));
-    const genre = decodeURIComponent(new URLSearchParams(window.location.search).get("genre"));
-    const author = decodeURIComponent(new URLSearchParams(window.location.search).get("author"));
-    const profile = decodeURIComponent(new URLSearchParams(window.location.search).get("profile"));
+    const params = new URLSearchParams(window.location.search);
+
+    const title = decodeURIComponent(params.get("title") || "");
+    const body = decodeURIComponent(params.get("body") || "");
+    const genre = decodeURIComponent(params.get("genre") || "");
+    const author = decodeURIComponent(params.get("author") || "");
+    const profile = decodeURIComponent(params.get("profile") || "");
 
     const postData = {
-        action: "post", // ✅ GAS 側でメール送信と判断させるためのフラグ
+        action: "post", // ✅ GASでメール送信と判断するキー
         title,
         body,
         genre,
@@ -39,11 +37,13 @@ document.getElementById("submit-btn").addEventListener("click", function () {
         profile
     };
 
-//    const API_URL = "【あなたのGASのWebアプリURL】"; // ★ココは実際のURLに差し替えてね！
+    const API_URL = "https://script.google.com/macros/s/AKfycbymcSD-LKzCXuKJTSuCIBywQoggRNlXL--CmYTHsUPT2IcdiY5CzNtgZLUEzyz1C5ZuaQ/exec"; // ← あなたのURLに変更してね
 
     fetch(API_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify(postData)
     })
     .then(response => response.json())
@@ -57,7 +57,7 @@ document.getElementById("submit-btn").addEventListener("click", function () {
     })
     .catch(error => {
         console.error("❌ 投稿エラー:", error);
-        alert("エラーが発生しました。しばらくしてから再試行してください。");
+        alert("エラーが発生しました。再試行してください。");
     });
 });
 
