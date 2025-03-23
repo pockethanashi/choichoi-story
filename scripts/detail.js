@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", fetchStoryDetail);
 
-const API_URL = "https://script.google.com/macros/s/AKfycbzv7XC22j3EXNT5kEzjEh_oe8RJZmBXftlZHHu6DuNkly8GH-Wfdv_ZahoUVks5LlVHfA/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbwoByFYlBKi6oDKze7ENI2JmzCN6S6x41IkfJXjibyp_aWeIlY6_7hXt_Xn-EDF1-pojg/exec";
 
 // 🔹 URLからタイトルを取得
 function getStoryTitleFromURL() {
@@ -45,29 +45,33 @@ function displayStory(story) {
     `;
 }
 
-
 // 🔹 いいねボタンを押したときの処理（スプレッドシートに反映）
 function likeStory(title) {
     console.log(`👍 いいねボタンが押されました: ${title}`);
 
     fetch(API_URL, {
         method: "POST",
-        mode: "no-cors",  // no-corsモードではレスポンスの内容を取得できない
+        mode: "no-cors",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title }),
     })
-    .then(() => {
-        // レスポンスが取れないため、成功した前提で通知
-        alert(`「${title}」に いいねしました！（反映まで少し時間がかかる場合があります）`);
+    .then(response => {
+        console.log("🔄 いいね送信完了", response);
+        return response.json();
+    })
+    .then(data => {
+        console.log("✅ いいね更新成功", data);
+        if (data.success) {
+            alert(`「${title}」のいいねが ${data.likes} に増えました！`);
+            updateLikeCount(title, data.likes);
+        } else {
+            console.error("❌ いいね更新失敗:", data.error);
+        }
     })
     .catch(error => {
         console.error("❌ いいね送信エラー:", error);
-        alert("いいねに失敗しました。もう一度お試しください。");
     });
 }
-
-
-
 
 // 🔹 いいね数を更新
 function updateLikeCount(title, newLikes) {
