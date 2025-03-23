@@ -1,45 +1,49 @@
-// URLパラメータから投稿データを取得して表示
+const API_URL = "https://script.google.com/macros/s/AKfycbzs3eTsfF7uFUN31Ag5sf71vR_ZIAN2b9JWvKaxp9byHbJLnQHumzPktrnvUZml9WAWRw/exec";
+
+// URLパラメータを取得して内容を画面に表示
 document.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
 
-    document.getElementById("confirm-title").innerText = params.get("title") || "未入力";
-    document.getElementById("confirm-body").innerText = params.get("body") || "未入力";
-    document.getElementById("confirm-genre").innerText = params.get("genre") || "未入力";
-    document.getElementById("confirm-author").innerText = params.get("author") || "未入力";
-    document.getElementById("confirm-profile").innerText = params.get("profile") || "未入力";
+    const title = params.get("title");
+    const body = params.get("body");
+    const genre = params.get("genre");
+    const author = params.get("author");
+    const profile = params.get("profile");
 
-    // 投稿ボタンが押されたとき
-    document.getElementById("submit-post").addEventListener("click", () => {
+    document.getElementById("confirm-title").innerText = title;
+    document.getElementById("confirm-body").innerText = body;
+    document.getElementById("confirm-genre").innerText = genre;
+    document.getElementById("confirm-author").innerText = author;
+    document.getElementById("confirm-profile").innerText = profile;
+
+    // 投稿ボタンにイベントを設定
+    document.getElementById("submit-btn").addEventListener("click", () => {
         const postData = {
             action: "post",
-            title: params.get("title"),
-            body: params.get("body"),
-            genre: params.get("genre"),
-            author: params.get("author"),
-            profile: params.get("profile")
+            title,
+            body,
+            genre,
+            author,
+            profile
         };
-
-        const API_URL = "https://script.google.com/macros/s/AKfycbzs3eTsfF7uFUN31Ag5sf71vR_ZIAN2b9JWvKaxp9byHbJLnQHumzPktrnvUZml9WAWRw/exec";
 
         fetch(API_URL, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(postData)
         })
-        .then(res => res.json())
+        .then(response => response.json())
         .then(data => {
             if (data.success) {
                 alert("投稿が完了しました！");
                 window.location.href = "index.html";
             } else {
-                alert("投稿失敗: " + data.error);
+                alert("投稿に失敗しました。エラー: " + data.error);
             }
         })
         .catch(error => {
             console.error("❌ 投稿エラー:", error);
-            alert("エラーが発生しました。");
+            alert("投稿エラーが発生しました。再試行してください。");
         });
     });
 });
