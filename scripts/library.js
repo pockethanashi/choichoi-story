@@ -4,8 +4,8 @@ const API_URL = "https://script.google.com/macros/s/AKfycbzs3eTsfF7uFUN31Ag5sf71
 
 
 
-const STORIES_PER_PAGE = 5; // 1ページあたりの最大表示数
-const PREVIEW_LINES = 10; // トップページで表示する本文の行数
+const STORIES_PER_PAGE = 3; // 1ページあたりの最大表示数
+const PREVIEW_LINES = 15; // トップページで表示する本文の行数
 
 let stories = [];
 let currentPage = 1;
