@@ -1,19 +1,26 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbxOD1kbaefm1VYuiQqLI8a9xapYeRtncyTLPAmZBQpvinI-D311QIhtkxhkBJXxsX_njQ/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbymcSD-LKzCXuKJTSuCIBywQoggRNlXL--CmYTHsUPT2IcdiY5CzNtgZLUEzyz1C5ZuaQ/exec";
 
 // ページ読み込み時にローカルストレージからデータを表示
 document.addEventListener("DOMContentLoaded", () => {
-  const title = localStorage.getItem("kobanashi_title");
-  const body = localStorage.getItem("kobanashi_body");
-  const genre = localStorage.getItem("kobanashi_genre");
-  const author = localStorage.getItem("kobanashi_author");
-  const profile = localStorage.getItem("kobanashi_profile");
+    const params = new URLSearchParams(window.location.search);
 
-  document.getElementById("confirm-title").innerText = title;
-  document.getElementById("confirm-body").innerText = body;
-  document.getElementById("confirm-genre").innerText = genre;
-  document.getElementById("confirm-author").innerText = author;
-  document.getElementById("confirm-profile").innerText = profile;
+    const title = params.get("title") || "";
+    const body = params.get("body") || "";
+    const genre = params.get("genre") || "";
+    const author = params.get("author") || "";
+    const profile = params.get("profile") || "";
+
+    // 表示用要素にセット（表示部分のIDはそれぞれのHTMLと一致させてね）
+    document.getElementById("confirm-title").innerText = title;
+    document.getElementById("confirm-body").innerText = body;
+    document.getElementById("confirm-genre").innerText = genre;
+    document.getElementById("confirm-author").innerText = author;
+    document.getElementById("confirm-profile").innerText = profile;
+
+    // 投稿ボタン押下時に送信する用にグローバル変数として保持しておいてもOK
+    window.postData = { title, body, genre, author, profile };
 });
+
 
 // 投稿ボタンが押されたときの処理
 document.getElementById("submitBtn").addEventListener("click", () => {
