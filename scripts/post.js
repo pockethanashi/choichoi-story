@@ -17,12 +17,14 @@ document.getElementById("post-form").addEventListener("submit", function(event) 
 
     // **📨 投稿データ**
     const postData = { title, body, genre, author, profile };
-
+    
     fetch(API_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+        "Content-Type": "application/json"
+        },
         body: JSON.stringify(postData)
-    })
+    })    
     .then(response => response.json())
     .then(data => {
         if (data.success) {
