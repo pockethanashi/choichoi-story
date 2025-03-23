@@ -37,7 +37,7 @@ document.getElementById("submit-btn").addEventListener("click", function () {
         profile
     };
 
-    const API_URL = "https://script.google.com/macros/s/AKfycbymcSD-LKzCXuKJTSuCIBywQoggRNlXL--CmYTHsUPT2IcdiY5CzNtgZLUEzyz1C5ZuaQ/exec"; // ← あなたのURLに変更してね
+    const API_URL = "https://script.google.com/macros/s/AKfycbzegJBdiYq5n0HEZfwR05s7ZNKOQBqRFXUDsgKBtYFMP0rB3hWHOMPOh8LLriefIADSaw/exec"; 
 
     fetch(API_URL, {
         method: "POST",
