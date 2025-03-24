@@ -1,5 +1,5 @@
 //const API_URL = "https://script.google.com/macros/s/AKfycbySmKN_CVGf7pOD6QPfSJ1qLQvpA5GBBsRMyrpxQIpy-elMUmkGVBjM2z_ZKTeUwrd2Xg/exec?action=post";
-const API_URL = "https://script.google.com/macros/s/AKfycbyxr2SovS9NYyn5vAE6JiP5MMS6I626MyGgt57FLBBxZCRmq4ZAD4Bt6GX4hFnGa50R4A/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbzXyq2NxtCtISMjJq--8rNS2NbKMnBo14tLm5oew52swp4VqzqRlHxZz6ZeMtL_16MmIw/exec";
 
 document.getElementById("confirm-btn").addEventListener("click", function () {
     const title = document.getElementById("title").value.trim();
