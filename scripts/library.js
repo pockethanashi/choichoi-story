@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", fetchStories);
 
-const API_URL = "https://script.google.com/macros/s/AKfycbzXyq2NxtCtISMjJq--8rNS2NbKMnBo14tLm5oew52swp4VqzqRlHxZz6ZeMtL_16MmIw/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbysCRNFuZgtzBmhz3UQPa9TA5GoSRW5qJGXC4-I6xS7GgooO4jm-RDvNjqmytTb49a4hw/exec";
 
 
 const STORIES_PER_PAGE = 3; // 1ページあたりの最大表示数
