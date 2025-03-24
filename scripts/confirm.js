@@ -1,5 +1,5 @@
 document.getElementById("submit-btn").addEventListener("click", function () {
-    const API_URL = "https://script.google.com/macros/s/AKfycbw6DulwCUDbghh2tWCHatpA1yHQDHZxA61vpOMdyrjZbBKIneOnlaA0CrW7m7-yF1zvYg/exec";  // ← 差し替えてね！
+    const API_URL = "https://script.google.com/macros/s/AKfycbz0Fc2ONa88CQoppzypkXN53r4z6SwudBVbBBQDebmDmpafBcewUmvt5n5nzZxcVqs8YQ/exec";  // ← 差し替えてね！
 
     fetch(API_URL, {
         method: "POST",
