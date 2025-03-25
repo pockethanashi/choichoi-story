@@ -1,5 +1,5 @@
 //const API_URL = "https://script.google.com/macros/s/AKfycbySmKN_CVGf7pOD6QPfSJ1qLQvpA5GBBsRMyrpxQIpy-elMUmkGVBjM2z_ZKTeUwrd2Xg/exec?action=post";
-const API_URL = "https://script.google.com/macros/s/AKfycbwHnj7LCPjv87ufblINJXWA6Z2DBb9DxlYhbaO2vqX0gbMu_aAioXZlyRJIvQSQO97UIg/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbykUw1ZjKKTNyAd3_v0AG5ovIfL7dtpo7jG7GuAN3BFZ33mh6q6rrmfhq8I5MBLILpNvQ/exec";
 
 document.getElementById("confirm-btn").addEventListener("click", function () {
     const title = document.getElementById("title").value.trim();
@@ -23,4 +23,5 @@ document.getElementById("confirm-btn").addEventListener("click", function () {
 
     window.location.href = `confirm.html?${params.toString()}`;
 });
+
 
