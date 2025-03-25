@@ -6,6 +6,7 @@ document.getElementById("submit-btn").addEventListener("click", function () {
     const profile = document.getElementById("confirm-profile").innerText;
 
     const postData = {
+        action: "post",
         title,
         body,
         genre,
@@ -28,3 +29,24 @@ document.getElementById("submit-btn").addEventListener("click", function () {
     alert("✅ 投稿処理が完了しました（メール送信されているはずです）");
     window.location.href = "index.html";
 });
+
+
+
+// ✅ URLパラメータから値を取得して表示
+document.addEventListener("DOMContentLoaded", function () {
+    const params = new URLSearchParams(window.location.search);
+
+    const title = decodeURIComponent(params.get("title") || "");
+    const body = decodeURIComponent(params.get("body") || "");
+    const genre = decodeURIComponent(params.get("genre") || "");
+    const author = decodeURIComponent(params.get("author") || "");
+    const profile = decodeURIComponent(params.get("profile") || "");
+
+    // 表示用エレメントに反映
+    document.getElementById("confirm-title").textContent = title;
+    document.getElementById("confirm-body").innerHTML = body.replace(/\n/g, "<br>");
+    document.getElementById("confirm-genre").textContent = genre;
+    document.getElementById("confirm-author").textContent = author;
+    document.getElementById("confirm-profile").innerHTML = profile.replace(/\n/g, "<br>");
+});
+

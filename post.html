@@ -33,11 +33,34 @@
             <label for="profile">自己紹介:</label>
             <textarea id="profile" name="profile" rows="3"></textarea>
 
-            <!-- これまでの投稿ボタンを「確認」ボタンに変更 -->
-            <button type="button" id="confirm-btn">確認</button>
-
+            <button type="button" id="confirm-btn">確認画面へ</button>
         </form>
     </main>
-    <script src="scripts/post.js"></script>
+
+    <script>
+        // ✅ 「確認画面へ」ボタンでデータをconfirm.htmlに渡す処理
+        document.getElementById("confirm-btn").addEventListener("click", function () {
+            const title = document.getElementById("title").value.trim();
+            const body = document.getElementById("body").value.trim();
+            const genre = document.getElementById("genre").value;
+            const author = document.getElementById("author").value.trim();
+            const profile = document.getElementById("profile").value.trim();
+
+            if (!title || !body || !author) {
+                alert("タイトル、本文、作者名は必須です。");
+                return;
+            }
+
+            const params = new URLSearchParams({
+                title: title,
+                body: body,
+                genre: genre,
+                author: author,
+                profile: profile
+            });
+
+            window.location.href = `confirm.html?${params.toString()}`;
+        });
+    </script>
 </body>
 </html>
