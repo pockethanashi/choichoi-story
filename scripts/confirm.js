@@ -15,13 +15,21 @@ document.getElementById("submit-btn").addEventListener("click", function () {
 
     const API_URL = "https://script.google.com/macros/s/AKfycbykUw1ZjKKTNyAd3_v0AG5ovIfL7dtpo7jG7GuAN3BFZ33mh6q6rrmfhq8I5MBLILpNvQ/exec";
 
+//    fetch(API_URL, {
+//        method: "POST",
+//        headers: {
+//            "Content-Type": "application/json"
+//        },
+//        body: JSON.stringify(postData)
+//    })
+    
+    
     fetch(API_URL, {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(postData)
-    })
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title }),
+    })    
     .then(response => response.json())
     .then(data => {
         if (data.success) {
