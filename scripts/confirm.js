@@ -26,8 +26,8 @@ document.getElementById("submit-btn").addEventListener("click", function () {
     });
 
     // レスポンスが読めないため、送信直後に遷移させる
-    alert("✅ 投稿処理が完了しました（メール送信されているはずです）");
-    window.location.href = "index.html";
+    alert("✅ 投稿処理が完了しました");
+//    window.location.href = "index.html";
 });
 
 
