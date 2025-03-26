@@ -12,10 +12,30 @@ header {
     text-align: center;
 }
 
-main {
-    width: 80%;
-    margin: 20px auto;
+
+.container {
+  display: flex;
+  justify-content: center;  /* 中央揃え */
+  max-width: 1040px;
+  margin: 0 auto;
 }
+
+#sidebar {
+  width: 200px;
+  padding: 20px;
+  background-color: #f0f0f0;
+}
+
+
+main {
+  flex: 1;
+  padding: 20px;
+  max-width: 800px; /* 👈 お好みで最大幅を指定 */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
 
 .story {
     background: white;

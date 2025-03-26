@@ -1,15 +1,37 @@
-/* 共通ヘッダーのスタイル */
 header {
-    background-color: #333;
-    color: white;
-    padding: 1rem;
+    background-image: url("../images/header-bg.jpg"); /* ✅ パスは適宜修正 */
+    background-size: cover;
+    background-position: center;
+    color: red;
+    padding: 2rem 1rem;
     text-align: center;
+    position: relative;
+}
+
+/* 背景の上に文字を読みやすく重ねるためにオーバーレイを追加してもよい（任意） */
+header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4); /* 黒の半透明オーバーレイ */
+    z-index: 0;
 }
 
 header h1 {
+    font-size: 5rem; /* ← ここが文字サイズ！ */
     margin: 0;
-    font-size: 1.8rem;
+    padding: 0.5rem 0;
+    position: relative; /* ← 追加 */
+    z-index: 1;          /* ← 追加 */
 }
+header nav {
+    position: relative;
+    z-index: 1;
+}
+
 
 nav {
     margin-top: 10px;
@@ -20,8 +42,12 @@ nav a {
     text-decoration: none;
     margin: 0 15px;
     font-weight: bold;
+    font-size: 2rem;
 }
 
 nav a:hover {
     text-decoration: underline;
 }
+
+
+
