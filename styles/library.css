@@ -106,18 +106,20 @@ button:hover {
 }
 
 
+/* スマホ用作者セレクト（初期は非表示） */
 #author-select-container {
-  display: none;
-  text-align: center;
-  margin: 20px;
+    display: none;
+    text-align: center;
+    margin: 20px auto;
 }
 
+/* 画面幅が768px以下のときだけ表示（スマホ表示） */
 @media screen and (max-width: 768px) {
-  #sidebar {
-    display: none;
-  }
+    #author-select-container {
+        display: block;
+    }
 
-  #author-select-container {
-    display: block;
-  }
+    #sidebar {
+        display: none; /* スマホではサイドバーを非表示 */
+    }
 }

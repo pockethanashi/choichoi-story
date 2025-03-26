@@ -1,3 +1,5 @@
+// ✅ 変更を加えた library.js 全体（プルダウン対応付き）
+
 document.addEventListener("DOMContentLoaded", () => {
     fetchStories();
 });
@@ -9,6 +11,7 @@ const PREVIEW_LINES = 15;
 
 let stories = [];
 let currentPage = 1;
+let currentAuthor = null;
 
 // 🔹 小噺一覧を取得して表示
 function fetchStories() {
@@ -20,20 +23,17 @@ function fetchStories() {
         .then(data => {
             stories = data;
             displayStories();
-            populateAuthorSidebar(); // ✅ サイドバーの作者一覧表示
+            populateAuthorSidebar();
+            populateAuthorDropdown();  // ✅ プルダウンも生成
         })
         .catch(error => console.error("❌ データ取得エラー:", error));
 }
 
 // 🔹 表示処理
-//function displayStories(filterAuthor = null) {
-//    const container = document.getElementById("stories-container");
-//    if (!container) return;
-//    container.innerHTML = "";
-
-function displayStories(authorFilter = "") {
-  const container = document.getElementById("stories-container");
-  container.innerHTML = "";
+function displayStories(filterAuthor = null) {
+    const container = document.getElementById("stories-container");
+    if (!container) return;
+    container.innerHTML = "";
 
     const filtered = filterAuthor
         ? stories.filter(story => story.author === filterAuthor)
@@ -50,30 +50,6 @@ function displayStories(authorFilter = "") {
 
     updatePagination(filtered.length);
 }
-
-
-function populateAuthorDropdown() {
-  const select = document.getElementById("author-select");
-  if (!select) return;
-
-  const authors = [...new Set(stories.map(s => s.author).filter(Boolean))];
-
-  authors.forEach(author => {
-    const option = document.createElement("option");
-    option.value = author;
-    option.textContent = author;
-    select.appendChild(option);
-  });
-
-  // 選択時のフィルタ処理
-  select.addEventListener("change", () => {
-    const selectedAuthor = select.value;
-    currentPage = 1;
-    displayStories(selectedAuthor);
-  });
-}
-
-
 
 // 🔹 HTML要素生成
 function createStoryElement(story) {
@@ -118,19 +94,19 @@ function updatePagination(totalItems) {
 document.getElementById("prevPage").addEventListener("click", () => {
     if (currentPage > 1) {
         currentPage--;
-        displayStories(currentAuthor); // ✅ フィルター保持
+        displayStories(currentAuthor);
     }
 });
+
 document.getElementById("nextPage").addEventListener("click", () => {
     const totalPages = Math.ceil(filteredStories().length / STORIES_PER_PAGE);
     if (currentPage < totalPages) {
         currentPage++;
-        displayStories(currentAuthor); // ✅ フィルター保持
+        displayStories(currentAuthor);
     }
 });
 
 // 🔹 作者一覧をサイドバーに表示
-let currentAuthor = null;
 function populateAuthorSidebar() {
     const authorList = document.getElementById("author-list");
     const authors = [...new Set(stories.map(s => s.author).filter(a => a))];
@@ -150,7 +126,6 @@ function populateAuthorSidebar() {
         authorList.appendChild(li);
     });
 
-    // 🔸 全件表示リンクも追加
     const allLink = document.createElement("a");
     allLink.href = "#";
     allLink.textContent = "すべて表示";
@@ -164,7 +139,29 @@ function populateAuthorSidebar() {
     authorList.prepend(allItem);
 }
 
-// 🔹 現在のフィルターに応じたデータ取得
+// 🔹 スマホ用プルダウンにも作者一覧を追加
+function populateAuthorDropdown() {
+    const dropdown = document.getElementById("author-select");
+    if (!dropdown) return;
+
+    const authors = [...new Set(stories.map(s => s.author).filter(a => a))];
+    dropdown.innerHTML = '<option value="">すべての作者</option>';
+
+    authors.forEach(author => {
+        const option = document.createElement("option");
+        option.value = author;
+        option.textContent = author;
+        dropdown.appendChild(option);
+    });
+
+    dropdown.addEventListener("change", () => {
+        currentPage = 1;
+        currentAuthor = dropdown.value || null;
+        displayStories(currentAuthor);
+    });
+}
+
+// 🔹 現在のフィルターに応じた小噺リスト
 function filteredStories() {
     return currentAuthor ? stories.filter(s => s.author === currentAuthor) : stories;
 }
