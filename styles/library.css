@@ -104,3 +104,20 @@ button:hover {
     background-color: #ccc;
     cursor: not-allowed;
 }
+
+
+#author-select-container {
+  display: none;
+  text-align: center;
+  margin: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  #sidebar {
+    display: none;
+  }
+
+  #author-select-container {
+    display: block;
+  }
+}

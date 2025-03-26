@@ -26,10 +26,14 @@ function fetchStories() {
 }
 
 // 🔹 表示処理
-function displayStories(filterAuthor = null) {
-    const container = document.getElementById("stories-container");
-    if (!container) return;
-    container.innerHTML = "";
+//function displayStories(filterAuthor = null) {
+//    const container = document.getElementById("stories-container");
+//    if (!container) return;
+//    container.innerHTML = "";
+
+function displayStories(authorFilter = "") {
+  const container = document.getElementById("stories-container");
+  container.innerHTML = "";
 
     const filtered = filterAuthor
         ? stories.filter(story => story.author === filterAuthor)
@@ -46,6 +50,30 @@ function displayStories(filterAuthor = null) {
 
     updatePagination(filtered.length);
 }
+
+
+function populateAuthorDropdown() {
+  const select = document.getElementById("author-select");
+  if (!select) return;
+
+  const authors = [...new Set(stories.map(s => s.author).filter(Boolean))];
+
+  authors.forEach(author => {
+    const option = document.createElement("option");
+    option.value = author;
+    option.textContent = author;
+    select.appendChild(option);
+  });
+
+  // 選択時のフィルタ処理
+  select.addEventListener("change", () => {
+    const selectedAuthor = select.value;
+    currentPage = 1;
+    displayStories(selectedAuthor);
+  });
+}
+
+
 
 // 🔹 HTML要素生成
 function createStoryElement(story) {
