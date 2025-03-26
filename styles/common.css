@@ -2,7 +2,7 @@ header {
     background-image: url("../images/header-bg.jpg"); /* ✅ パスは適宜修正 */
     background-size: cover;
     background-position: center;
-    color: red;
+    color: white;
     padding: 2rem 1rem;
     text-align: center;
     position: relative;
