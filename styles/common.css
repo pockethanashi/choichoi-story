@@ -1,3 +1,6 @@
+h1, h2 {
+  font-family: 'Kaisei HarunoUmi', serif;
+}
 header {
     background-image: url("../images/header-bg.jpg"); /* ✅ パスは適宜修正 */
     background-size: cover;
