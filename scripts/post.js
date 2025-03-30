@@ -8,6 +8,12 @@ document.getElementById("confirm-btn").addEventListener("click", function () {
     const author = document.getElementById("author").value.trim();
     const profile = document.getElementById("profile").value.trim();
 
+    // ✅ バージョン管理項目を取得
+    const version = document.getElementById("version").value.trim();
+    const updateDate = document.getElementById("updateDate").value;
+    const originalId = document.getElementById("originalId").value.trim();
+    const updateMemo = document.getElementById("updateMemo").value.trim();
+
     if (!title || !body || !author) {
         alert("タイトル、本文、作者名は必須です。");
         return;
@@ -19,6 +25,10 @@ document.getElementById("confirm-btn").addEventListener("click", function () {
         genre,
         author,
         profile,
+        version,
+        updateDate,
+        originalId,
+        updateMemo
     });
 
     window.location.href = `confirm.html?${params.toString()}`;

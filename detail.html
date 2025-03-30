@@ -1,46 +1,56 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>小噺の詳細</title>
-    <link rel="stylesheet" href="styles/detail.css">
-    <link rel="stylesheet" href="styles/common.css">
-    <link href="https://fonts.googleapis.com/css2?family=Kaisei+HarunoUmi&display=swap" rel="stylesheet">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小噺の詳細</title>
+  <link rel="stylesheet" href="styles/detail.css">
+  <link rel="stylesheet" href="styles/common.css">
+  <link href="https://fonts.googleapis.com/css2?family=Kaisei+HarunoUmi&display=swap" rel="stylesheet">
 
 </head>
 <body>
-    <header>
-      <h1>ポケット小噺</h1>
-      <nav>
-        <a href="index.html">トップ</a>
-        <a href="post.html">投稿</a>
-      </nav>
-    </header>
+  <header>
+    <h1>ポケット小噺</h1>
+    <nav>
+      <a href="index.html">トップ</a>
+      <a href="post.html">投稿</a>
+    </nav>
+  </header>
 
-<!--
-    <header>
-        <h1 id="story-title">読み込み中</h1>
-    </header>
--->
+  <!-- 🔸 サイドバーとメインを並べる -->
+  <div class="container">
+    <aside id="story-sidebar">
+      <div id="version-area" style="margin-bottom: 1rem;">
+        <label for="version-select">別バージョンを見る:</label>
+        <select id="version-select"></select>
+      </div>
+      <p><strong>ジャンル:</strong> <span id="story-genre"></span></p>
+      <p><strong>作者:</strong> <span id="story-author"></span></p>
+      <p><strong>バージョン:</strong> <span id="story-version"></span></p>
+      <p><strong>更新日:</strong> <span id="story-updateDate"></span></p>
+      <p><strong>更新メモ:</strong> <span id="story-updateMemo"></span></p>
+    </aside>
+
     <main>
-        <div id="story-container"></div>
+      <h2 id="story-title">読み込み中...</h2>
+      <div id="story-body"></div>
+      <p>いいね数: <span id="story-likes">0</span></p>
+      <button onclick="likeStory()">❤️ いいね</button>
+      <br><br>
+      <a href="index.html">⬅ トップへ戻る</a>
     </main>
-    <script src="scripts/detail.js"></script>
-    
-    
-    <div id="profile-modal" class="modal">
-     <div class="modal-content">
+  </div>
+
+  <!-- 🔹 作者プロフィール用モーダル -->
+  <div id="profile-modal" class="modal">
+    <div class="modal-content">
       <span class="close">&times;</span>
       <h2 id="profile-title"></h2>
       <p id="profile-text"></p>
-     </div>
     </div>
+  </div>
 
-   <!-- 既存の小噺の詳細表示部分 -->
-   <div id="story-container"></div>
-    
-    <a href="index.html">⬅ トップへ戻る</a>
+  <script src="scripts/detail.js"></script>
 </body>
 </html>

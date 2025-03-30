@@ -1,49 +1,57 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <title>投稿内容の確認</title>
-    <link rel="stylesheet" href="styles/confirm.css">
-    <link rel="stylesheet" href="styles/common.css">
+  <meta charset="UTF-8">
+  <title>投稿内容の確認</title>
+  <link rel="stylesheet" href="styles/confirm.css">
+  <link rel="stylesheet" href="styles/common.css">
     <link href="https://fonts.googleapis.com/css2?family=Kaisei+HarunoUmi&display=swap" rel="stylesheet">
 
 </head>
 <body>
-<header>
-  <h1>ポケット小噺</h1>
-  <nav>
-    <a href="index.html">トップ</a>
-    <a href="post.html">投稿</a>
-  </nav>
-</header>
+  <header>
+    <h1>ポケット小噺</h1>
+    <nav>
+      <a href="index.html">トップ</a>
+      <a href="post.html">投稿</a>
+    </nav>
+  </header>
 
-    <header>
-        <h1>投稿内容の確認</h1>
-    </header>
-    <main>
-        <div id="confirm-content">
-            <p><strong>タイトル:</strong> <span id="confirm-title"></span></p>
-            <p><strong>本文:</strong> <span id="confirm-body"></span></p>
-            <p><strong>ジャンル:</strong> <span id="confirm-genre"></span></p>
-            <p><strong>作者名:</strong> <span id="confirm-author"></span></p>
-            <p><strong>プロフィール:</strong> <span id="confirm-profile"></span></p>
-        </div>
+  <main>
+    <h2>投稿内容の確認</h2>
+    <div id="confirm-content">
+      <p><strong>タイトル:</strong> <span id="confirm-title"></span></p>
+      <p><strong>本文:</strong> <span id="confirm-body"></span></p>
+      <p><strong>ジャンル:</strong> <span id="confirm-genre"></span></p>
+      <p><strong>作者名:</strong> <span id="confirm-author"></span></p>
+      <p><strong>プロフィール:</strong> <span id="confirm-profile"></span></p>
+      <p><strong>バージョン:</strong> <span id="confirm-version"></span></p>
+      <p><strong>更新日:</strong> <span id="confirm-updateDate"></span></p>
+      <p><strong>オリジナルID:</strong> <span id="confirm-originalId"></span></p>
+      <p><strong>更新メモ:</strong> <span id="confirm-updateMemo"></span></p>
+    </div>
 
-        <form id="confirm-form">
-            <!-- hidden にしてデータを再送信 -->
-            <input type="hidden" name="title" id="hidden-title">
-            <input type="hidden" name="body" id="hidden-body">
-            <input type="hidden" name="genre" id="hidden-genre">
-            <input type="hidden" name="author" id="hidden-author">
-            <input type="hidden" name="profile" id="hidden-profile">
+    <form id="confirm-form">
+      <!-- hidden にしてデータを再送信 -->
+      <input type="hidden" name="title" id="hidden-title">
+      <input type="hidden" name="body" id="hidden-body">
+      <input type="hidden" name="genre" id="hidden-genre">
+      <input type="hidden" name="author" id="hidden-author">
+      <input type="hidden" name="profile" id="hidden-profile">
 
-            <button type="button" id="submit-btn">この内容で投稿する</button>
+      <!-- 🔽 バージョン管理用の hidden フィールドを追加 -->
+      <input type="hidden" name="version" id="hidden-version">
+      <input type="hidden" name="updateDate" id="hidden-updateDate">
+      <input type="hidden" name="originalId" id="hidden-originalId">
+      <input type="hidden" name="updateMemo" id="hidden-updateMemo">
 
-        </form>
-        <br>
-        <a href="post.html">編集に戻る</a>
-    </main>
+      <button type="button" id="submit-btn">この内容で投稿する</button>
+    </form>
 
-    <script src="scripts/confirm.js"></script>
+    <br>
+    <a href="post.html">編集に戻る</a>
+  </main>
+
+  <script src="scripts/confirm.js"></script>
 </body>
 </html>

@@ -1,10 +1,8 @@
-// ✅ 変更を加えた library.js 全体（プルダウン対応付き）
-
 document.addEventListener("DOMContentLoaded", () => {
     fetchStories();
 });
 
-const API_URL = "https://script.google.com/macros/s/AKfycbzXzLXCNZ8Qp0LF9wm2mgDOlya909e2yoDzgmYNZodAblw8d6ESiRnDPx8586FLfJjlvg/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbyy2QS8TdacrRRtVRzl1MGg6CMRQNQILrYh-spuDTM2H-9GrtWjiuEnk6f-RpHldsnUqw/exec";
 
 const STORIES_PER_PAGE = 3;
 const PREVIEW_LINES = 15;
@@ -13,7 +11,7 @@ let stories = [];
 let currentPage = 1;
 let currentAuthor = null;
 
-// 🔹 小噺一覧を取得して表示
+// 🔹 データ取得
 function fetchStories() {
     fetch(`${API_URL}?action=get`)
         .then(response => {
@@ -21,12 +19,38 @@ function fetchStories() {
             return response.json();
         })
         .then(data => {
-            stories = data;
+            stories = getLatestStories(data);
             displayStories();
             populateAuthorSidebar();
-            populateAuthorDropdown();  // ✅ プルダウンも生成
+            populateAuthorDropdown();
         })
         .catch(error => console.error("❌ データ取得エラー:", error));
+}
+
+// 🔹 最新バージョンのみ抽出（同日ならバージョン番号が高い方）
+function getLatestStories(allStories) {
+    const latestMap = new Map();
+
+    allStories.forEach(story => {
+        const key = story.title;
+        const newDate = new Date(story.updateDate || "1900-01-01");
+        const newVersion = parseFloat(story.version || "0");
+
+        const current = latestMap.get(key);
+        if (!current) {
+            latestMap.set(key, story);
+            return;
+        }
+
+        const currentDate = new Date(current.updateDate || "1900-01-01");
+        const currentVersion = parseFloat(current.version || "0");
+
+        if (newDate > currentDate || (newDate.getTime() === currentDate.getTime() && newVersion > currentVersion)) {
+            latestMap.set(key, story);
+        }
+    });
+
+    return Array.from(latestMap.values());
 }
 
 // 🔹 表示処理
@@ -51,7 +75,7 @@ function displayStories(filterAuthor = null) {
     updatePagination(filtered.length);
 }
 
-// 🔹 HTML要素生成
+// 🔹 HTML生成
 function createStoryElement(story) {
     const storyDiv = document.createElement("div");
     storyDiv.classList.add("story");
@@ -82,7 +106,7 @@ function likeStory(title) {
     alert(`「${title}」にいいねしました！（反映には少し時間がかかる場合があります）`);
 }
 
-// 🔹 ページネーション更新
+// 🔹 ページネーション
 function updatePagination(totalItems) {
     const totalPages = Math.ceil(totalItems / STORIES_PER_PAGE);
     const pageNumberElem = document.getElementById("pageNumber");
@@ -106,7 +130,7 @@ document.getElementById("nextPage").addEventListener("click", () => {
     }
 });
 
-// 🔹 作者一覧をサイドバーに表示
+// 🔹 作者一覧（サイドバー）
 function populateAuthorSidebar() {
     const authorList = document.getElementById("author-list");
     const authors = [...new Set(stories.map(s => s.author).filter(a => a))];
@@ -139,7 +163,7 @@ function populateAuthorSidebar() {
     authorList.prepend(allItem);
 }
 
-// 🔹 スマホ用プルダウンにも作者一覧を追加
+// 🔹 スマホ用プルダウン
 function populateAuthorDropdown() {
     const dropdown = document.getElementById("author-select");
     if (!dropdown) return;
@@ -161,7 +185,7 @@ function populateAuthorDropdown() {
     });
 }
 
-// 🔹 現在のフィルターに応じた小噺リスト
+// 🔹 現在の絞り込み状態に応じた一覧
 function filteredStories() {
     return currentAuthor ? stories.filter(s => s.author === currentAuthor) : stories;
 }

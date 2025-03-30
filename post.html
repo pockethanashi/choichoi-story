@@ -40,35 +40,58 @@
 
             <label for="profile">自己紹介:</label>
             <textarea id="profile" name="profile" rows="3"></textarea>
+            
+            <!-- バージョン管理情報の入力欄 -->
+            <label for="version">バージョン番号:</label>
+            <input type="text" id="version" name="version">
+
+            <label for="updateDate">更新日:</label>
+            <input type="date" id="updateDate" name="updateDate">
+
+            <label for="originalId">オリジナルID:</label>
+            <input type="text" id="originalId" name="originalId" placeholder="新規作成なら空でOK">
+
+            <label for="updateMemo">更新メモ:</label><br>
+            <textarea id="updateMemo" name="updateMemo" rows="3" placeholder="変更内容の簡単な説明"></textarea>
 
             <button type="button" id="confirm-btn">確認画面へ</button>
         </form>
     </main>
 
     <script>
-        // ✅ 「確認画面へ」ボタンでデータをconfirm.htmlに渡す処理
-        document.getElementById("confirm-btn").addEventListener("click", function () {
-            const title = document.getElementById("title").value.trim();
-            const body = document.getElementById("body").value.trim();
-            const genre = document.getElementById("genre").value;
-            const author = document.getElementById("author").value.trim();
-            const profile = document.getElementById("profile").value.trim();
+    // ✅ 「確認画面へ」ボタンでデータをconfirm.htmlに渡す処理
+    document.getElementById("confirm-btn").addEventListener("click", function () {
+        const title = document.getElementById("title").value.trim();
+        const body = document.getElementById("body").value.trim();
+        const genre = document.getElementById("genre").value;
+        const author = document.getElementById("author").value.trim();
+        const profile = document.getElementById("profile").value.trim();
 
-            if (!title || !body || !author) {
-                alert("タイトル、本文、作者名は必須です。");
-                return;
-            }
+        const version = document.getElementById("version").value.trim();
+        const updateDate = document.getElementById("updateDate").value;
+        const originalId = document.getElementById("originalId").value.trim();
+        const updateMemo = document.getElementById("updateMemo").value.trim();
 
-            const params = new URLSearchParams({
-                title: title,
-                body: body,
-                genre: genre,
-                author: author,
-                profile: profile
-            });
+        if (!title || !body || !author) {
+            alert("タイトル、本文、作者名は必須です。");
+            return;
+        }
 
-            window.location.href = `confirm.html?${params.toString()}`;
+        const params = new URLSearchParams({
+            title,
+            body,
+            genre,
+            author,
+            profile,
+            version,
+            updateDate,
+            originalId,
+            updateMemo
         });
-    </script>
+
+        window.location.href = `confirm.html?${params.toString()}`;
+    });
+</script>
+
 </body>
 </html>

@@ -1,14 +1,14 @@
 document.addEventListener("DOMContentLoaded", fetchStoryDetail);
 
-const API_URL = "https://script.google.com/macros/s/AKfycbzXzLXCNZ8Qp0LF9wm2mgDOlya909e2yoDzgmYNZodAblw8d6ESiRnDPx8586FLfJjlvg/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbyy2QS8TdacrRRtVRzl1MGg6CMRQNQILrYh-spuDTM2H-9GrtWjiuEnk6f-RpHldsnUqw/exec";
 
-// 🔹 URLからタイトルを取得
+let allVersions = []; // バージョンごとの小噺を格納
+
 function getStoryTitleFromURL() {
     const params = new URLSearchParams(window.location.search);
     return params.get("title");
 }
 
-// 🔹 小噺の詳細データを取得
 function fetchStoryDetail() {
     const title = getStoryTitleFromURL();
     if (!title) {
@@ -16,66 +16,75 @@ function fetchStoryDetail() {
         return;
     }
 
-    console.log(`📢 データ取得開始: ${title}`);
     fetch(`${API_URL}?action=get`)
-    .then(response => response.json())
-    .then(data => {
-        const story = data.find(s => s.title === title);
-        if (story) {
-            displayStory(story);
-        } else {
-            console.error("❌ 該当する小噺が見つかりません");
-        }
-    })
-    .catch(error => {
-        console.error("❌ データ取得エラー:", error);
+        .then(response => response.json())
+        .then(data => {
+            allVersions = data.filter(s => s.title === title);
+            if (allVersions.length === 0) {
+                console.error("❌ 該当する小噺が見つかりません");
+                return;
+            }
+            populateVersionSelector();
+            displayStory(allVersions[0]); // 最新（最初）のバージョンを表示
+        })
+        .catch(error => console.error("❌ データ取得エラー:", error));
+}
+
+function populateVersionSelector() {
+    const select = document.getElementById("version-select");
+    if (!select) return;
+
+    select.innerHTML = ""; // 既存の選択肢をクリア
+
+    allVersions.forEach((story, index) => {
+        const option = document.createElement("option");
+        option.value = index;
+
+        const versionLabel = story.version ? `v${story.version}` : "バージョンなし";
+        const memo = story.updateMemo || "メモなし";
+
+        option.textContent = `${versionLabel}（${memo}）`;
+        select.appendChild(option);
+    });
+
+    select.addEventListener("change", (e) => {
+        const selected = parseInt(e.target.value);
+        displayStory(allVersions[selected]);
     });
 }
 
-// 🔹 小噺の詳細を表示（改行も反映）
+
+
 function displayStory(story) {
-    const container = document.getElementById("story-container");
-    container.innerHTML = `
-        <h2>${story.title}</h2>
-        <p>${story.body.replace(/\n/g, "<br>")}</p>
-        <p><strong>ジャンル:</strong> ${story.genre}</p>
-        <p><strong>いいね:</strong> <span id="likes-${story.title}">${story.likes}</span></p>
-        <button onclick="likeStory('${story.title}')">❤️ いいね</button>
-        <button class="profile-btn" onclick="showProfile('${story.author}', '${story.profile}')">👤 作者プロフィールを見る</button>
-    `;
-}
+    document.getElementById("story-title").textContent = story.title;
+    document.getElementById("story-body").innerHTML = story.body.replace(/\n/g, "<br>");
+    document.getElementById("story-genre").textContent = story.genre;
+    document.getElementById("story-author").textContent = story.author || "不明";
+    document.getElementById("story-likes").textContent = story.likes;
+    document.getElementById("story-version").textContent = story.version || "なし";
+    document.getElementById("story-updateDate").textContent = story.updateDate || "不明";
+    document.getElementById("story-updateMemo").textContent = story.updateMemo || "なし";
 
-// 🔹 いいねボタンを押したときの処理（スプレッドシートに反映）
-function likeStory(title) {
-    console.log(`👍 いいねボタンが押されました: ${title}`);
-
-    fetch(API_URL, {
-        method: "POST",
-        mode: "no-cors", // ← これがあるとレスポンス読めないが送信はできる
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ title }) // ← タイトルだけでいいね処理と判定
-    });
-
-    // 🔸 レスポンスは取得できないので仮にアラートだけ表示
-    alert(`「${title}」にいいねしました！（反映には少し時間がかかる場合があります）`);
-
-    // ✅ 更新のため再読み込みする場合はこちら（任意）
-    // location.reload();
-}
-
-// 🔹 いいね数を更新
-function updateLikeCount(title, newLikes) {
-    const likeElement = document.getElementById(`likes-${title}`);
-    if (likeElement) {
-        likeElement.innerText = newLikes;
-    } else {
-        console.error(`⚠️ いいね表示要素が見つかりませんでした: ${title}`);
+    // プロフィールボタンの動作（任意）
+    const profileBtn = document.querySelector(".profile-btn");
+    if (profileBtn) {
+        profileBtn.onclick = () => showProfile(story.author, story.profile);
     }
 }
 
-// 🔹 プロフィールモーダルを表示
+
+function likeStory(title) {
+    fetch(API_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ title })
+    });
+    alert(`「${title}」にいいねしました！（反映には少し時間がかかる場合があります）`);
+}
+
 function showProfile(author, profile) {
     const modal = document.getElementById("profile-modal");
     const profileTitle = document.getElementById("profile-title");
@@ -86,12 +95,10 @@ function showProfile(author, profile) {
 
     modal.style.display = "block";
 
-    // ✅ モーダルを閉じる処理
     document.querySelector(".close").addEventListener("click", () => {
         modal.style.display = "none";
     });
 
-    // ✅ モーダル外をクリックして閉じる
     window.addEventListener("click", (event) => {
         if (event.target === modal) {
             modal.style.display = "none";
