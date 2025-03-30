@@ -1,53 +1,81 @@
-header {
-    background-image: url("../images/header-bg.jpg"); /* ✅ パスは適宜修正 */
+h1, h2 {
+  font-family: 'Kaisei HarunoUmi', serif;
+}
+
+
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.main-header {
+    width: 100vw;
+    margin: 0;
+    padding: 1rem; /* ← 少し余白を戻すと自然 */
+    position: relative;
+    background-image: url("../images/header-bg.jpg");
     background-size: cover;
     background-position: center;
     color: white;
-    padding: 2rem 1rem;
-    text-align: center;
-    position: relative;
 }
 
-/* 背景の上に文字を読みやすく重ねるためにオーバーレイを追加してもよい（任意） */
-header::before {
+.main-header::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.4); /* 黒の半透明オーバーレイ */
+    background: rgba(0,0,0,0.4);
     z-index: 0;
 }
 
-header h1 {
-    font-size: 5rem; /* ← ここが文字サイズ！ */
-    margin: 0;
-    padding: 0.5rem 0;
-    position: relative; /* ← 追加 */
-    z-index: 1;          /* ← 追加 */
-}
-header nav {
+.header-main {
+    display: flex;
+    align-items: center;
     position: relative;
     z-index: 1;
 }
 
-
-nav {
-    margin-top: 10px;
+.logo {
+    height: 150px; /* ← やや小さめに */
+    width: auto;
+    margin-right: 1rem;
 }
 
-nav a {
+.title-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.site-title {
+    font-size: 3rem;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.site-subtitle {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+/* === サブヘッダー（ナビゲーション） === */
+.sub-header {
+    background-color: #333;
+    text-align: center;
+    padding: 0.5rem 1rem;
+}
+
+.sub-header a {
     color: white;
     text-decoration: none;
     margin: 0 15px;
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
-nav a:hover {
+.sub-header a:hover {
     text-decoration: underline;
 }
-
-
-

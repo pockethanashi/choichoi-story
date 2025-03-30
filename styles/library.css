@@ -2,22 +2,6 @@ h1, h2 {
   font-family: 'Kaisei HarunoUmi', serif;
 }
 
-
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f8f8f8;
-}
-
-header {
-    background-color: #333;
-    color: white;
-    padding: 1rem;
-    text-align: center;
-}
-
-
 .container {
   display: flex;
   justify-content: center;  /* 中央揃え */
@@ -31,100 +15,92 @@ header {
   background-color: #f0f0f0;
 }
 
-
 main {
   flex: 1;
   padding: 20px;
-  max-width: 800px; /* 👈 お好みで最大幅を指定 */
+  max-width: 800px;
   margin-left: auto;
   margin-right: auto;
 }
 
-
-
 .story {
-    background: white;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  background: white;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
-    margin: 0;
+  margin: 0;
 }
 
 .likes {
-    font-weight: bold;
-    color: red;
+  font-weight: bold;
+  color: red;
 }
 
 button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    margin-top: 5px;
-    cursor: pointer;
-    border-radius: 3px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-top: 5px;
+  cursor: pointer;
+  border-radius: 3px;
 }
 
 button:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
-/* ページネーションのボタンを中央下に配置 */
+/* ページネーション */
 .pagination {
-    display: flex;
-    justify-content: center;  /* 中央寄せ */
-    align-items: center;
-    margin-top: 20px; /* 上部のコンテンツとの余白を設定 */
-/*    position: fixed;  /* 画面固定 */ */
-/*    bottom: 20px;  /* 画面の下からの距離 */ */
-/*    left: 50%; */
-/*    transform: translateX(-50%); /* 水平方向の中央揃え */ */
-    background: white; /* 背景色 */
-    padding: 10px 20px; /* ボタン周囲の余白 */
-    border-radius: 8px; /* 角丸 */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 影を追加 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  background: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .pagination button {
-    padding: 10px 15px;
-    font-size: 16px;
-    margin: 0 10px; /* ボタン間の間隔を調整 */
-    cursor: pointer;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    transition: background 0.3s;
+  padding: 10px 15px;
+  font-size: 16px;
+  margin: 0 10px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background 0.3s;
 }
 
 .pagination button:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 .pagination button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+  background-color: #ccc;
+  cursor: not-allowed;
 }
-
 
 /* スマホ用作者セレクト（初期は非表示） */
 #author-select-container {
-    display: none;
-    text-align: center;
-    margin: 20px auto;
+  display: none;
+  text-align: center;
+  margin: 20px auto;
 }
 
-/* 画面幅が768px以下のときだけ表示（スマホ表示） */
+/* モバイル対応 */
 @media screen and (max-width: 768px) {
-    #author-select-container {
-        display: block;
-    }
+  #author-select-container {
+    display: block;
+  }
 
-    #sidebar {
-        display: none; /* スマホではサイドバーを非表示 */
-    }
+  #sidebar {
+    display: none;
+  }
 }

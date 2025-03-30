@@ -1,23 +1,6 @@
-h1, h2 {
-  font-family: 'Kaisei HarunoUmi', serif;
-}
+/* フォント・body設定・headerは共通化済みなので省略 */
 
-
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-}
-
-header {
-  background-color: #0077cc;
-  color: white;
-  padding: 10px 0;
-  font-size: 24px;
-}
-
+/* 🔹 中央に配置された確認ボックス */
 main {
   width: 90%;
   max-width: 600px;
@@ -26,14 +9,17 @@ main {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
 }
 
+/* 🔹 タイトル */
 h2 {
   margin-bottom: 10px;
+  text-align: center;
 }
 
+/* 🔹 確認項目（ラベルと内容） */
 .confirm-item {
-  text-align: left;
   margin-bottom: 20px;
 }
 
@@ -52,6 +38,7 @@ h2 {
   word-break: break-word;
 }
 
+/* 🔹 送信・戻るボタン */
 button {
   background-color: #0077cc;
   color: white;
