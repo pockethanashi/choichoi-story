@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>新規小噺投稿</title>
+  <link rel="stylesheet" href="styles/post.css" />
+  <link rel="stylesheet" href="styles/common.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Kaisei+HarunoUmi&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <div class="main-header">
+      <div class="header-main">
+        <img src="images/logo.png" alt="ロゴ" class="logo" />
+        <div class="title-group">
+          <h1 class="site-title">ちょいChoiceストーリー</h1>
+          <p class="site-subtitle">アプデする小話</p>
+        </div>
+      </div>
+    </div>
+    <nav class="sub-header">
+      <a href="index.html">トップ</a>
+      <a href="new-post.html">新規投稿</a>
+      <a href="concept.html">このサイトについて</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>新しい小噺の投稿</h2>
+
+    <form id="post-form">
+      <label for="title">タイトル:</label>
+      <input type="text" id="title" name="title" required />
+
+      <!-- 🔹 ファイル読み込み -->
+      <label for="fileInput">本文ファイル（.txt）読み込み:</label>
+      <input type="file" id="fileInput" accept=".txt" />
+      <p style="font-size: 0.9rem; margin-top: 0;">※選択した.txtファイルの内容が本文欄に自動入力されます</p>
+
+      <label for="body">本文:</label>
+      <textarea id="body" name="body" rows="6" required></textarea>
+
+      <label for="genre">ジャンル:</label>
+      <select id="genre" name="genre" required>
+        <option value="日常">日常</option>
+        <option value="SF">SF</option>
+        <option value="ファンタジー">ファンタジー</option>
+        <option value="ホラー">ホラー</option>
+        <option value="コメディ">コメディ</option>
+      </select>
+
+      <label for="author">作者名:</label>
+      <input type="text" id="author" name="author" required />
+
+      <label for="profile">自己紹介:</label>
+      <textarea id="profile" name="profile" rows="3"></textarea>
+
+      <label for="version">バージョン番号:</label>
+      <input type="text" id="version" name="version" value="1.0" required />
+
+      <label for="updateDate">更新日:</label>
+      <input type="date" id="updateDate" name="updateDate" />
+
+      <label for="updateMemo">更新メモ:</label>
+      <textarea id="updateMemo" name="updateMemo" rows="3" placeholder="任意（新規投稿なので省略可）"></textarea>
+      
+      <label for="contact">連絡先（任意）:</label>
+      <input type="text" id="contact" name="contact" placeholder="メールアドレスやSNSなど" />
+
+      <input type="hidden" id="originalId" name="originalId" value="" />
+
+      <button type="button" id="confirm-btn">確認画面へ</button>
+    </form>
+  </main>
+
+  <script>
+  const params = new URLSearchParams(window.location.search);
+
+  // 🔹 対象フィールド（hidden含む）一覧
+  const fields = [
+    "title", "body", "genre", "author", "profile",
+    "version", "updateDate", "updateMemo",
+    "originalId", "contact"
+  ];
+
+  // 🔹 URLパラメータから各フォームへ値を復元
+  fields.forEach(id => {
+    const elem = document.getElementById(id);
+    if (elem && params.has(id)) {
+      elem.value = params.get(id);
+    }
+  });
+
+  // 🔹 ファイル読み込みで本文に反映
+  document.getElementById("fileInput").addEventListener("change", function () {
+    const file = this.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      document.getElementById("body").value = e.target.result;
+    };
+    reader.readAsText(file, "UTF-8");
+  });
+
+  // 🔹 確認画面へ遷移
+  document.getElementById("confirm-btn").addEventListener("click", function () {
+    const requiredFields = ["title", "body", "author", "version"];
+    const params = new URLSearchParams();
+    let valid = true;
+
+    fields.forEach(id => {
+      const val = document.getElementById(id).value.trim();
+      if (requiredFields.includes(id) && !val) {
+        valid = false;
+      }
+      params.append(id, val);
+    });
+
+    if (!valid) {
+      alert("タイトル、本文、作者名、バージョンは必須です。");
+      return;
+    }
+
+    window.location.href = `confirm.html?${params.toString()}`;
+  });
+</script>
+
+</body>
+</html>

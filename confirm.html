@@ -5,8 +5,7 @@
   <title>投稿内容の確認</title>
   <link rel="stylesheet" href="styles/confirm.css">
   <link rel="stylesheet" href="styles/common.css">
-    <link href="https://fonts.googleapis.com/css2?family=Kaisei+HarunoUmi&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Kaisei+HarunoUmi&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
@@ -14,14 +13,14 @@
       <div class="header-main">
         <img src="images/logo.png" alt="ロゴ" class="logo">
         <div class="title-group">
-         <h1 class="site-title">ちょいChoiceストーリー</h1>
-         <p class="site-subtitle">アプデする小話</p>
+          <h1 class="site-title">ちょいChoiceストーリー</h1>
+          <p class="site-subtitle">アプデする小話</p>
         </div>
       </div>
     </div>
     <nav class="sub-header">
       <a href="index.html">トップ</a>
-      <a href="post.html">投稿</a>
+      <a href="new-post.html">新規投稿</a>
       <a href="concept.html">このサイトについて</a>
     </nav>
   </header>
@@ -38,6 +37,8 @@
       <p><strong>更新日:</strong> <span id="confirm-updateDate"></span></p>
       <p><strong>オリジナルID:</strong> <span id="confirm-originalId"></span></p>
       <p><strong>更新メモ:</strong> <span id="confirm-updateMemo"></span></p>
+      <p><strong>親作品ID:</strong> <span id="confirm-parentId"></span></p>
+      <p><strong>連絡先:</strong> <span id="confirm-contact"></span></p>
     </div>
 
     <form id="confirm-form">
@@ -47,19 +48,52 @@
       <input type="hidden" name="genre" id="hidden-genre">
       <input type="hidden" name="author" id="hidden-author">
       <input type="hidden" name="profile" id="hidden-profile">
-
-      <!-- 🔽 バージョン管理用の hidden フィールドを追加 -->
       <input type="hidden" name="version" id="hidden-version">
       <input type="hidden" name="updateDate" id="hidden-updateDate">
       <input type="hidden" name="originalId" id="hidden-originalId">
       <input type="hidden" name="updateMemo" id="hidden-updateMemo">
+      <input type="hidden" name="parentId" id="hidden-parentId">
+      <input type="hidden" name="contact" id="hidden-contact">
 
       <button type="button" id="submit-btn">この内容で投稿する</button>
     </form>
 
     <br>
-    <a href="post.html">編集に戻る</a>
+    <a id="back-link" href="#">編集に戻る</a>
   </main>
+
+ <script>
+  // 🔹 URLからパラメータ取得
+  const urlParams = new URLSearchParams(window.location.search);
+  const fields = [
+    "title", "body", "genre", "author", "profile",
+    "version", "updateDate", "originalId", "updateMemo",
+    "parentId", "contact"
+  ];
+
+  // 🔹 表示とhidden inputの設定
+  fields.forEach(id => {
+    const value = urlParams.get(id) || "";
+    const displayElem = document.getElementById(`confirm-${id}`);
+    const hiddenElem = document.getElementById(`hidden-${id}`);
+    if (displayElem) displayElem.textContent = value;
+    if (hiddenElem) hiddenElem.value = value;
+  });
+
+  // 🔹 戻るリンクの切り替え（すべての値をURLに付与して戻す）
+  const backLink = document.getElementById("back-link");
+  const isUpdate = !!urlParams.get("originalId");
+
+  const backUrlBase = isUpdate ? "update-post.html?" : "new-post.html?";
+  const paramStrings = fields.map(key => {
+    const val = urlParams.get(key) || "";
+    const paramName = key === "parentId" ? "parent" : key; // parentId → parent に変換
+    return `${encodeURIComponent(paramName)}=${encodeURIComponent(val)}`;
+  });
+
+  backLink.href = backUrlBase + paramStrings.join("&");
+</script>
+
 
   <script src="scripts/confirm.js"></script>
 </body>

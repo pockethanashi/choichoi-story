@@ -1,31 +1,47 @@
 document.addEventListener("DOMContentLoaded", fetchStoryDetail);
 
-const API_URL = "https://script.google.com/macros/s/AKfycbyy2QS8TdacrRRtVRzl1MGg6CMRQNQILrYh-spuDTM2H-9GrtWjiuEnk6f-RpHldsnUqw/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbyd1K0W3VLk2hzDot0NEOs3VSxZzuE6fiy9AhmwckesAHvTCLXi1pVeO3zOzFjDa143jw/exec";
 
-let allVersions = []; // バージョンごとの小噺を格納
+let allVersions = []; // 同じoriginalIdを持つバージョン違いを格納
 
-function getStoryTitleFromURL() {
+// 🔹 URLからid（originalId）を取得
+function getStoryIdFromURL() {
     const params = new URLSearchParams(window.location.search);
-    return params.get("title");
+    return params.get("id");
 }
 
 function fetchStoryDetail() {
-    const title = getStoryTitleFromURL();
-    if (!title) {
-        console.error("❌ タイトルが指定されていません");
+    const originalId = getStoryIdFromURL();
+    if (!originalId) {
+        console.error("❌ 作品IDが指定されていません");
         return;
     }
 
     fetch(`${API_URL}?action=get`)
         .then(response => response.json())
         .then(data => {
-            allVersions = data.filter(s => s.title === title);
+            // originalId が一致するすべてのバージョンを抽出
+            allVersions = data.filter(s => s.originalId === originalId);
+
             if (allVersions.length === 0) {
-                console.error("❌ 該当する小噺が見つかりません");
+                console.error("❌ 該当する作品が見つかりません");
                 return;
             }
+
+            // 🔽 バージョンの新しさでソート（更新日＆バージョン番号）
+            allVersions.sort((a, b) => {
+                const dateA = new Date(a.updateDate || "1900-01-01");
+                const dateB = new Date(b.updateDate || "1900-01-01");
+                const versionA = parseFloat(a.version || "0");
+                const versionB = parseFloat(b.version || "0");
+
+                if (dateA < dateB) return 1;
+                if (dateA > dateB) return -1;
+                return versionB - versionA;
+            });
+
             populateVersionSelector();
-            displayStory(allVersions[0]); // 最新（最初）のバージョンを表示
+            displayStory(allVersions[0]); // 最新バージョンを表示
         })
         .catch(error => console.error("❌ データ取得エラー:", error));
 }
@@ -34,7 +50,7 @@ function populateVersionSelector() {
     const select = document.getElementById("version-select");
     if (!select) return;
 
-    select.innerHTML = ""; // 既存の選択肢をクリア
+    select.innerHTML = "";
 
     allVersions.forEach((story, index) => {
         const option = document.createElement("option");
@@ -53,37 +69,39 @@ function populateVersionSelector() {
     });
 }
 
-
-
 function displayStory(story) {
-    document.getElementById("story-title").textContent = story.title;
-    document.getElementById("story-body").innerHTML = story.body.replace(/\n/g, "<br>");
-    document.getElementById("story-genre").textContent = story.genre;
-    document.getElementById("story-author").textContent = story.author || "不明";
-    document.getElementById("story-likes").textContent = story.likes;
-    document.getElementById("story-version").textContent = story.version || "なし";
-    document.getElementById("story-updateDate").textContent = story.updateDate || "不明";
-    document.getElementById("story-updateMemo").textContent = story.updateMemo || "なし";
+  document.getElementById("story-title").textContent = story.title;
+  document.getElementById("story-body").innerHTML = story.body.replace(/\n/g, "<br>");
+  document.getElementById("story-genre").textContent = story.genre;
+  document.getElementById("story-author").textContent = story.author || "不明";
+  document.getElementById("story-likes").textContent = story.likes;
+  document.getElementById("story-version").textContent = story.version || "なし";
+  document.getElementById("story-updateDate").textContent = story.updateDate || "不明";
+  document.getElementById("story-updateMemo").textContent = story.updateMemo || "なし";
 
-    // プロフィールボタンの動作（任意）
-    const profileBtn = document.querySelector(".profile-btn");
-    if (profileBtn) {
-        profileBtn.onclick = () => showProfile(story.author, story.profile);
-    }
+  const profileBtn = document.querySelector(".profile-btn");
+  if (profileBtn) {
+    profileBtn.onclick = () => showProfile(story.author, story.profile);
+  }
+
+  // 🔹 「いいね」ボタンの挙動を設定
+  const likeButton = document.querySelector("button[onclick^='likeStory']");
+  if (likeButton) {
+    likeButton.onclick = () => likeStory(story.originalId, story.version);
+  }
 }
 
 
-function likeStory(title) {
-    fetch(API_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ title })
-    });
-    alert(`「${title}」にいいねしました！（反映には少し時間がかかる場合があります）`);
+function likeStory(originalId, version) {
+  fetch(API_URL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ originalId, version })
+  });
+  alert(`このバージョン（ID: ${originalId}, v${version}）にいいねしました！`);
 }
+
 
 function showProfile(author, profile) {
     const modal = document.getElementById("profile-modal");

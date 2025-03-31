@@ -23,7 +23,7 @@
     </div>
     <nav class="sub-header">
       <a href="index.html">トップ</a>
-      <a href="post.html">投稿</a>
+      <a href="new-post.html">新規投稿</a>
       <a href="concept.html">このサイトについて</a>
     </nav>
   </header>
@@ -48,6 +48,11 @@
       <p>いいね数: <span id="story-likes">0</span></p>
       <button onclick="likeStory()">❤️ いいね</button>
       <br><br>
+      
+      <button id="revise-button">✏️ この作品をアップデートする</button>
+      <p style="font-size: 0.9rem; color: #666;">※他の人の作品をベースに、自分なりのバージョンを投稿できます</p>
+
+      <br>
       <a href="index.html">⬅ トップへ戻る</a>
     </main>
   </div>
@@ -62,5 +67,31 @@
   </div>
 
   <script src="scripts/detail.js"></script>
+  
+  
+  <script>
+      document.getElementById("revise-button").addEventListener("click", function () {
+        const params = new URLSearchParams(window.location.search);
+        const storyId = params.get("id");
+
+        // 表示されているタイトルとバージョンを取得（最新の内容）
+        const title = document.getElementById("story-title")?.textContent || "";
+        const version = document.getElementById("story-version")?.textContent || "";
+
+        if (storyId) {
+          const postParams = new URLSearchParams({
+            parent: storyId,
+            title: title,
+            version: version
+          });
+          window.location.href = `update-post.html?${postParams.toString()}`;
+        } else {
+          alert("元の作品IDが取得できませんでした。");
+        }
+      });
+ </script>
+
+
+  
 </body>
 </html>

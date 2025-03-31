@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>小噺投稿</title>
-    <link rel="stylesheet" href="styles/post.css">
-    <link rel="stylesheet" href="styles/common.css">
-    <link href="https://fonts.googleapis.com/css2?family=Kaisei+HarunoUmi&display=swap" rel="stylesheet">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小噺投稿</title>
+  <link rel="stylesheet" href="styles/post.css">
+  <link rel="stylesheet" href="styles/common.css">
+  <link href="https://fonts.googleapis.com/css2?family=Kaisei+HarunoUmi&display=swap" rel="stylesheet">
 </head>
 <body>
+
+  <!-- 🔹 共通ヘッダー -->
   <header>
     <div class="main-header">
       <div class="header-main">
         <img src="images/logo.png" alt="ロゴ" class="logo">
         <div class="title-group">
-         <h1 class="site-title">ちょいChoiceストーリー</h1>
-         <p class="site-subtitle">アプデする小話</p>
+          <h1 class="site-title">ちょいChoiceストーリー</h1>
+          <p class="site-subtitle">アプデする小話</p>
         </div>
       </div>
     </div>
@@ -27,80 +28,95 @@
     </nav>
   </header>
 
-     <main>
-        <form id="post-form">
-            <label for="title">タイトル:</label>
-            <input type="text" id="title" name="title" required>
+  <main>
+    <form id="post-form">
+      <label for="title">タイトル:</label>
+      <input type="text" id="title" name="title" required>
 
-            <label for="body">本文:</label>
-            <textarea id="body" name="body" rows="6" required></textarea>
+      <label for="body">本文:</label>
+      <textarea id="body" name="body" rows="6" required></textarea>
 
-            <label for="genre">ジャンル:</label>
-            <select id="genre" name="genre" required>
-                <option value="日常">日常</option>
-                <option value="SF">SF</option>
-                <option value="ファンタジー">ファンタジー</option>
-                <option value="ホラー">ホラー</option>
-                <option value="コメディ">コメディ</option>
-            </select>
+      <label for="genre">ジャンル:</label>
+      <select id="genre" name="genre" required>
+        <option value="日常">日常</option>
+        <option value="SF">SF</option>
+        <option value="ファンタジー">ファンタジー</option>
+        <option value="ホラー">ホラー</option>
+        <option value="コメディ">コメディ</option>
+      </select>
 
-            <label for="author">作者名:</label>
-            <input type="text" id="author" name="author" required>
+      <label for="author">作者名:</label>
+      <input type="text" id="author" name="author" required>
 
-            <label for="profile">自己紹介:</label>
-            <textarea id="profile" name="profile" rows="3"></textarea>
-            
-            <!-- バージョン管理情報の入力欄 -->
-            <label for="version">バージョン番号:</label>
-            <input type="text" id="version" name="version">
+      <label for="profile">自己紹介:</label>
+      <textarea id="profile" name="profile" rows="3"></textarea>
 
-            <label for="updateDate">更新日:</label>
-            <input type="date" id="updateDate" name="updateDate">
+      <label for="version">バージョン番号:</label>
+      <input type="text" id="version" name="version">
 
-            <label for="originalId">オリジナルID:</label>
-            <input type="text" id="originalId" name="originalId" placeholder="新規作成なら空でOK">
+      <label for="updateDate">更新日:</label>
+      <input type="date" id="updateDate" name="updateDate">
 
-            <label for="updateMemo">更新メモ:</label><br>
-            <textarea id="updateMemo" name="updateMemo" rows="3" placeholder="変更内容の簡単な説明"></textarea>
+      <label for="originalId">オリジナルID:</label>
+      <input type="text" id="originalId" name="originalId" placeholder="新規作成なら空でOK">
 
-            <button type="button" id="confirm-btn">確認画面へ</button>
-        </form>
-    </main>
+      <label for="updateMemo">更新メモ:</label><br>
+      <textarea id="updateMemo" name="updateMemo" rows="3" placeholder="変更内容の簡単な説明"></textarea>
 
-    <script>
-    // ✅ 「確認画面へ」ボタンでデータをconfirm.htmlに渡す処理
+      <input type="hidden" id="parentId" name="parentId">
+
+      <button type="button" id="confirm-btn">確認画面へ</button>
+    </form>
+  </main>
+
+  <script>
+    // URLのクエリから親IDを取得してhiddenフィールドに設定
+    const urlParams = new URLSearchParams(window.location.search);
+    const parentId = urlParams.get("parent");
+    if (parentId) {
+      document.getElementById("parentId").value = parentId;
+
+      const originalInput = document.getElementById("originalId");
+      if (originalInput && !originalInput.value) {
+        originalInput.value = parentId;
+      }
+    }
+
+    // 「確認画面へ」ボタンをクリックしたときの処理
     document.getElementById("confirm-btn").addEventListener("click", function () {
-        const title = document.getElementById("title").value.trim();
-        const body = document.getElementById("body").value.trim();
-        const genre = document.getElementById("genre").value;
-        const author = document.getElementById("author").value.trim();
-        const profile = document.getElementById("profile").value.trim();
+      const title = document.getElementById("title").value.trim();
+      const body = document.getElementById("body").value.trim();
+      const genre = document.getElementById("genre").value;
+      const author = document.getElementById("author").value.trim();
+      const profile = document.getElementById("profile").value.trim();
+      const version = document.getElementById("version").value.trim();
+      const updateDate = document.getElementById("updateDate").value;
+      const originalId = document.getElementById("originalId").value.trim();
+      const updateMemo = document.getElementById("updateMemo").value.trim();
 
-        const version = document.getElementById("version").value.trim();
-        const updateDate = document.getElementById("updateDate").value;
-        const originalId = document.getElementById("originalId").value.trim();
-        const updateMemo = document.getElementById("updateMemo").value.trim();
+      const parentIdFromForm = document.getElementById("parentId").value;
 
-        if (!title || !body || !author) {
-            alert("タイトル、本文、作者名は必須です。");
-            return;
-        }
+      if (!title || !body || !author) {
+        alert("タイトル、本文、作者名は必須です。");
+        return;
+      }
 
-        const params = new URLSearchParams({
-            title,
-            body,
-            genre,
-            author,
-            profile,
-            version,
-            updateDate,
-            originalId,
-            updateMemo
-        });
+      const params = new URLSearchParams({
+        title,
+        body,
+        genre,
+        author,
+        profile,
+        version,
+        updateDate,
+        originalId,
+        updateMemo,
+        parentId: parentIdFromForm
+      });
 
-        window.location.href = `confirm.html?${params.toString()}`;
+      window.location.href = `confirm.html?${params.toString()}`;
     });
-</script>
+  </script>
 
 </body>
 </html>

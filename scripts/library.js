@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchStories();
 });
 
-const API_URL = "https://script.google.com/macros/s/AKfycbyy2QS8TdacrRRtVRzl1MGg6CMRQNQILrYh-spuDTM2H-9GrtWjiuEnk6f-RpHldsnUqw/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbyd1K0W3VLk2hzDot0NEOs3VSxZzuE6fiy9AhmwckesAHvTCLXi1pVeO3zOzFjDa143jw/exec";
 
 const STORIES_PER_PAGE = 3;
 const PREVIEW_LINES = 15;
@@ -86,7 +86,7 @@ function createStoryElement(story) {
     storyDiv.innerHTML = `
         <h2>${story.title}</h2>
         <p>${previewText}${storyLines.length > PREVIEW_LINES ? "..." : ""}</p>
-        ${storyLines.length > PREVIEW_LINES ? `<a href="detail.html?title=${encodeURIComponent(story.title)}">続きを読む</a>` : ""}
+        ${storyLines.length > PREVIEW_LINES ? `<a href="detail.html?id=${encodeURIComponent(story.originalId)}">続きを読む</a>` : ""}
         <p><strong>ジャンル:</strong> ${story.genre}</p>
         <p><strong>作者:</strong> ${story.author}</p>
         <p><strong>いいね:</strong> <span id="likes-${story.title}">${story.likes}</span></p>

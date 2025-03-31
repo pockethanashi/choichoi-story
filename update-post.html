@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>小噺アップデート投稿</title>
+  <link rel="stylesheet" href="styles/post.css" />
+  <link rel="stylesheet" href="styles/common.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Kaisei+HarunoUmi&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <div class="main-header">
+      <div class="header-main">
+        <img src="images/logo.png" alt="ロゴ" class="logo" />
+        <div class="title-group">
+          <h1 class="site-title">ちょいChoiceストーリー</h1>
+          <p class="site-subtitle">アプデする小話</p>
+        </div>
+      </div>
+    </div>
+    <nav class="sub-header">
+      <a href="index.html">トップ</a>
+      <a href="new-post.html">新規投稿</a>
+      <a href="concept.html">このサイトについて</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>作品のアップデート投稿</h2>
+
+    <p><strong>元のタイトル:</strong> <span id="original-title-text"></span></p>
+
+    <form id="post-form">
+      <label for="title">タイトル:</label>
+      <input type="text" id="title" name="title" required />
+
+      <!-- 🔹 ファイル読み込み用 -->
+      <label for="fileInput">本文ファイル（.txt）読み込み:</label>
+      <input type="file" id="fileInput" accept=".txt" />
+      <p style="font-size: 0.9rem; margin-top: 0;">※選択した.txtファイルの内容が本文欄に自動入力されます</p>
+
+      <label for="body">本文:</label>
+      <textarea id="body" name="body" rows="6" required></textarea>
+
+      <label for="genre">ジャンル:</label>
+      <select id="genre" name="genre" required>
+        <option value="日常">日常</option>
+        <option value="SF">SF</option>
+        <option value="ファンタジー">ファンタジー</option>
+        <option value="ホラー">ホラー</option>
+        <option value="コメディ">コメディ</option>
+      </select>
+
+      <label for="author">作者名:</label>
+      <input type="text" id="author" name="author" required />
+
+      <label for="profile">自己紹介:</label>
+      <textarea id="profile" name="profile" rows="3"></textarea>
+
+      <label for="version">
+        バージョン番号（更新対象のバージョン番号：
+        <span id="previous-version-label" style="color: #555;">?</span>）:
+      </label>
+      <input type="text" id="version" name="version" required />
+
+      <label for="updateDate">更新日:</label>
+      <input type="date" id="updateDate" name="updateDate" />
+
+      <label for="updateMemo">更新メモ:</label>
+      <textarea id="updateMemo" name="updateMemo" rows="3" required placeholder="変更点などを簡潔に記入してください"></textarea>
+      
+      <label for="contact">連絡先（任意）:</label>
+      <input type="text" id="contact" name="contact" placeholder="メールアドレスやSNSなど" />
+
+
+      <input type="hidden" id="originalId" name="originalId" />
+
+      <button type="button" id="confirm-btn">確認画面へ</button>
+    </form>
+  </main>
+
+  <script>
+  const params = new URLSearchParams(window.location.search);
+
+  // 🔹 全フォームの項目を一覧化（hidden含む）
+  const fields = [
+    "title", "body", "genre", "author", "profile",
+    "version", "updateDate", "updateMemo", "originalId", "contact"
+  ];
+
+  // 🔹 各フィールドにURLパラメータの値をセット
+  fields.forEach(id => {
+    const elem = document.getElementById(id);
+    if (elem && params.has(id)) {
+      elem.value = params.get(id);
+    }
+  });
+
+  // 🔹 特別項目：元のタイトル表示（空白なら"?"）
+  const titleDisplay = document.getElementById("original-title-text");
+  const titleParam = params.get("title");
+  if (titleDisplay && titleParam) {
+    titleDisplay.textContent = titleParam;
+  }
+
+  // 🔹 特別項目：前のバージョン番号表示
+  const prevVersionDisplay = document.getElementById("previous-version-label");
+  const prevVersion = params.get("version");
+  if (prevVersionDisplay && prevVersion) {
+    prevVersionDisplay.textContent = `v${prevVersion}`;
+  }
+
+  // 🔹 originalId（parent）必須チェック
+  const parentId = params.get("parent");
+  if (parentId) {
+    document.getElementById("originalId").value = parentId;
+  } else {
+    alert("親作品IDが見つかりません。トップページに戻ります。");
+    window.location.href = "index.html";
+  }
+
+  // 🔹 ファイル読み込みで本文に反映
+  const fileInput = document.getElementById("fileInput");
+  fileInput.addEventListener("change", function () {
+    const file = this.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      document.getElementById("body").value = e.target.result;
+    };
+    reader.readAsText(file, "UTF-8");
+  });
+
+  // 🔹 確認画面へ遷移（パラメータを付加）
+  document.getElementById("confirm-btn").addEventListener("click", function () {
+    const requiredFields = ["title", "body", "author", "version", "updateMemo"];
+    const params = new URLSearchParams();
+    let valid = true;
+
+    fields.forEach(id => {
+      const val = document.getElementById(id).value.trim();
+      if (requiredFields.includes(id) && !val) {
+        valid = false;
+      }
+      params.append(id, val);
+    });
+
+    if (!valid) {
+      alert("タイトル、本文、作者名、バージョン、更新メモは必須です。");
+      return;
+    }
+
+    // parentId（URLには parent=◯◯ として戻したい）
+    if (parentId) {
+      params.append("parentId", parentId);
+    }
+
+    window.location.href = `confirm.html?${params.toString()}`;
+  });
+</script>
+
+</body>
+</html>
