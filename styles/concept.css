@@ -1,0 +1,32 @@
+main.concept-page {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  line-height: 1.8;
+}
+
+main.concept-page h2, main.concept-page h3 {
+  text-align: center;
+  color: #444;
+}
+
+main.concept-page p {
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+main.concept-page a {
+  display: inline-block;
+  margin-top: 20px;
+  text-decoration: none;
+  color: #0077cc;
+  font-weight: bold;
+}
+
+main.concept-page a:hover {
+  text-decoration: underline;
+}
