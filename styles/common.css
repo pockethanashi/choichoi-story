@@ -92,7 +92,7 @@ html, body {
 
 
 
-@media screen and (orientation: portrait) and (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .main-header {
     width: 100%;
     padding: 0.5rem;
