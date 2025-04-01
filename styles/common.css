@@ -135,7 +135,7 @@ html, body {
   }
 }
 
-@media screen and (orientation: portrait) and (max-width: 768px) {
+@media screen and (orientation: portrait) and (max-width: 400px) {
   .main-header {
     width: 100%;
     padding: 1rem;
@@ -156,7 +156,7 @@ html, body {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 0.5rem;
+    font-size: 1.5rem;
   }
 
   .site-subtitle {
