@@ -106,6 +106,10 @@ html, body {
     height: 60px;
     margin-bottom: 0.5rem;
   }
+  
+  .title-group {
+      max-width: 100%;
+  }
 
   .site-title {
     white-space: nowrap;
@@ -135,7 +139,7 @@ html, body {
   }
 }
 
-@media screen and (orientation: portrait) and (max-width: 400px) {
+@media screen and (orientation: portrait) and (max-width: 768px) {
   .main-header {
     width: 100%;
     padding: 1rem;
@@ -150,6 +154,10 @@ html, body {
   .logo {
     height: 80px;
     margin-bottom: 0.5rem;
+  }
+
+  .title-group {
+      max-width: 100%;
   }
 
   .site-title {
