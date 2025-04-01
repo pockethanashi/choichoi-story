@@ -146,7 +146,7 @@ html, body {
 }
 
 
-@media screen and (orientation: landscape) and (max-width: 1048px){
+@media screen and (orientation: landscape) and (max-width: 1366px){
   .main-header {
     width: 100%; /* ← 100vwから修正 */
     padding: 1rem;
