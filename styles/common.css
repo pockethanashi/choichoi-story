@@ -92,7 +92,7 @@ html, body {
 
 
 
-@media screen and (max-width: 768px) {
+@media screen and (orientation: portrait) and (max-width: 768px) {
   .main-header {
     width: 100%;
     padding: 0.5rem;
@@ -143,4 +143,42 @@ html, body {
     white-space: nowrap;
   }
 }
+
+
+/* --- 横向き（スマホ・タブレット・PC小画面） --- */
+@media screen and (orientation: landscape) {
+  .main-header {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .header-main {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex-wrap: nowrap;
+  }
+
+  .logo {
+    height: 60px;
+    margin-bottom: 0.5rem;
+  }
+
+  .title-group {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .site-title {
+    font-size: 1.3rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .site-subtitle {
+    font-size: 1rem;
+  }
+}
+
 
