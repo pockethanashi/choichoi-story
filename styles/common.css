@@ -79,3 +79,35 @@ html, body {
 .sub-header a:hover {
     text-decoration: underline;
 }
+
+
+@media screen and (max-width: 768px) {
+  .header-main {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .logo {
+    height: 60px;
+    margin-bottom: 0.5rem;
+  }
+
+  .site-title {
+    font-size: 2rem;
+  }
+
+  .site-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .sub-header {
+    font-size: 1rem;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .sub-header a {
+    margin: 0 10px;
+  }
+}
