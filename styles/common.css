@@ -142,13 +142,14 @@ html, body {
 @media screen and (orientation: portrait) and (max-width: 768px) {
   .main-header {
     width: 100%;
-    padding: 1rem;
+    padding: 0.5rem;
   }
 
   .header-main {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    flex-wrap: nowrap; 
   }
 
   .logo {
@@ -158,6 +159,7 @@ html, body {
 
   .title-group {
       max-width: 100%;
+      min-width: 0; 
   }
 
   .site-title {
@@ -165,6 +167,7 @@ html, body {
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 1.5rem;
+    display: block; 
   }
 
   .site-subtitle {
