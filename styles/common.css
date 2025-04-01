@@ -89,7 +89,12 @@ html, body {
 }
 
 
-@media screen and (max-width: 768px) and (orientation: landscape){
+@media screen and (max-width: 768px) {
+  .main-header {
+    width: 100%; /* ← 100vwから修正 */
+    padding: 1rem;
+  }
+
   .header-main {
     flex-direction: column;
     align-items: center;
@@ -102,10 +107,10 @@ html, body {
   }
 
   .site-title {
-    white-space: nowrap; /* ← 改行を防ぐ */
+    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; /* 長すぎたら「...」で省略（任意） */
-    font-size: 1.4rem; /* 必要に応じて小さめに調整 */
+    text-overflow: ellipsis;
+    font-size: 1.4rem;
   }
 
   .site-subtitle {
@@ -113,16 +118,20 @@ html, body {
   }
 
   .sub-header {
-    width: 100vw;
+    width: 100%; /* ← ここも100vwから修正 */
     overflow-x: auto;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
     padding: 0.5rem 0;
+    text-align: center;
   }
 
   .sub-header a {
     padding: 0 10px;
     font-size: 1rem;
+    display: inline-block;
+    white-space: nowrap;
   }
 }
+
 
