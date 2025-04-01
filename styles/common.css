@@ -145,10 +145,9 @@ html, body {
 }
 
 
-/* --- 横向き（スマホ・タブレット・PC小画面） --- */
-@media screen and (orientation: landscape) {
+@media screen and (orientation: landscape) and (max-width: 1336px){
   .main-header {
-    width: 100%;
+    width: 100%; /* ← 100vwから修正 */
     padding: 1rem;
   }
 
@@ -156,29 +155,42 @@ html, body {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    flex-wrap: nowrap;
   }
 
   .logo {
     height: 60px;
     margin-bottom: 0.5rem;
   }
-
+  
   .title-group {
-    max-width: 100%;
-    min-width: 0;
+      max-width: 100%;
   }
 
   .site-title {
-    font-size: 1.3rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 1.3rem;
   }
 
   .site-subtitle {
     font-size: 1rem;
   }
-}
 
+  .sub-header {
+    width: 100%; /* ← ここも100vwから修正 */
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.5rem 0;
+    text-align: center;
+  }
+
+  .sub-header a {
+    padding: 0 10px;
+    font-size: 1rem;
+    display: inline-block;
+    white-space: nowrap;
+  }
+}
 
