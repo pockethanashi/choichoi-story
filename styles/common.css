@@ -51,6 +51,7 @@ html, body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    max-width: 100%;
 }
 
 .site-title {
@@ -110,7 +111,7 @@ html, body {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: clamp(1.2rem, 5vw, 3rem);
+    font-size: 1.3rem;
   }
 
   .site-subtitle {
