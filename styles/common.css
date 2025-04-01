@@ -94,7 +94,10 @@ html, body {
   }
 
   .site-title {
-    font-size: 2rem;
+    white-space: nowrap; /* ← 改行を防ぐ */
+    overflow: hidden;
+    text-overflow: ellipsis; /* 長すぎたら「...」で省略（任意） */
+    font-size: 1.8rem; /* 必要に応じて小さめに調整 */
   }
 
   .site-subtitle {
