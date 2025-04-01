@@ -36,7 +36,6 @@ html, body {
     align-items: center;
     position: relative;
     z-index: 1;
-    flex-wrap: nowrap;
 }
 
 .logo {
@@ -49,17 +48,13 @@ html, body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    max-width: 100%;
 }
 
 .site-title {
-  white-space: nowrap;        /* ← 改行を防ぐ！ */
-  overflow: hidden;           /* はみ出しを防止 */
-  text-overflow: ellipsis;    /* 長すぎたら…（任意） */
-  font-size: 2rem;            /* スマホ向けに少し小さく調整してもOK */
-  max-width: 100%;            /* 横幅制限の解除（必要なら） */
+    font-size: 3rem;
+    margin: 0;
+    line-height: 1.2;
 }
-
 
 .site-subtitle {
     font-size: 1.5rem;
@@ -86,7 +81,7 @@ html, body {
 }
 
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) and (orientation: landscape){
   .header-main {
     flex-direction: column;
     align-items: center;
@@ -102,7 +97,7 @@ html, body {
     white-space: nowrap; /* ← 改行を防ぐ */
     overflow: hidden;
     text-overflow: ellipsis; /* 長すぎたら「...」で省略（任意） */
-    font-size: 1.8rem; /* 必要に応じて小さめに調整 */
+    font-size: 1.4rem; /* 必要に応じて小さめに調整 */
   }
 
   .site-subtitle {
