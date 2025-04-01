@@ -5,9 +5,12 @@ h1, h2 {
 
 
 html, body {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;  /* ← ここ追加で横スクロールバーを防ぐ！ */
 }
+
 
 .main-header {
     width: 100vw;
@@ -63,18 +66,23 @@ html, body {
 
 /* === サブヘッダー（ナビゲーション） === */
 .sub-header {
-    background-color: #333;
-    text-align: center;
-    padding: 0.5rem 1rem;
+  width: 100vw;
+  background-color: #333;
+  text-align: center;
+  padding: 0.5rem 0; /* ← 左右のpaddingを0に */
+  margin: 0;
 }
 
 .sub-header a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-    font-weight: bold;
-    font-size: 1.5rem;
+  display: inline-block;
+  padding: 0 1rem;  /* ← スペースはここで確保 */
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.5rem;
+  white-space: nowrap;
 }
+
 
 .sub-header a:hover {
     text-decoration: underline;
@@ -104,18 +112,17 @@ html, body {
     font-size: 1.2rem;
   }
 
-
   .sub-header {
+    width: 100vw;
     overflow-x: auto;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
-    padding: 0.5rem;
+    padding: 0.5rem 0;
   }
 
   .sub-header a {
-    display: inline-block;
-    margin: 0 10px;
+    padding: 0 10px;
     font-size: 1rem;
-    white-space: nowrap;
   }
 }
+
