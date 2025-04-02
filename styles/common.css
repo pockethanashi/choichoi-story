@@ -9,6 +9,7 @@ html, body {
   padding: 0;
   width: 100%;
   overflow-x: hidden;  /* ← ここ追加で横スクロールバーを防ぐ！ */
+  background-color: #d8f3dc;
 }
 
 
