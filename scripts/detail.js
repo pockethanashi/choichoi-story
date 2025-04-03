@@ -78,6 +78,9 @@ function displayStory(story) {
   document.getElementById("story-version").textContent = story.version || "なし";
   document.getElementById("story-updateDate").textContent = story.updateDate || "不明";
   document.getElementById("story-updateMemo").textContent = story.updateMemo || "なし";
+  document.getElementById("story-originalAuthor").textContent =
+  findOriginalAuthor(allVersions, story.originalId);
+
 
   const profileBtn = document.querySelector(".profile-btn");
   if (profileBtn) {
@@ -123,3 +126,31 @@ function showProfile(author, profile) {
         }
     });
 }
+
+
+function findOriginalAuthor(data, originalId) {
+  const normalizedId = (originalId || "").trim().toLowerCase();
+
+  // originalId が一致する候補をすべて取得
+  const candidates = data.filter(s =>
+    (s.originalId || "").trim().toLowerCase() === normalizedId
+  );
+
+  if (candidates.length === 0) return "不明";
+
+  // 更新日→バージョン番号の順に昇順ソート（最初の作者がオリジナルとみなす）
+  candidates.sort((a, b) => {
+    const dateA = new Date(a.updateDate || "9999-12-31");
+    const dateB = new Date(b.updateDate || "9999-12-31");
+    if (dateA < dateB) return -1;
+    if (dateA > dateB) return 1;
+
+    const verA = parseFloat(a.version || "0");
+    const verB = parseFloat(b.version || "0");
+    return verA - verB;
+  });
+
+  return candidates[0].author || "不明";
+}
+
+

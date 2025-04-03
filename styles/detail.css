@@ -11,6 +11,13 @@
   padding: 0 1rem;
 }
 
+#version-select {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+
 /* 🔹 サイドバー */
 #story-sidebar {
   width: 250px;
