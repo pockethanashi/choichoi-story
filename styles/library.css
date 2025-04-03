@@ -6,7 +6,7 @@ h1, h2 {
 .container {
   display: flex;
   justify-content: center;  /* 中央揃え */
-  max-width: 1040px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -16,10 +16,36 @@ h1, h2 {
   background-color: #f0f0f0;
 }
 
+#sidebar-right {
+  width: 200px;
+  padding: 20px;
+  background-color: #eef4f8;
+  text-align: center;
+  border-left: 1px solid #ccc;
+}
+
+.admin-image {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.contact-link {
+  font-weight: bold;
+  color: #0077cc;
+  text-decoration: none;
+}
+
+.contact-link:hover {
+  text-decoration: underline;
+}
+
+
+
 main {
   flex: 1;
   padding: 20px;
-  max-width: 800px;
+  max-width: 880px;
   margin-left: auto;
   margin-right: auto;
 
@@ -103,6 +129,10 @@ button:hover {
   }
 
   #sidebar {
+    display: none;
+  }
+  
+  #sidebar-right {
     display: none;
   }
 }
