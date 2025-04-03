@@ -11,7 +11,7 @@ h1, h2 {
 }
 
 #sidebar {
-  width: 200px;
+  width: 150px;
   padding: 20px;
   background-color: #f0f0f0;
 }
@@ -45,7 +45,7 @@ h1, h2 {
 main {
   flex: 1;
   padding: 20px;
-  max-width: 880px;
+  max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
 

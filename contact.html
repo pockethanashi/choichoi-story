@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>管理者への問い合わせ</title>
+  <link rel="stylesheet" href="styles/common.css" />
+  <link rel="stylesheet" href="styles/contact.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Kaisei+HarunoUmi&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <div class="main-header">
+      <div class="header-main">
+        <img src="images/logo.png" alt="ロゴ" class="logo" />
+        <div class="title-group">
+          <h1 class="site-title">ちょいChoiceストーリー</h1>
+          <p class="site-subtitle">アプデする小話</p>
+        </div>
+      </div>
+    </div>
+    <nav class="sub-header">
+      <a href="index.html">トップ</a>
+      <a href="new-post.html">新規投稿</a>
+      <a href="concept.html">このサイトについて</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>管理者への問い合わせ</h2>
+    <p>ご意見・ご要望・お問い合わせがありましたら、以下のフォームからご連絡ください。</p>
+    
+    <form action="https://formspree.io/f/xxxxx" method="POST"> <!-- ←必要に応じてGASやFormspreeへ -->
+      <label for="name">お名前（任意）:</label>
+      <input type="text" id="name" name="name" />
+
+      <label for="email">メールアドレス（返信希望の場合）:</label>
+      <input type="email" id="email" name="email" />
+
+      <label for="message">お問い合わせ内容:</label>
+      <textarea id="message" name="message" rows="6" required></textarea>
+
+      <button type="submit">送信する</button>
+    </form>
+  </main>
+</body>
+</html>
