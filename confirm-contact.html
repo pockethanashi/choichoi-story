@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>お問い合わせの確認</title>
+  <link rel="stylesheet" href="styles/confirm.css">
+  <link rel="stylesheet" href="styles/common.css">
+  <link href="https://fonts.googleapis.com/css2?family=Kaisei+HarunoUmi&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <div class="main-header">
+      <div class="header-main">
+        <img src="images/logo.png" alt="ロゴ" class="logo" />
+        <div class="title-group">
+          <h1 class="site-title">ちょいChoiceストーリー</h1>
+          <p class="site-subtitle">アプデする小話</p>
+        </div>
+      </div>
+    </div>
+    <nav class="sub-header">
+      <a href="index.html">トップ</a>
+      <a href="new-post.html">新規投稿</a>
+      <a href="concept.html">このサイトについて</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>お問い合わせ内容の確認</h2>
+    <div id="confirm-content">
+      <p><strong>お名前:</strong> <span id="confirm-name"></span></p>
+      <p><strong>メールアドレス:</strong> <span id="confirm-email"></span></p>
+      <p><strong>お問い合わせ内容:</strong><br><span id="confirm-message"></span></p>
+    </div>
+
+    <form id="confirm-form">
+      <input type="hidden" id="hidden-name" name="name">
+      <input type="hidden" id="hidden-email" name="email">
+      <input type="hidden" id="hidden-message" name="message">
+
+      <button type="button" id="send-btn">この内容で送信する</button>
+    </form>
+
+    <br>
+    <a id="back-link" href="#">編集に戻る</a>
+
+    <p id="result-message" style="margin-top: 1rem;"></p>
+  </main>
+
+  <script src="scripts/confirm-contact.js"></script>
+</body>
+</html>

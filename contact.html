@@ -30,18 +30,24 @@
     <h2>管理者への問い合わせ</h2>
     <p>ご意見・ご要望・お問い合わせがありましたら、以下のフォームからご連絡ください。</p>
     
-    <form action="https://formspree.io/f/xxxxx" method="POST"> <!-- ←必要に応じてGASやFormspreeへ -->
+    <!-- form タグに id を追加 -->
+    <form id="contact-form">
       <label for="name">お名前（任意）:</label>
       <input type="text" id="name" name="name" />
-
+    
       <label for="email">メールアドレス（返信希望の場合）:</label>
       <input type="email" id="email" name="email" />
-
+    
       <label for="message">お問い合わせ内容:</label>
       <textarea id="message" name="message" rows="6" required></textarea>
-
-      <button type="submit">送信する</button>
+    
+      <button type="button" id="contact-submit">確認画面へ</button>
     </form>
+
+
+    <p id="result-message" style="margin-top: 1rem;"></p>
   </main>
+
+  <script src="scripts/contact.js"></script>
 </body>
 </html>
