@@ -1,44 +1,39 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const fields = ["name", "email", "message"];
+document.getElementById("send-btn").addEventListener("click", function () {
+  const name = document.getElementById("confirm-name").textContent;
+  const email = document.getElementById("confirm-email").textContent;
+  const message = document.getElementById("confirm-message").textContent;
 
-  // 表示とhiddenの両方に反映
-  fields.forEach(id => {
-    const value = urlParams.get(id) || "";
-    const displayElem = document.getElementById(`confirm-${id}`);
-    const hiddenElem = document.getElementById(`hidden-${id}`);
-    if (displayElem) displayElem.textContent = value;
-    if (hiddenElem) hiddenElem.value = value;
+  const postData = {
+    action: "contact",
+    name,
+    email,
+    message
+  };
+
+  const API_URL = "https://script.google.com/macros/s/AKfycbxon-diIi46egMwU4fGxUUm3-B9cCSMUon4i1JFvAZSgZwz8G8WshhLh7tRlrHj5maxyg/exec";
+
+  fetch(API_URL, {
+    method: "POST",
+    mode: "no-cors", // ← CORSを無視して送信のみ行う
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(postData)
   });
 
-  // 送信ボタン処理
-  document.getElementById("send-btn").addEventListener("click", () => {
-    const name = document.getElementById("hidden-name").value;
-    const email = document.getElementById("hidden-email").value;
-    const message = document.getElementById("hidden-message").value;
-    const resultMessage = document.getElementById("result-message");
+  alert("✅ お問い合わせを送信しました。ありがとうございました！");
+  window.location.href = "index.html";
+});
 
-    fetch("https://script.google.com/macros/s/AKfycbxon-diIi46egMwU4fGxUUm3-B9cCSMUon4i1JFvAZSgZwz8G8WshhLh7tRlrHj5maxyg/exec", {
-      method: "POST",
-      mode: "cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ action: "contact", name, email, message })
-    })
-    .then(() => {
-      resultMessage.textContent = "送信しました。ありがとうございました！";
-      resultMessage.style.color = "green";
-    })
-    .catch(() => {
-      resultMessage.textContent = "送信に失敗しました。時間をおいて再度お試しください。";
-      resultMessage.style.color = "red";
-    });
-  });
+// 🔁 URLからパラメータを取得して表示に反映
+document.addEventListener("DOMContentLoaded", function () {
+  const params = new URLSearchParams(window.location.search);
 
-  // 戻るリンク再構築
-  const backLink = document.getElementById("back-link");
-  const backParams = fields.map(key => {
-    const val = urlParams.get(key) || "";
-    return `${encodeURIComponent(key)}=${encodeURIComponent(val)}`;
-  });
-  backLink.href = `contact.html?${backParams.join("&")}`;
+  const name = decodeURIComponent(params.get("name") || "");
+  const email = decodeURIComponent(params.get("email") || "");
+  const message = decodeURIComponent(params.get("message") || "");
+
+  document.getElementById("confirm-name").textContent = name;
+  document.getElementById("confirm-email").textContent = email;
+  document.getElementById("confirm-message").textContent = message;
 });

@@ -90,7 +90,6 @@ function createStoryElement(story) {
         <p><strong>ジャンル:</strong> ${story.genre}</p>
         <p><strong>作者:</strong> ${story.author}</p>
         <p><strong>いいね:</strong> <span id="likes-${story.title}">${story.likes}</span></p>
-        <button onclick="likeStory('${story.title}')">❤️ いいね</button>
     `;
     return storyDiv;
 }
@@ -189,3 +188,11 @@ function populateAuthorDropdown() {
 function filteredStories() {
     return currentAuthor ? stories.filter(s => s.author === currentAuthor) : stories;
 }
+
+
+
+/*いいねボタン追加するとき用
+        <button onclick="likeStory('${story.title}')">❤️ いいね</button>  
+        storyDiv.innerHTML　に追加
+
+ */
