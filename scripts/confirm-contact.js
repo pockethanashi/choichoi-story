@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const message = document.getElementById("hidden-message").value;
     const resultMessage = document.getElementById("result-message");
 
-    fetch("https://script.google.com/macros/s/AKfycbzbtOOxFjTFLSqFqXFlk4cRImpM4ZUUmi38dqBIc9M0R3sFyGM9fdXNgvVcNOkVDjL1gw/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbxon-diIi46egMwU4fGxUUm3-B9cCSMUon4i1JFvAZSgZwz8G8WshhLh7tRlrHj5maxyg/exec", {
       method: "POST",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
