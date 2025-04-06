@@ -1,3 +1,12 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; /* ← 横スクロールを防ぐために重要 */
+}
+
+
+
 main.concept-page {
   max-width: 1000px;
   width: 100%;  /* ← ここを追加して100vwを回避 */
