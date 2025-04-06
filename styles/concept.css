@@ -1,7 +1,7 @@
 main.concept-page {
   max-width: 1000px;
-  margin: 60px auto;
-  padding: 40px;
+  margin: 20px auto;
+  padding: 5px;
   background: linear-gradient(145deg, #ffffff, #f0f4f8);
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.1);
@@ -62,12 +62,7 @@ main.concept-page a:hover {
 }
 
 @media screen and (max-width: 768px) and (orientation: portrait) {
-  main.concept-page {
-    margin: 10px auto;
-    padding: 10px;
-  }
-  
-  
+
   main.concept-page h2, main.concept-page h3 {
     font-size: 1rem;
     padding: 0.8rem;
