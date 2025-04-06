@@ -77,12 +77,15 @@ main.concept-page {
   main.concept-page p {
    font-size: 0.8rem;
    line-height: 1.6;
+   padding:0px 1px;
   }
 
   main.concept-page a {
     display: inline-block;
      font-size: 0.8rem;
      line-height: 1.6;
+        padding:0px 1px;
+
   }
 
 
