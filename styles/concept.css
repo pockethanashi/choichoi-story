@@ -66,6 +66,7 @@ main.concept-page a:hover {
 main.concept-page {
   margin: 5px auto;
   padding: 1px;
+  margin: 20px auto;
 }
 
 
@@ -77,15 +78,12 @@ main.concept-page {
   main.concept-page p {
    font-size: 0.8rem;
    line-height: 1.6;
-   padding:0px 1px;
   }
 
   main.concept-page a {
     display: inline-block;
      font-size: 0.8rem;
      line-height: 1.6;
-        padding:0px 1px;
-
   }
 
 
