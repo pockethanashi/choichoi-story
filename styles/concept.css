@@ -3,6 +3,7 @@ html, body {
   padding: 0;
   width: 100%;
   overflow-x: hidden; /* ← 横スクロールを防ぐために重要 */
+  box-sizing: border-box;
 }
 
 
@@ -72,7 +73,7 @@ main.concept-page a:hover {
   border-radius: 4px;
 }
 
-@media screen and (max-width: 1048px) and (orientation: portrait) {
+@media screen and (max-width: 768px) and (orientation: portrait) {
 
   main.concept-page {
     padding: 0 10rem; /* 左右ともに1remの余白を確実に付ける */
