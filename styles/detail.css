@@ -62,13 +62,19 @@ button:hover {
   background: #e6005c;
 }
 
-/* 🔹 作者プロフィールボタン */
 .profile-btn {
-  background: #007bff;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  margin-top: 5px;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .profile-btn:hover {
-  background: #0056b3;
+  background-color: #0056b3;
 }
 
 /* 🔹 モーダル */
