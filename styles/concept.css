@@ -64,6 +64,7 @@ main.concept-page a:hover {
 @media screen and (max-width: 768px) and (orientation: portrait) {
 
 main.concept-page {
+  max-width: auto;
   margin: 5px;
   padding: 1px;
   margin: 20px;
