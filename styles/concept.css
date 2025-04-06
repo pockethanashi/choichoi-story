@@ -1,33 +1,62 @@
 main.concept-page {
   max-width: 800px;
-  margin: 40px auto;
-  padding: 20px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  line-height: 1.8;
+  margin: 60px auto;
+  padding: 40px;
+  background: linear-gradient(145deg, #ffffff, #f0f4f8);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  line-height: 1.9;
+  color: #333;
 }
+
 
 main.concept-page h2, main.concept-page h3 {
   text-align: center;
-  color: #444;
+  color: #2c3e50;
+  border-bottom: 2px solid #d8e8ec;
+  padding-bottom: 0.3em;
+  margin-top: 2.5em;
+  margin-bottom: 1.2em;
+  font-family: 'Kaisei HarunoUmi', serif;
 }
 
 main.concept-page p {
+  font-size: 1.1rem;
   margin-bottom: 2rem;
-  font-size: 1rem;
-  color: #333;
+  line-height: 2;
+  color: #444;
   text-align: center;
+  font-weight: bold;
 }
 
 main.concept-page a {
   display: inline-block;
-  margin-top: 20px;
+  margin-top: 30px;
   text-decoration: none;
-  color: #0077cc;
+  color: #0066cc;
   font-weight: bold;
+  font-size: 1.1rem;
 }
 
 main.concept-page a:hover {
   text-decoration: underline;
+  color: #004b99;
+}
+
+
+/* 赤字強調用 */
+.highlight-red {
+  color: #d90000;
+  font-weight: bold;
+}
+
+
+.section-title {
+  background-color: #fffde7; 
+  padding: 0rem;
+  border-left: 6px solid #007bff; /* 青いラインでアクセント */
+  margin-top: 2rem;
+  font-size: 1.8rem;
+  text-align: center;
+  border-radius: 4px;
 }
