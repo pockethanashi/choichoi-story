@@ -1,5 +1,6 @@
 main.concept-page {
   max-width: 1000px;
+  width: 100%;  /* ← ここを追加して100vwを回避 */
   margin: 20px auto;
   padding: 5px;
   background: linear-gradient(145deg, #ffffff, #f0f4f8);
