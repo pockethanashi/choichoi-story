@@ -63,15 +63,10 @@ main.concept-page a:hover {
 
 @media screen and (max-width: 768px) and (orientation: portrait) {
 
-main.concept-page {
-  max-width: auto;
-  margin: 5px;
-  padding: 1px;
-  margin: 20px;
-      width: 100%;
-      padding: 0.5rem;
-}
-
+  main.concept-page {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 
   main.concept-page h2, main.concept-page h3 {
     font-size: 1rem;
