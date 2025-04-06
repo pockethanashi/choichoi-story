@@ -76,7 +76,7 @@ main.concept-page a:hover {
 @media screen and (max-width: 768px) and (orientation: portrait) {
 
   main.concept-page {
-    padding: 0 5rem; /* 左右ともに1remの余白を確実に付ける */
+    padding: 0 0rem; /* 左右ともに1remの余白を確実に付ける */
   }
 
   main.concept-page h2, main.concept-page h3 {
