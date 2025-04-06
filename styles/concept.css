@@ -83,4 +83,26 @@ main.concept-page a:hover {
   .highlight {
     font-size: 1rem;
   }
+  
+  
+  main.concept-page h2, main.concept-page h3 {
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+
+  main.concept-page p {
+   font-size: 0.8rem;
+   line-height: 1.6;
+  }
+
+  main.concept-page a {
+    display: inline-block;
+     font-size: 0.8rem;
+     line-height: 1.6;
+  }
+
+
+
+
+
 }
