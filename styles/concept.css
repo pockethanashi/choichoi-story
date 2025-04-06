@@ -9,15 +9,16 @@ html, body {
 
 main.concept-page {
   max-width: 1000px;
-  width: 100%;  /* ← ここを追加して100vwを回避 */
+  width: 100%;
   margin: 20px auto;
-  padding: 5px;
+  padding: 1rem;
   background: linear-gradient(145deg, #ffffff, #f0f4f8);
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.1);
   line-height: 1.9;
   color: #333;
 }
+
 
 
 main.concept-page h2, main.concept-page h3 {
@@ -74,8 +75,7 @@ main.concept-page a:hover {
 @media screen and (max-width: 768px) and (orientation: portrait) {
 
   main.concept-page {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding: 0 1rem; /* 左右ともに1remの余白を確実に付ける */
   }
 
   main.concept-page h2, main.concept-page h3 {
