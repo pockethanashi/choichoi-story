@@ -81,6 +81,8 @@ function displayStory(story) {
   document.getElementById("story-originalAuthor").textContent =
   findOriginalAuthor(allVersions, story.originalId);
 
+  document.title = `${story.title} `;
+
 
   const profileBtn = document.querySelector(".profile-btn");
   if (profileBtn) {
