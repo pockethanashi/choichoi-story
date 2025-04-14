@@ -71,7 +71,6 @@ function populateVersionSelector() {
 
 function displayStory(story) {
   document.getElementById("story-title").textContent = story.title;
-  document.getElementById("story-body").innerHTML = story.body.replace(/\n/g, "<br>");
   document.getElementById("story-genre").textContent = story.genre;
   document.getElementById("story-author").textContent = story.author || "不明";
   document.getElementById("story-likes").textContent = story.likes;
@@ -79,22 +78,37 @@ function displayStory(story) {
   document.getElementById("story-updateDate").textContent = story.updateDate || "不明";
   document.getElementById("story-updateMemo").textContent = story.updateMemo || "なし";
   document.getElementById("story-originalAuthor").textContent =
-  findOriginalAuthor(allVersions, story.originalId);
+    findOriginalAuthor(allVersions, story.originalId);
+    
+ 
 
   document.title = `${story.title} `;
 
+  // 🔸 差分ハイライト処理
+  const currentBody = story.body || "";
+  const currentIndex = allVersions.findIndex(s => s.version === story.version);
+  const previousBody = currentIndex < allVersions.length - 1
+    ? allVersions[currentIndex + 1].body || ""
+    : currentBody;
 
+  const diffHtml = highlightDiff(previousBody, currentBody);
+  document.getElementById("story-body").innerHTML = diffHtml;
+//  document.getElementById("story-body").innerHTML = story.body.replace(/\n/g, "<br>");
+
+
+  // 🔸 プロフィールボタンのイベント設定
   const profileBtn = document.querySelector(".profile-btn");
   if (profileBtn) {
     profileBtn.onclick = () => showProfile(story.author, story.profile);
   }
 
-  // 🔹 「いいね」ボタンの挙動を設定
+  // 🔸 「いいね」ボタンの挙動
   const likeButton = document.querySelector("button[onclick^='likeStory']");
   if (likeButton) {
     likeButton.onclick = () => likeStory(story.originalId, story.version);
   }
 }
+
 
 
 function likeStory(originalId, version) {
@@ -154,5 +168,26 @@ function findOriginalAuthor(data, originalId) {
 
   return candidates[0].author || "不明";
 }
+
+
+
+function highlightDiff(oldText, newText) {
+  const diff = Diff.diffWordsWithSpace(oldText, newText);
+
+  return diff.map(part => {
+    const valueWithBr = part.value.replace(/\n/g, "<br>");
+    if (part.added) {
+      return `<span class="diff-added">${valueWithBr}</span>`;
+    } else if (part.removed) {
+      return ""; // ← 削除部分は表示しない
+    } else {
+      return valueWithBr;
+    }
+  }).join('');
+}
+
+
+
+
 
 

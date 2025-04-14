@@ -131,3 +131,14 @@ button:hover {
     margin: 10% auto;
   }
 }
+
+
+.diff-added {
+  background-color: #e6ffe6;
+/*  font-weight: bold; */
+}
+.diff-removed {
+  background-color: #ffe6e6;
+  text-decoration: line-through;
+  opacity: 0.6;
+}
