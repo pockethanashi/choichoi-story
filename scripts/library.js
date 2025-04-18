@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    fetchStories();
+    fetchStories(); 
 });
 
 const API_URL = "https://script.google.com/macros/s/AKfycbxon-diIi46egMwU4fGxUUm3-B9cCSMUon4i1JFvAZSgZwz8G8WshhLh7tRlrHj5maxyg/exec";
@@ -8,8 +8,21 @@ const STORIES_PER_PAGE = 5;
 const PREVIEW_LINES = 15;
 
 let stories = [];
-let currentPage = 1;
-let currentAuthor = null;
+let currentPage = getPageFromURL();
+let currentAuthor = getAuthorFromURL();
+
+
+function getPageFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  return parseInt(params.get("page")) || 1;
+}
+
+function getAuthorFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("author") || null;
+}
+
+
 
 // 🔹 データ取得
 function fetchStories() {
@@ -20,7 +33,7 @@ function fetchStories() {
         })
         .then(data => {
             stories = getLatestStories(data);
-            displayStories();
+            displayStories(currentAuthor);
             populateAuthorSidebar();
             populateAuthorDropdown();
         })
@@ -115,19 +128,26 @@ function updatePagination(totalItems) {
 }
 
 document.getElementById("prevPage").addEventListener("click", () => {
-    if (currentPage > 1) {
-        currentPage--;
-        displayStories(currentAuthor);
-    }
+  if (currentPage > 1) {
+    redirectToPage(currentPage - 1);
+  }
 });
 
 document.getElementById("nextPage").addEventListener("click", () => {
-    const totalPages = Math.ceil(filteredStories().length / STORIES_PER_PAGE);
-    if (currentPage < totalPages) {
-        currentPage++;
-        displayStories(currentAuthor);
-    }
+  const totalPages = Math.ceil(filteredStories().length / STORIES_PER_PAGE);
+  if (currentPage < totalPages) {
+    redirectToPage(currentPage + 1);
+  }
 });
+
+
+function redirectToPage(page, author = currentAuthor) {
+  const params = new URLSearchParams();
+  if (author) params.set("author", author);
+  params.set("page", page);
+  window.location.href = `index.html?${params.toString()}`;
+}
+
 
 // 🔹 作者一覧（サイドバー）
 function populateAuthorSidebar() {
@@ -141,9 +161,9 @@ function populateAuthorSidebar() {
         link.href = "#";
         link.textContent = author;
         link.addEventListener("click", () => {
-            currentPage = 1;
-            currentAuthor = author;
-            displayStories(author);
+          currentPage = 1;
+          currentAuthor = author;
+          redirectToPage(1, author); // ← URLに反映
         });
         li.appendChild(link);
         authorList.appendChild(li);
@@ -153,9 +173,9 @@ function populateAuthorSidebar() {
     allLink.href = "#";
     allLink.textContent = "すべて表示";
     allLink.addEventListener("click", () => {
-        currentPage = 1;
-        currentAuthor = null;
-        displayStories();
+      currentPage = 1;
+      currentAuthor = null;
+      redirectToPage(1, null); // ← すべてに戻る
     });
     const allItem = document.createElement("li");
     allItem.appendChild(allLink);
@@ -178,10 +198,15 @@ function populateAuthorDropdown() {
     });
 
     dropdown.addEventListener("change", () => {
-        currentPage = 1;
-        currentAuthor = dropdown.value || null;
-        displayStories(currentAuthor);
+      const selectedAuthor = dropdown.value || null;
+      currentAuthor = selectedAuthor;
+      currentPage = 1;
+      redirectToPage(1, selectedAuthor);
     });
+    
+    if (currentAuthor) {
+      dropdown.value = currentAuthor;
+    }
 }
 
 // 🔹 現在の絞り込み状態に応じた一覧
@@ -196,3 +221,4 @@ function filteredStories() {
         storyDiv.innerHTML　に追加
 
  */
+ 
