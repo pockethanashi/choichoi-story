@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>話のネタを生成 | ちょいChoiceストーリー</title>
+  <link rel="stylesheet" href="styles/common.css" />
+  <link rel="stylesheet" href="styles/word-generator.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Kaisei+HarunoUmi&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- 🔹 共通ヘッダー -->
+  <header>
+    <div class="main-header">
+      <div class="header-main">
+        <a href="index.html">
+          <img src="images/logo.png" alt="ロゴ" class="logo" />
+        </a>
+        <div class="title-group">
+          <h1 class="site-title">ちょいChoiceストーリー</h1>
+          <p class="site-subtitle">アプデする小話</p>
+        </div>
+      </div>
+    </div>
+    <nav class="sub-header">
+      <a href="index.html">トップ</a>
+      <a href="new-post.html">新規投稿</a>
+      <a href="concept.html">このサイトについて</a>
+      <a href="word-generator.html">ネタをジェネレータ</a>
+    </nav>
+  </header>
+
+  <!-- 🔸 本文 -->
+  <main class="concept-page">
+    <h2 class="section-title">💡 話のネタをランダムに生成！</h2>
+    <p>以下のボタンやカテゴリを使って、小噺のアイデアをランダムに組み合わせてみましょう。</p>
+
+    <div class="container">
+
+      <!-- ✅ カテゴリ表示エリア（プルダウン形式） -->
+      <div id="category-container"></div>
+
+      <div style="margin-top: 1rem;">
+        <button onclick="generateStory()">指定ワードで生成</button>
+        <button onclick="generateRandomStory()">ランダム生成</button>
+        <button onclick="resetSelections()">すべてリセット</button>
+      </div>
+
+      <div id="output" style="margin-top: 2rem; font-size: 1.2rem; font-weight: bold;"></div>
+    </div>
+  </main>
+
+  <!-- 🔹 機能はすべて外部JSに集約 -->
+  <script src="scripts/word-generator.js"></script>
+</body>
+</html>
