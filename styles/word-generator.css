@@ -31,3 +31,33 @@ button {
     width: 200px;
     cursor: pointer;
 }
+
+#category-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.category-section {
+  flex: 1 1 calc(33% - 1rem);
+  min-width: 250px;
+  box-sizing: border-box;
+}
+
+.category-section h3 {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.category-section select {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .category-section {
+    flex: 1 1 100%;
+  }
+}
