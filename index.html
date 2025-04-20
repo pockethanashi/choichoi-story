@@ -24,11 +24,15 @@
       </div>
     </div>
   </div>
-  <nav class="sub-header">
-    <a href="index.html">トップ</a>
-    <a href="new-post.html">新規投稿</a>
-    <a href="concept.html">このサイトについて</a>
-　　　<a href="word-generator.html">ネタジェネレータ</a>
+   <nav class="sub-header">
+    <button id="hamburger-toggle" class="hamburger">&#9776;</button>
+    <div class="nav-links">
+      <a href="index.html">トップ</a>
+      <a href="new-post.html">新規投稿</a>
+      <a href="concept.html">このサイトについて</a>
+      <a href="word-generator.html">話のネタを生成</a>
+      <a href="contact.html">問い合わせ</a>
+    </div>
   </nav>
 </header>
 
@@ -65,8 +69,18 @@
   </select>
 </div>
 
+<script>
+  // ハンバーガーメニューの動作
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggle = document.getElementById("hamburger-toggle");
+    const navLinks = document.querySelector(".nav-links");
+    if (toggle && navLinks) {
+      toggle.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+      });
+    }
+  });
+</script>
+
 </body>
-
-
-
 </html>

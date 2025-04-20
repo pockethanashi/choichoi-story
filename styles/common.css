@@ -95,10 +95,33 @@ html, body {
     text-decoration: underline;
 }
 
-
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin: 0.5rem;
+}
 
 
 @media screen and (orientation: portrait) and (max-width: 1048px) {
+    .hamburger {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background-color: #333;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+
   .main-header {
     width: 100%;
     padding: 0.5rem;
@@ -152,6 +175,22 @@ html, body {
 
 
 @media screen and (orientation: landscape) and (max-width: 1366px){
+    .hamburger {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background-color: #333;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+
+
   .main-header {
     width: 100%; /* ← 100vwから修正 */
     padding: 1rem;
