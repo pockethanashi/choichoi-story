@@ -73,6 +73,7 @@ html, body {
 
 /* === サブヘッダー（ナビゲーション） === */
 .sub-header {
+  position: relative;
   width: 100%;
   background-color: #333;
   text-align: center;
