@@ -91,4 +91,29 @@ button:hover {
   button {
     width: 100%;
   }
+  
+   .header-main {
+    flex-direction: column;        /* 縦並びに変更 */
+    align-items: center;           /* 中央に揃える */
+    text-align: center;
+  }
+
+  .title-group {
+    align-items: center;           /* タイトルも中央揃えに */
+    text-align: center;
+  }
+
+  .logo {
+    margin-bottom: 0.5rem;
+    height: 80px;                  /* 小さく調整（お好みで） */
+  }
+
+  .site-title {
+    font-size: 1.5rem;
+  }
+
+  .site-subtitle {
+    font-size: 1.1rem;
+  }
+  
 }
