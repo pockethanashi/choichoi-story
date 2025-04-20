@@ -156,21 +156,10 @@ html, body {
     font-size: 1.1rem;
   }
 
-  .sub-header {
-    width: 100%;
-    overflow-x: auto;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-    padding: 0.5rem 0;
-    text-align: center;
+ .sub-header {
+    flex-direction: column;
   }
-
-  .sub-header a {
-    padding: 0 10px;
-    font-size: 1rem;
-    display: inline-block;
-    white-space: nowrap;
-  }
+}
 }
 
 
@@ -222,20 +211,12 @@ html, body {
     font-size: 1rem;
   }
 
-  .sub-header {
-    width: 100%; /* ← ここも100vwから修正 */
-    overflow-x: auto;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-    padding: 0.5rem 0;
-    text-align: center;
-  }
 
-  .sub-header a {
-    padding: 0 10px;
-    font-size: 1rem;
-    display: inline-block;
-    white-space: nowrap;
+  
+   .sub-header {
+    flex-direction: column;
   }
+}
+  
 }
 
