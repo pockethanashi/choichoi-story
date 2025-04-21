@@ -40,11 +40,24 @@ html, body {
 }
 
 .header-main {
-    display: flex;
-    align-items: center;
-    position: relative;
-    z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;  /* ← 左寄せに統一 */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  z-index: 1;
+  position: relative;
 }
+
+.title-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  align-items: flex-start;
+}
+
 
 .logo {
     height: 150px; /* ← やや小さめに */
@@ -52,12 +65,7 @@ html, body {
     margin-right: 1rem;
 }
 
-.title-group {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    max-width: 100%;
-}
+
 
 .site-title {
     font-size: 5rem;

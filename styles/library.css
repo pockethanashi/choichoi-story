@@ -3,6 +3,8 @@ h1, h2 {
 }
 
 
+
+
 .container {
   display: flex;
   justify-content: center;  /* 中央揃え */
@@ -138,9 +140,9 @@ button:hover {
   
   /* ✅ ヘッダーのスマホ用レイアウト調整 */
 .header-main {
-  flex-direction: column !important;
-  align-items: center !important;
-  text-align: center !important;
+  flex-direction: column ;
+  align-items: center ;
+  text-align: center ;
 }
 
 .title-group {

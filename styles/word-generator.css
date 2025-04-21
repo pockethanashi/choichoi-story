@@ -1,4 +1,5 @@
 
+
 body {
   margin: 0;
   padding: 0;
@@ -6,16 +7,6 @@ body {
   background-color: #d8f3dc; /* 念のため共通化 */
 }
 
-.main-header {
-  width: 100vw;           /* ← 画面いっぱいに背景を表示 */
-  margin: 0;
-  padding: 1rem 0;
-  position: relative;
-  background-image: url("../images/header-bg.jpg");
-  background-size: cover;
-  background-position: center;
-  color: white;
-}
 
 .container {
   max-width: 1000px;
@@ -75,25 +66,7 @@ button:hover {
 }
 
 
-.header-main {
-  display: flex;
-  align-items: center;
-  max-width: 1200px;
-  margin-left: 1rem;        /* ← 左に寄せる */
-  margin-right: auto;
-  padding: 0 1rem;
-  z-index: 1;
-  position: relative;
-}
 
-
-.title-group {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: left;
-  align-items: flex-start;   /* ← 中央から左寄せへ */
-}
 
 
 /* スマホ対応 */
