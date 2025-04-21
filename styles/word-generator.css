@@ -6,6 +6,16 @@ body {
   background-color: #d8f3dc; /* 念のため共通化 */
 }
 
+.main-header {
+  width: 100vw;           /* ← 画面いっぱいに背景を表示 */
+  margin: 0;
+  padding: 1rem 0;
+  position: relative;
+  background-image: url("../images/header-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
 
 .container {
   max-width: 1000px;
@@ -67,11 +77,15 @@ button:hover {
 
 .header-main {
   display: flex;
-  flex-direction: row;       /* ← これ重要：縦並び→横並びへ */
   align-items: center;
-  justify-content: flex-start;
-  text-align: left;          /* ← 子要素のテキスト揃え */
+  max-width: 1200px;
+  margin-left: 1rem;        /* ← 左に寄せる */
+  margin-right: auto;
+  padding: 0 1rem;
+  z-index: 1;
+  position: relative;
 }
+
 
 .title-group {
   display: flex;

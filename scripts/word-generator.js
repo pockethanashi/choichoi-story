@@ -57,7 +57,7 @@ const categoryData = {
   },
   incident: {
     label: "事件",
-    words: ["甲府事件"]
+    words: ["甲府事件","米騒動","ネッシー騒動"]
   }
 };
 

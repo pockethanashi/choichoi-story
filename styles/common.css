@@ -196,7 +196,7 @@ html, body {
 
   .sub-header a {
     padding: 0 0.5rem;
-    font-size: 0.55rem;             /* ← 小さめのフォント */
+    font-size: 0.65rem;             /* ← 小さめのフォント */
     display: inline-block;
     white-space: nowrap;
   }
@@ -275,7 +275,7 @@ html, body {
 
   .sub-header a {
     padding: 0 0.5rem;
-    font-size: 0.55rem;             /* ← 小さめのフォント */
+    font-size: 0.65rem;             /* ← 小さめのフォント */
     display: inline-block;
     white-space: nowrap;
   }
