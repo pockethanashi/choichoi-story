@@ -156,11 +156,16 @@ html, body {
     padding: 0.5rem;
   }
 
+    /* ✅ 追加：headerのレイアウト統一用 */
   .header-main {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    flex-wrap: nowrap; 
+  }
+
+  .title-group {
+    align-items: center;
+    text-align: center;
   }
 
   .logo {
@@ -238,8 +243,14 @@ html, body {
     padding: 1rem;
   }
 
+    /* ✅ 追加：headerのレイアウト統一用 */
   .header-main {
     flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .title-group {
     align-items: center;
     text-align: center;
   }
