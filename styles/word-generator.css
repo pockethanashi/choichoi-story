@@ -1,48 +1,34 @@
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    text-align: center;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  background-color: #d8f3dc; /* 念のため共通化 */
 }
+
 
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.category-list {
-    margin-top: 20px;
-    text-align: left;
-    width: 300px;
-}
-
-.category-list div {
-    margin-bottom: 10px;
-}
-
-select {
-    padding: 8px;
-    width: 100%;
-}
-
-button {
-    margin-top: 10px;
-    padding: 10px;
-    width: 200px;
-    cursor: pointer;
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #category-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.5rem;
   justify-content: space-between;
+  margin-top: 1rem;
 }
 
 .category-section {
-  flex: 1 1 calc(33% - 1rem);
-  min-width: 250px;
+  flex: 1 1 calc(33.333% - 1rem);
+  min-width: 260px;
   box-sizing: border-box;
+  text-align: left;
 }
 
 .category-section h3 {
@@ -56,8 +42,78 @@ button {
   font-size: 1rem;
 }
 
-@media (max-width: 768px) {
+button {
+  margin: 0.5rem;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #ff4081;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #e6005c;
+}
+
+#output {
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+
+.header-main {
+  display: flex;
+  flex-direction: row;       /* ← これ重要：縦並び→横並びへ */
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;          /* ← 子要素のテキスト揃え */
+}
+
+.title-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  align-items: flex-start;   /* ← 中央から左寄せへ */
+}
+
+
+/* スマホ対応 */
+@media screen and (max-width: 768px) {
   .category-section {
     flex: 1 1 100%;
   }
+
+  button {
+    width: 100%;
+  }
+  
+   .header-main {
+    flex-direction: column;        /* 縦並びに変更 */
+    align-items: center;           /* 中央に揃える */
+    text-align: center;
+  }
+
+  .title-group {
+    align-items: center;           /* タイトルも中央揃えに */
+    text-align: center;
+  }
+
+  .logo {
+    margin-bottom: 0.5rem;
+    height: 80px;                  /* 小さく調整（お好みで） */
+  }
+
+  .site-title {
+    font-size: 1.5rem;
+  }
+
+  .site-subtitle {
+    font-size: 1.1rem;
+  }
+  
 }

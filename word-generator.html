@@ -7,29 +7,35 @@
   <link rel="stylesheet" href="styles/common.css" />
   <link rel="stylesheet" href="styles/word-generator.css" />
   <link href="https://fonts.googleapis.com/css2?family=Kaisei+HarunoUmi&display=swap" rel="stylesheet" />
+    <link rel="icon" href="images/favicon.png" type="image/png">
 </head>
 <body>
 
   <!-- 🔹 共通ヘッダー -->
-  <header>
-    <div class="main-header">
-      <div class="header-main">
-        <a href="index.html">
-          <img src="images/logo.png" alt="ロゴ" class="logo" />
-        </a>
-        <div class="title-group">
-          <h1 class="site-title">ちょいChoiceストーリー</h1>
-          <p class="site-subtitle">アプデする小話</p>
-        </div>
+<header>
+  <div class="main-header">
+    <div class="header-main">
+      <a href="index.html">
+        <img src="images/logo.png" alt="ロゴ" class="logo" />
+      </a>
+      <div class="title-group">
+        <h1 class="site-title">ちょいChoiceストーリー</h1>
+        <p class="site-subtitle">アプデする小話</p>
       </div>
     </div>
-    <nav class="sub-header">
+  </div>
+  <nav class="sub-header">
+    <button id="hamburger-toggle" class="hamburger">&#9776;</button>
+    <div class="nav-links">
       <a href="index.html">トップ</a>
       <a href="new-post.html">新規投稿</a>
       <a href="concept.html">このサイトについて</a>
-      <a href="word-generator.html">ネタをジェネレータ</a>
-    </nav>
-  </header>
+      <a href="word-generator.html">話のネタを生成</a>
+      <a href="contact.html">問い合わせ</a>
+    </div>
+  </nav>
+</header>
+    
 
   <!-- 🔸 本文 -->
   <main class="concept-page">
@@ -53,5 +59,23 @@
 
   <!-- 🔹 機能はすべて外部JSに集約 -->
   <script src="scripts/word-generator.js"></script>
+
+<script>
+  // ハンバーガーメニューの動作
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggle = document.getElementById("hamburger-toggle");
+    const navLinks = document.querySelector(".nav-links");
+    if (toggle && navLinks) {
+      toggle.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+      });
+    }
+  });
+</script>
+
+
+
+
+
 </body>
 </html>

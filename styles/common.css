@@ -73,6 +73,7 @@ html, body {
 
 /* === サブヘッダー（ナビゲーション） === */
 .sub-header {
+  position: relative;
   width: 100%;
   background-color: #333;
   text-align: center;
@@ -95,10 +96,61 @@ html, body {
     text-decoration: underline;
 }
 
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  z-index: 10;
+}
 
+.nav-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center; /* ← PC時に中央揃えに */
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.2rem;
+  white-space: nowrap;
+}
 
 
 @media screen and (orientation: portrait) and (max-width: 1048px) {
+  .hamburger {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;  /* ← モバイル時は左寄せ */
+    align-items: flex-start;
+    position: absolute;
+    top: 100%;           /* ← ハンバーガーの下に表示される */
+    left: 0;
+    background-color: #333;
+    width: 100%;
+    padding: 0.5rem 0;
+    z-index: 11;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links a {
+    padding: 0.8rem 1rem;
+    border-top: 1px solid #444;
+    text-align: left;
+  }
+
+
   .main-header {
     width: 100%;
     padding: 0.5rem;
@@ -152,6 +204,35 @@ html, body {
 
 
 @media screen and (orientation: landscape) and (max-width: 1366px){
+  .hamburger {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;  /* ← モバイル時は左寄せ */
+    align-items: flex-start;
+    position: absolute;
+    top: 100%;           /* ← ハンバーガーの下に表示される */
+    left: 0;
+    background-color: #333;
+    width: 100%;
+    padding: 0.5rem 0;
+    z-index: 11;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links a {
+    padding: 0.8rem 1rem;
+    border-top: 1px solid #444;
+    text-align: left;
+  }
+
+
   .main-header {
     width: 100%; /* ← 100vwから修正 */
     padding: 1rem;
@@ -198,5 +279,8 @@ html, body {
     display: inline-block;
     white-space: nowrap;
   }
+  
+  
+  
 }
 
