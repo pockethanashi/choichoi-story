@@ -133,18 +133,18 @@ html, body {
     font-size: 1.1rem;
   }
 
-  .sub-header {
+    .sub-header {
     width: 100%;
-    overflow-x: auto;
+    overflow-x: auto;               /* ← 横スクロール許可（長すぎる場合） */
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
-    padding: 0.5rem 0;
+    padding: 0.3rem 0;
     text-align: center;
   }
 
   .sub-header a {
-    padding: 0 10px;
-    font-size: 1rem;
+    padding: 0 0.5rem;
+    font-size: 0.85rem;             /* ← 小さめのフォント */
     display: inline-block;
     white-space: nowrap;
   }
@@ -184,17 +184,17 @@ html, body {
   }
 
   .sub-header {
-    width: 100%; /* ← ここも100vwから修正 */
-    overflow-x: auto;
+    width: 100%;
+    overflow-x: auto;               /* ← 横スクロール許可（長すぎる場合） */
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
-    padding: 0.5rem 0;
+    padding: 0.3rem 0;
     text-align: center;
   }
 
   .sub-header a {
-    padding: 0 10px;
-    font-size: 1rem;
+    padding: 0 0.5rem;
+    font-size: 0.85rem;             /* ← 小さめのフォント */
     display: inline-block;
     white-space: nowrap;
   }
