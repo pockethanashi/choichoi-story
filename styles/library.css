@@ -135,4 +135,33 @@ button:hover {
   #sidebar-right {
     display: none;
   }
+  
+  /* ✅ ヘッダーのスマホ用レイアウト調整 */
+.header-main {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.title-group {
+  align-items: center;
+  text-align: center;
+}
+
+.logo {
+  height: 80px;
+  margin-bottom: 0.5rem;
+}
+
+.site-title {
+  font-size: 1.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.site-subtitle {
+  font-size: 1.1rem;
+}
+
 }
