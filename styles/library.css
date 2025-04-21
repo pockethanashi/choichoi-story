@@ -138,9 +138,9 @@ button:hover {
   
   /* ✅ ヘッダーのスマホ用レイアウト調整 */
 .header-main {
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
 }
 
 .title-group {
