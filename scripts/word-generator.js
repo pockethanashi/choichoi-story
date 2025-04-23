@@ -99,26 +99,63 @@ function generateCategoryUI(data) {
 }
 
 function generateStory() {
-  let result = "";
+  const pairs = [];
   for (const [key, { label }] of Object.entries(categoryData)) {
     const selectedValue = document.querySelector(`select[name="${key}"]`)?.value;
     if (selectedValue) {
-      result += `${label}：${selectedValue}　`;
+      pairs.push(`${label}：${selectedValue}`);
     }
   }
-  document.getElementById("output").textContent = result || "※ いずれかのワードを選択してください";
+
+  if (pairs.length === 0) {
+    document.getElementById("output").textContent = "※ いずれかのワードを選択してください";
+  } else {
+    formatTwoColumnOutput(pairs);
+  }
 }
 
+
 function generateRandomStory() {
-  let result = "";
+  const pairs = [];
   for (const [key, { label, words }] of Object.entries(categoryData)) {
     const word = words[Math.floor(Math.random() * words.length)];
-    result += `${label}：${word}　`;
+    pairs.push(`${label}：${word}`);
+    document.querySelector(`select[name="${key}"]`).value = word;
   }
-  document.getElementById("output").textContent = result;
+
+  formatTwoColumnOutput(pairs);
 }
+
 
 function resetSelections() {
   document.querySelectorAll("select").forEach(sel => sel.selectedIndex = 0);
   document.getElementById("output").textContent = "";
+}
+
+function formatTwoColumnOutput(pairs) {
+  const container = document.createElement("div");
+  container.classList.add("output-grid");
+
+  for (let i = 0; i < pairs.length; i += 2) {
+    const row = document.createElement("div");
+    row.classList.add("output-row");
+
+    const left = document.createElement("div");
+    left.classList.add("output-cell");
+    left.textContent = pairs[i];
+    row.appendChild(left);
+
+    if (pairs[i + 1]) {
+      const right = document.createElement("div");
+      right.classList.add("output-cell");
+      right.textContent = pairs[i + 1];
+      row.appendChild(right);
+    }
+
+    container.appendChild(row);
+  }
+
+  const output = document.getElementById("output");
+  output.innerHTML = "";
+  output.appendChild(container);
 }
