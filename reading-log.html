@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>感情ログ記録</title>
+  <link rel="stylesheet" href="styles/reading-log.css">
+  <link rel="stylesheet" href="styles/common.css">
+  <link href="https://fonts.googleapis.com/css2?family=Kaisei+HarunoUmi&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Kaisei+HarunoUmi&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+  <div class="main-header">
+    <div class="header-main">
+    　<a href="index.html">
+        <img src="images/logo.png" alt="ロゴ" class="logo" />
+     </a>
+      <div class="title-group">
+        <h1 class="site-title">ちょいChoiceストーリー</h1>
+        <p class="site-subtitle">アプデする小話</p>
+      </div>
+    </div>
+  </div>
+  <nav class="sub-header">
+    <a href="index.html">トップ</a>
+    <a href="new-post.html">新規投稿</a>
+    <a href="concept.html">このサイトについて</a>
+    <a href="word-generator.html">ネタジェネレータ</a>
+    <a href="contact.html">問い合わせ</a>
+  </nav>
+</header>
+
+<main class="concept-page">
+  <h2 class="section-title">📘 この作品の感情ログ</h2>
+
+  <section>
+    <h3>新しく記録する</h3>
+    <p>感じた気持ちを選んでください：</p>
+    <div class="emotions">
+      <button onclick="selectEmotion('😊')">😊</button>
+      <button onclick="selectEmotion('😢')">😢</button>
+      <button onclick="selectEmotion('😠')">😠</button>
+      <button onclick="selectEmotion('🤔')">🤔</button>
+    </div>
+
+    <p>感想メモ：</p>
+    <textarea id="comment" rows="4" placeholder="どんなことを感じましたか？"></textarea><br>
+    <button onclick="saveLog()" style="margin-top: 1em;">記録する</button>
+  </section>
+
+  <section style="margin-top:2em;">
+    <h3>これまでの感情ログ</h3>
+    <div id="logItems"></div>
+  </section>
+
+  <a href="index.html">← トップへ戻る</a>
+<a id="backToDetail" href="#" style="margin-left: 1em;">→ 小噺のページへ</a>
+</main>
+
+<footer>
+  <p>&copy; 2025 ちょいChoiceストーリー</p>
+</footer>
+
+<script>
+let selectedEmotion = '';
+
+function selectEmotion(emoji) {
+  selectedEmotion = emoji;
+  document.querySelectorAll('.emotions button').forEach(btn => btn.style.opacity = 0.5);
+  event.target.style.opacity = 1;
+}
+
+function saveLog() {
+  const comment = document.getElementById('comment').value.trim();
+  const params = new URLSearchParams(window.location.search);
+  const storyId = params.get('id');
+  if (!storyId || !selectedEmotion || !comment) {
+    alert('すべての項目を入力してください');
+    return;
+  }
+  const key = `storyLog_${storyId}`;
+  const logs = JSON.parse(localStorage.getItem(key)) || [];
+  logs.push({
+    date: new Date().toLocaleString(),
+    emotion: selectedEmotion,
+    comment: comment
+  });
+  localStorage.setItem(key, JSON.stringify(logs));
+  location.reload();
+}
+
+(function renderStoryLogs() {
+  const params = new URLSearchParams(window.location.search);
+  const storyId = params.get('id');
+  if (!storyId) return;
+  const key = `storyLog_${storyId}`;
+  const logs = JSON.parse(localStorage.getItem(key)) || [];
+  const container = document.getElementById('logItems');
+  if (!container) return;
+  container.innerHTML = '';
+
+  logs.forEach((log, index) => {
+    const div = document.createElement('div');
+    div.style.marginBottom = '0.5em';
+    div.innerHTML = `
+      <strong>${log.emotion}</strong> ${log.comment} <span style="color:#666;">(${log.date})</span>
+      <button style="margin-left:1em;" onclick="deleteLog(${index})">🗑 削除</button>
+    `;
+    container.appendChild(div);
+  });
+})();
+
+function deleteLog(index) {
+  const params = new URLSearchParams(window.location.search);
+  const storyId = params.get('id');
+  if (!storyId) return;
+  const key = `storyLog_${storyId}`;
+  let logs = JSON.parse(localStorage.getItem(key)) || [];
+  logs.splice(index, 1);
+  localStorage.setItem(key, JSON.stringify(logs));
+  location.reload();
+}
+  // ストーリーIDに基づいて小噺ページへのリンクを設定
+  window.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const storyId = params.get('id');
+    const detailLink = document.getElementById('backToDetail');
+    if (storyId && detailLink) {
+      detailLink.href = `detail.html?id=${encodeURIComponent(storyId)}`;
+    }
+  });
+</script>
+
+</body>
+</html>

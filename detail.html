@@ -1,87 +1,81 @@
 <!DOCTYPE html>
+
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ストーリー全文</title>
-  <link rel="stylesheet" href="styles/detail.css">
-  <link rel="stylesheet" href="styles/common.css">
-  <link href="https://fonts.googleapis.com/css2?family=Kaisei+HarunoUmi&display=swap" rel="stylesheet">
-  <link rel="icon" href="images/favicon.png" type="image/png">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ストーリー全文</title>
+<link href="styles/detail.css" rel="stylesheet"/>
+<link href="styles/common.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Kaisei+HarunoUmi&amp;display=swap" rel="stylesheet"/>
+<link href="images/favicon.png" rel="icon" type="image/png"/>
 </head>
 <body>
-
-  <!-- 🔸 共通ヘッダー（ロゴ＋タイトル＋ナビ） -->
+<div data-story-id="sample001" style="display:none;"></div>
+<!-- 🔸 共通ヘッダー（ロゴ＋タイトル＋ナビ） -->
 <header>
-  <div class="main-header">
-    <div class="header-main">
+<div class="main-header">
+<div class="header-main">
     　<a href="index.html">
-        <img src="images/logo.png" alt="ロゴ" class="logo" />
-     </a>
-      <div class="title-group">
-        <h1 class="site-title">ちょいChoiceストーリー</h1>
-        <p class="site-subtitle">アプデする小話</p>
-      </div>
-    </div>
-  </div>
-  <nav class="sub-header">
-    <a href="index.html">トップ</a>
-    <a href="new-post.html">新規投稿</a>
-    <a href="concept.html">このサイトについて</a>
-    <a href="word-generator.html">ネタジェネレータ</a>
-    <a href="contact.html">問い合わせ</a>
-  </nav>
+<img alt="ロゴ" class="logo" src="images/logo.png"/>
+</a>
+<div class="title-group">
+<h1 class="site-title">ちょいChoiceストーリー</h1>
+<p class="site-subtitle">アプデする小話</p>
+</div>
+</div>
+</div>
+<nav class="sub-header">
+<a href="index.html">トップ</a>
+<a href="new-post.html">新規投稿</a>
+<a href="concept.html">このサイトについて</a>
+<a href="word-generator.html">ネタジェネレータ</a>
+<a href="contact.html">問い合わせ</a>
+</nav>
 </header>
-
-  <!-- 🔸 サイドバーとメインを並べる -->
-  <div class="container">
-    <aside id="story-sidebar">
-      <div id="version-area" style="margin-bottom: 1rem;">
-        <label for="version-select">別バージョンを見る:</label>
-        <select id="version-select"></select>
-      </div>
-      <p><strong>ジャンル:</strong> <span id="story-genre"></span></p>
-      <p><strong>オリジナル作者:</strong> <span id="story-originalAuthor"></span></p>
-      <p><strong>作者:</strong> <span id="story-author"></span></p>
-      <button class="profile-btn">👤 作者プロフィールを見る</button>
-      <p><strong>バージョン:</strong> <span id="story-version"></span></p>
-      <p><strong>更新日:</strong> <span id="story-updateDate"></span></p>
-      <p><strong>更新メモ:</strong> <span id="story-updateMemo"></span></p>
-    </aside>
-
-    <main>
-      <h2 id="story-title">読み込み中...</h2>
-      <div id="story-body"></div>
-      <p>いいね数: <span id="story-likes">0</span></p>
-      <button onclick="likeStory()">❤️ いいね</button>
-      <br><br>
-      
-      <button id="revise-button">✏️ この作品をアップデートする</button>
-      <p style="font-size: 0.9rem; color: #666;">※他の人の作品をベースに、自分なりのバージョンを投稿できます</p>
-
-      <br>
-      <a href="index.html">⬅ トップへ戻る</a>
-    </main>
-    
-
-
-  <!-- 🔹 作者プロフィール用モーダル -->
-  <div id="profile-modal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2 id="profile-title"></h2>
-      <p id="profile-text"></p>
-    </div>
-  </div>
-
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsdiff/7.0.0/diff.min.js"></script>
-
-  <script src="scripts/detail.js"></script>
-
-  
-  
-  <script>
+<!-- 🔸 サイドバーとメインを並べる -->
+<div class="container">
+<aside id="story-sidebar">
+<div id="version-area" style="margin-bottom: 1rem;">
+<label for="version-select">別バージョンを見る:</label>
+<select id="version-select"></select>
+</div>
+<p><strong>ジャンル:</strong> <span id="story-genre"></span></p>
+<p><strong>オリジナル作者:</strong> <span id="story-originalAuthor"></span></p>
+<p><strong>作者:</strong> <span id="story-author"></span></p>
+<button class="profile-btn">👤 作者プロフィールを見る</button>
+<p><strong>バージョン:</strong> <span id="story-version"></span></p>
+<p><strong>更新日:</strong> <span id="story-updateDate"></span></p>
+<p><strong>更新メモ:</strong> <span id="story-updateMemo"></span></p>
+</aside>
+<main>
+<h2 id="story-title">読み込み中...</h2>
+<div id="story-body"></div>
+<p>いいね数: <span id="story-likes">0</span></p>
+<button onclick="likeStory()">❤️ いいね</button>
+<br/>
+<a class="log-button" href="reading-log.html">📖 この作品に感情を記録する</a>
+<br/>
+<button id="revise-button">✏️ この作品をアップデートする</button>
+<p style="font-size: 0.9rem; color: #666;">※他の人の作品をベースに、自分なりのバージョンを投稿できます</p>
+<br/>
+<a href="index.html">⬅ トップへ戻る</a>
+<div id="logList" style="margin-top:2em; padding:1em; background:#e8f5e9; border-radius:6px;">
+<h4>📘 この作品の感情ログ<a href="reading-log.html" id="logPageLink" style="font-size:0.9em; margin-left:1em;">→ 感情ログ一覧ページへ</a></h4>
+<div id="logItems"></div>
+    　 </div>
+</main>
+<!-- 🔹 作者プロフィール用モーダル -->
+<div class="modal" id="profile-modal">
+<div class="modal-content">
+<span class="close">×</span>
+<h2 id="profile-title"></h2>
+<p id="profile-text"></p>
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsdiff/7.0.0/diff.min.js"></script>
+<script src="scripts/detail.js"></script>
+<script>
       document.getElementById("revise-button").addEventListener("click", function () {
         const params = new URLSearchParams(window.location.search);
         const storyId = params.get("id");
@@ -101,13 +95,15 @@
           alert("元の作品IDが取得できませんでした。");
         }
       });
-
-
 </script>
-
-
-
-
-  
-</body>
+</div><script>
+// 読み込み時にログページへのリンクをストーリーID付きに更新
+window.addEventListener('DOMContentLoaded', () => {
+  const storyId = document.querySelector('[data-story-id]')?.dataset.storyId;
+  const logLink = document.getElementById('logPageLink');
+  if (storyId && logLink) {
+    logLink.href = `reading-log.html?id=${encodeURIComponent(storyId)}`;
+  }
+});
+</script></body>
 </html>

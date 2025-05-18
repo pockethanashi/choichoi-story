@@ -187,6 +187,69 @@ function highlightDiff(oldText, newText) {
 }
 
 
+//新機能
+// URLのクエリパラメータから storyId を取得して data-story-id にセット
+(function injectStoryId() {
+  const params = new URLSearchParams(window.location.search);
+  const storyId = params.get('id');
+  if (storyId) {
+    let el = document.querySelector('[data-story-id]');
+    if (!el) {
+      el = document.createElement('div');
+      el.style.display = 'none';
+      el.setAttribute('data-story-id', storyId);
+      document.body.prepend(el);
+    } else {
+      el.setAttribute('data-story-id', storyId);
+    }
+  }
+})();
+
+
+// 感情ログボタンの href を更新する処理
+(function updateLogButtonHref() {
+  const params = new URLSearchParams(window.location.search);
+  const storyId = params.get('id');
+  if (storyId) {
+    const logLink = document.querySelector('.log-button');
+    if (logLink) {
+      logLink.href = `reading-log.html?id=${encodeURIComponent(storyId)}`;
+    }
+  }
+})();
+
+
+// ログを取得して表示する
+(function renderStoryLogs() {
+  const params = new URLSearchParams(window.location.search);
+  const storyId = params.get('id');
+  if (!storyId) return;
+  const key = `storyLog_${storyId}`;
+  const logs = JSON.parse(localStorage.getItem(key)) || [];
+  const container = document.getElementById('logItems');
+  if (!container) return;
+  container.innerHTML = '';
+
+  logs.forEach((log, index) => {
+    const div = document.createElement('div');
+    div.style.marginBottom = '0.5em';
+    div.innerHTML = `
+      <strong>${log.emotion}</strong> ${log.comment} <span style="color:#666;">(${log.date})</span>
+    `;
+    container.appendChild(div);
+  });
+})();
+
+function deleteLog(index) {
+  const params = new URLSearchParams(window.location.search);
+  const storyId = params.get('id');
+  if (!storyId) return;
+  const key = `storyLog_${storyId}`;
+  let logs = JSON.parse(localStorage.getItem(key)) || [];
+  logs.splice(index, 1);
+  localStorage.setItem(key, JSON.stringify(logs));
+  location.reload();
+}
 
 
 

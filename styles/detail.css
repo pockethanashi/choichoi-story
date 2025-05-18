@@ -142,3 +142,14 @@ button:hover {
   text-decoration: line-through;
   opacity: 0.6;
 }
+
+/* 新機能 */
+.log-button {
+  display: inline-block;
+  margin-top: 1em;
+  padding: 0.5em 1em;
+  background-color: #ffe082;
+  color: #333;
+  text-decoration: none;
+  border-radius: 5px;
+}

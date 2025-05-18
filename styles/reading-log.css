@@ -1,0 +1,183 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; /* ← 横スクロールを防ぐために重要 */
+  box-sizing: border-box;
+}
+
+
+
+main.concept-page {
+  max-width: 1000px;
+  width: 100%;
+  margin: 20px auto;
+  padding: 1rem;
+  background: linear-gradient(145deg, #ffffff, #f0f4f8);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  line-height: 1.9;
+  color: #333;
+}
+
+
+
+main.concept-page h2, main.concept-page h3 {
+  text-align: left;
+  color: #2c3e50;
+  border-bottom: 2px solid #d8e8ec;
+  padding-bottom: 0.3em;
+  margin-top: 0em;
+  margin-bottom: 1.2em;
+  font-family: 'Kaisei HarunoUmi', serif;
+}
+
+main.concept-page p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  line-height: 2;
+  color: #444;
+  text-align: left;
+  font-weight: bold;
+}
+
+main.concept-page a {
+  display: inline-block;
+  margin-top: 30px;
+  text-decoration: none;
+  color: #0066cc;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+main.concept-page a:hover {
+  text-decoration: underline;
+  color: #004b99;
+}
+
+
+/* 赤字強調用 */
+.highlight-red {
+  color: #d90000;
+  font-weight: bold;
+}
+
+
+.section-title {
+  background-color: #fffde7; 
+  padding: 0rem;
+  border-left: 6px solid #007bff; /* 青いラインでアクセント */
+  margin-top: 2rem;
+  font-size: 1.6rem;
+  text-align: center;
+  border-radius: 4px;
+}
+
+
+.submit-rule {
+  max-width: 1000px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: #fefefe;
+  border-left: 6px solid #009688;
+  border-radius: 10px;
+  font-family: 'Noto Sans JP', sans-serif;
+  color: #333;
+  line-height: 1.9;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.submit-rule h2 {
+  font-size: 1.6rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #00796b;
+  border-bottom: 1px solid #cceae7;
+  padding-bottom: 0.3rem;
+  text-align: center;
+}
+
+.submit-rule p {
+  margin-bottom: 1.5rem;
+  font-size: 1.05rem;
+  text-align: center;
+}
+
+.submit-rule ol {
+  padding-left: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.submit-rule li {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+
+
+.submit-guide {
+  max-width: 1000px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: #fefefe;
+  border-left: 6px solid #009688;
+  border-radius: 10px;
+  font-family: 'Noto Sans JP', sans-serif;
+  color: #333;
+  line-height: 1.9;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.submit-guide h2 {
+  font-size: 1.6rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #00796b;
+  border-bottom: 1px solid #cceae7;
+  padding-bottom: 0.3rem;
+  text-align: center;
+}
+
+.submit-guide p {
+  margin-bottom: 1.5rem;
+  font-size: 1.05rem;
+  text-align: center;
+}
+
+.submit-guide ol {
+  padding-left: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.submit-guide li {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+
+
+
+@media screen and (max-width: 768px) and (orientation: portrait) {
+
+  main.concept-page {
+    width: calc(100% - 2rem); /* ← 横幅から左右マージン分引く */
+    margin: 20px auto;
+    padding: 1rem; /* ← 内側余白も少し増やすとバランス◎ */
+  }
+
+  main.concept-page h2, main.concept-page h3 {
+    font-size: 1rem;
+    padding: 0rem;
+  }
+
+  main.concept-page p {
+   font-size: 0.8rem;
+   line-height: 1.6;
+  }
+
+  main.concept-page a {
+    display: inline-block;
+     font-size: 0.8rem;
+     line-height: 1.6;
+  }
+}
