@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ストーリー全文</title>
+<link href="styles/detail-vertical.css" rel="stylesheet"/>
+<link href="styles/common.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Kaisei+HarunoUmi&amp;display=swap" rel="stylesheet"/>
+<link href="images/favicon.png" rel="icon" type="image/png"/>
+</head>
+<body>
+<div data-story-id="sample001" style="display:none;"></div>
+<!-- 🔸 共通ヘッダー（ロゴ＋タイトル＋ナビ） -->
+<header>
+<div class="main-header">
+<div class="header-main">
+    　<a href="index.html">
+<img alt="ロゴ" class="logo" src="images/logo.png"/>
+</a>
+<div class="title-group">
+<h1 class="site-title">ちょいChoiceストーリー</h1>
+<p class="site-subtitle">アプデする小話</p>
+</div>
+</div>
+</div>
+<nav class="sub-header">
+<a href="index.html">トップ</a>
+<a href="new-post.html">新規投稿</a>
+<a href="concept.html">このサイトについて</a>
+<a href="word-generator.html">ネタジェネレータ</a>
+<a href="contact.html">問い合わせ</a>
+</nav>
+</header>
+<!-- 🔸 サイドバーとメインを並べる -->
+<div class="container">
+<main class="story-main">
+  <section class="reader-card" aria-label="縦書き読書エリア">
+    <div class="reader-scroll">
+      <div class="story-heading">
+        <h2 id="story-title">読み込み中...</h2>
+        <p class="story-heading-author">著・<span id="story-author"></span></p>
+        <p class="story-heading-version">第<span id="story-version"></span>稿</p>
+      </div>
+      <article id="story-body"></article>
+    </div>
+  </section>
+
+  <p class="reader-hint">← 横スクロール／スワイプして読み進めます</p>
+
+  <section class="story-controls">
+    <div id="version-area" class="version-area">
+      <label for="version-select">別バージョンを見る</label>
+      <select id="version-select"></select>
+    </div>
+
+    <div class="story-actions">
+      <button onclick="likeStory()">❤️ いいね <span id="story-likes">0</span></button>
+      <a class="log-button" href="reading-log.html">📖 感情を記録する</a>
+      <button id="revise-button">✏️ この作品をアップデートする</button>
+    </div>
+    <p class="revise-note">※他の人の作品をベースに、自分なりのバージョンを投稿できます</p>
+  </section>
+
+  <section id="story-sidebar" class="story-info">
+    <h3>作品情報</h3>
+    <div class="story-info-grid">
+      <p><strong>ジャンル</strong><span id="story-genre"></span></p>
+      <p><strong>オリジナル作者</strong><span id="story-originalAuthor"></span></p>
+      <p><strong>作者</strong><span id="story-author-info"></span></p>
+      <p><strong>バージョン</strong><span id="story-version-info"></span></p>
+      <p><strong>更新日</strong><span id="story-updateDate"></span></p>
+      <p><strong>更新メモ</strong><span id="story-updateMemo"></span></p>
+    </div>
+    <button class="profile-btn">👤 作者プロフィールを見る</button>
+  </section>
+
+  <div class="back-link"><a href="index.html">⬅ トップへ戻る</a></div>
+
+  <div id="logList">
+    <h4>📘 この作品の感情ログ <a href="reading-log.html" id="logPageLink">→ 感情ログ一覧ページへ</a></h4>
+    <div id="logItems"></div>
+  </div>
+</main>
+<!-- 🔹 作者プロフィール用モーダル -->
+<div class="modal" id="profile-modal">
+<div class="modal-content">
+<span class="close">×</span>
+<h2 id="profile-title"></h2>
+<p id="profile-text"></p>
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsdiff/7.0.0/diff.min.js"></script>
+<script src="scripts/detail-vertical.js"></script>
+<script>
+      document.getElementById("revise-button").addEventListener("click", function () {
+        const params = new URLSearchParams(window.location.search);
+        const storyId = params.get("id");
+
+        // 表示されているタイトルとバージョンを取得（最新の内容）
+        const title = document.getElementById("story-title")?.textContent || "";
+        const version = document.getElementById("story-version")?.textContent || "";
+
+        if (storyId) {
+          const postParams = new URLSearchParams({
+            parent: storyId,
+            title: title,
+            version: version
+          });
+          window.location.href = `update-post.html?${postParams.toString()}`;
+        } else {
+          alert("元の作品IDが取得できませんでした。");
+        }
+      });
+</script>
+</div><script>
+// 読み込み時にログページへのリンクをストーリーID付きに更新
+window.addEventListener('DOMContentLoaded', () => {
+  const storyId = document.querySelector('[data-story-id]')?.dataset.storyId;
+  const logLink = document.getElementById('logPageLink');
+  if (storyId && logLink) {
+    logLink.href = `reading-log.html?id=${encodeURIComponent(storyId)}`;
+  }
+});
+</script></body>
+</html>

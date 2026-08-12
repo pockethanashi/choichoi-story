@@ -1,0 +1,315 @@
+/* =========================================
+   作品詳細：縦書き読書モード
+   ========================================= */
+
+.container {
+  width: min(1180px, calc(100% - 32px));
+  margin: 24px auto 48px;
+}
+
+.story-main {
+  width: 100%;
+}
+
+/* ===== 縦書き本文 ===== */
+.reader-card {
+  height: min(720px, calc(100vh - 250px));
+  min-height: 520px;
+  overflow: hidden;
+  background: #f7f3e8;
+  border: 1px solid rgba(75, 66, 48, 0.15);
+  border-radius: 8px;
+  box-shadow: 0 14px 35px rgba(32, 54, 41, 0.12);
+}
+
+.reader-scroll {
+  width: 100%;
+  height: 100%;
+  padding: 52px 60px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #c6bfad transparent;
+}
+
+.story-heading {
+  min-width: 170px;
+  margin-left: 72px;
+  padding-left: 36px;
+  border-left: 1px solid #d9d2c1;
+  font-family: 'Kaisei HarunoUmi', serif;
+}
+
+#story-title {
+  margin: 0 0 0 28px;
+  color: #292721;
+  font-size: 1.5em;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-align: start;
+}
+
+.story-heading-author,
+.story-heading-version {
+  margin: 0 0 0 18px;
+  color: #716c61;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+}
+
+#story-body {
+  color: #292721;
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 2.05;
+  letter-spacing: 0.045em;
+  text-align: start;
+}
+
+#story-body br {
+  content: "";
+}
+
+.reader-hint {
+  margin: 10px 4px 0;
+  color: #607267;
+  font-size: 0.82rem;
+  text-align: center;
+}
+
+/* 差分ハイライト */
+.diff-added {
+  background-color: #e3f2df;
+}
+.diff-removed {
+  background-color: #ffe6e6;
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+/* ===== 読書後の操作 ===== */
+.story-controls,
+.story-info,
+#logList {
+  margin-top: 22px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.88);
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.version-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.version-area label {
+  flex: 0 0 auto;
+  font-weight: bold;
+}
+
+#version-select {
+  width: min(520px, 100%);
+  padding: 9px 10px;
+  border: 1px solid #bfc9c1;
+  border-radius: 5px;
+  background: white;
+}
+
+.story-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+button,
+.log-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 9px 16px;
+  border: 0;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+button {
+  background: #ff4081;
+  color: white;
+}
+
+button:hover {
+  background: #e6005c;
+}
+
+.log-button {
+  background: #ffe082;
+  color: #333;
+}
+
+#revise-button {
+  background: #3f7656;
+}
+
+#revise-button:hover {
+  background: #315e44;
+}
+
+.revise-note {
+  margin: 10px 0 0;
+  color: #666;
+  font-size: 0.88rem;
+}
+
+/* ===== 作品情報 ===== */
+.story-info h3 {
+  margin: 0 0 16px;
+}
+
+.story-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px 22px;
+}
+
+.story-info-grid p {
+  margin: 0;
+}
+
+.story-info-grid strong,
+.story-info-grid span {
+  display: block;
+}
+
+.story-info-grid strong {
+  margin-bottom: 3px;
+  color: #617067;
+  font-size: 0.78rem;
+}
+
+.profile-btn {
+  margin-top: 16px;
+  background: #487a9d;
+}
+
+.profile-btn:hover {
+  background: #365f7b;
+}
+
+.back-link {
+  margin: 20px 2px;
+}
+
+.back-link a,
+#logPageLink {
+  color: #356648;
+}
+
+#logList h4 {
+  margin-top: 0;
+}
+
+/* ===== 作者プロフィールモーダル ===== */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  width: min(600px, 90%);
+  margin: 8vh auto;
+  padding: 24px;
+  background: white;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.close {
+  float: right;
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: black;
+}
+
+/* ===== スマホ ===== */
+@media screen and (max-width: 768px) {
+  .container {
+    width: calc(100% - 20px);
+    margin-top: 14px;
+  }
+
+  .reader-card {
+    height: calc(100dvh - 190px);
+    min-height: 430px;
+    border-radius: 5px;
+  }
+
+  .reader-scroll {
+    padding: 34px 26px;
+  }
+
+  .story-heading {
+    min-width: 135px;
+    margin-left: 42px;
+    padding-left: 24px;
+  }
+
+  #story-title {
+    font-size: 1.5em;
+  }
+
+  #story-body {
+    font-size: 16px;
+    line-height: 1.95;
+  }
+
+  .version-area {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  #version-select {
+    width: 100%;
+  }
+
+  .story-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .story-info-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .story-info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* 縦中横：2〜4桁程度の半角数字を横一列で正立表示 */
+.story-body .tcy {
+  text-combine-upright: all;
+  -webkit-text-combine: horizontal;
+}

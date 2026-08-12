@@ -99,7 +99,11 @@ function createStoryElement(story) {
     storyDiv.innerHTML = `
         <h2>${story.title}</h2>
         <p>${previewText}${storyLines.length > PREVIEW_LINES ? "..." : ""}</p>
-        ${storyLines.length > PREVIEW_LINES ? `<a href="detail.html?id=${encodeURIComponent(story.originalId)}">続きを読む</a>` : ""}
+        ${storyLines.length > PREVIEW_LINES ? `
+        <div class="read-links">
+          <a class="read-link" href="detail.html?id=${encodeURIComponent(story.originalId)}">横書きで読む</a>
+          <a class="read-link vertical-read-link" href="detail-vertical.html?id=${encodeURIComponent(story.originalId)}">縦書きで読む</a>
+        </div>` : ""}
         <p><strong>ジャンル:</strong> ${story.genre}</p>
         <p><strong>作者:</strong> ${story.author}</p>
         <p><strong>いいね:</strong> <span id="likes-${story.title}">${story.likes}</span></p>
