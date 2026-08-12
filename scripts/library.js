@@ -36,6 +36,7 @@ function fetchStories() {
             displayStories(currentAuthor);
             populateAuthorSidebar();
             populateAuthorDropdown();
+            populateStoryTitleList();
         })
         .catch(error => console.error("❌ データ取得エラー:", error));
 }
@@ -101,7 +102,7 @@ function createStoryElement(story) {
         <p>${previewText}${storyLines.length > PREVIEW_LINES ? "..." : ""}</p>
         ${storyLines.length > PREVIEW_LINES ? `
         <div class="read-links">
-          <a class="read-link" href="detail.html?id=${encodeURIComponent(story.originalId)}">横書きで読む</a>
+          <a class="read-link" href="detail-vertical.html?id=${encodeURIComponent(story.originalId)}">横書きで読む</a>
           <a class="read-link vertical-read-link" href="detail-vertical.html?id=${encodeURIComponent(story.originalId)}">縦書きで読む</a>
         </div>` : ""}
         <p><strong>ジャンル:</strong> ${story.genre}</p>
@@ -109,6 +110,28 @@ function createStoryElement(story) {
         <p><strong>いいね:</strong> <span id="likes-${story.title}">${story.likes}</span></p>
     `;
     return storyDiv;
+}
+
+// 🔹 小噺タイトル一覧（更新日の新しい順に最大12件）
+function populateStoryTitleList() {
+    const list = document.getElementById("story-title-list");
+    if (!list) return;
+
+    const sortedStories = [...stories].sort((a, b) => {
+        const dateA = new Date(a.updateDate || "1900-01-01");
+        const dateB = new Date(b.updateDate || "1900-01-01");
+        return dateB - dateA;
+    });
+
+    list.innerHTML = "";
+    sortedStories.slice(0, 12).forEach(story => {
+        const li = document.createElement("li");
+        const link = document.createElement("a");
+        link.href = `detail-vertical.html?id=${encodeURIComponent(story.originalId)}`;
+        link.textContent = story.title;
+        li.appendChild(link);
+        list.appendChild(li);
+    });
 }
 
 // 🔹 いいね処理

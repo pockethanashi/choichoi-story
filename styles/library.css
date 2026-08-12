@@ -19,11 +19,59 @@ h1, h2 {
 }
 
 #sidebar-right {
-  width: 150px;
+  width: 230px;
   padding: 20px;
   background-color: #eef4f8;
   text-align: center;
   border-left: 1px solid #ccc;
+}
+
+
+/* 小噺タイトル一覧 */
+.story-title-box {
+  margin-bottom: 28px;
+  text-align: left;
+}
+
+.story-title-box h3 {
+  margin: 0 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #c9d5cf;
+  font-family: 'Kaisei HarunoUmi', serif;
+}
+
+#story-title-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#story-title-list li {
+  padding: 7px 0;
+  border-bottom: 1px dotted #c8d0cc;
+  line-height: 1.45;
+}
+
+#story-title-list a {
+  color: #355c49;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+#story-title-list a:hover {
+  text-decoration: underline;
+}
+
+.all-stories-link {
+  display: inline-block;
+  margin-top: 12px;
+  color: #35604b;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.all-stories-link:hover {
+  text-decoration: underline;
 }
 
 .admin-image {
@@ -134,8 +182,22 @@ button:hover {
     display: none;
   }
   
+  .container {
+    display: block;
+  }
+
   #sidebar-right {
-    display: none;
+    display: block;
+    width: auto;
+    margin: 0 20px 20px;
+    padding: 18px 20px;
+    border-left: none;
+    border-radius: 8px;
+  }
+
+  #sidebar-right .admin-box {
+    max-width: 180px;
+    margin: 24px auto 0;
   }
   
   /* ✅ ヘッダーのスマホ用レイアウト調整 */
