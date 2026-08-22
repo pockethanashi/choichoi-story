@@ -102,7 +102,7 @@ function createStoryElement(story) {
         <p>${previewText}${storyLines.length > PREVIEW_LINES ? "..." : ""}</p>
         ${storyLines.length > PREVIEW_LINES ? `
         <div class="read-links">
-          <a class="read-link" href="detail-vertical.html?id=${encodeURIComponent(story.originalId)}">横書きで読む</a>
+          <a class="read-link" href="detail.html?id=${encodeURIComponent(story.originalId)}">横書きで読む</a>
           <a class="read-link vertical-read-link" href="detail-vertical.html?id=${encodeURIComponent(story.originalId)}">縦書きで読む</a>
         </div>` : ""}
         <p><strong>ジャンル:</strong> ${story.genre}</p>
