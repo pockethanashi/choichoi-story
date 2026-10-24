@@ -25,7 +25,7 @@
 .reader-scroll {
   width: 100%;
   height: 100%;
-  padding: 52px 60px;
+  padding: 68px 64px;
   overflow-x: auto;
   overflow-y: hidden;
   writing-mode: vertical-rl;
@@ -63,10 +63,11 @@
 
 #story-body {
   color: #292721;
-  font-family: inherit;
-  font-size: 16px;
-  line-height: 2.05;
-  letter-spacing: 0.045em;
+  font-family: "Yu Mincho", "游明朝", "Hiragino Mincho ProN",
+               "Hiragino Mincho Pro", "Noto Serif JP", serif;
+  font-size: 10.5pt;      /* Word本文：10.5pt */
+  line-height: 1.7143;    /* Word行送り18pt ÷ 10.5pt */
+  letter-spacing: 0;      /* Word本文に合わせて字間を追加しない */
   text-align: start;
 }
 
@@ -278,9 +279,14 @@ button:hover {
   }
 
   #story-body {
-    font-size: 16px;
-    line-height: 1.95;
-  }
+  color: #292721;
+  font-family: "Yu Mincho", "游明朝", "Hiragino Mincho ProN",
+               "Hiragino Mincho Pro", "Noto Serif JP", serif;
+  font-size: 10.5pt;      /* Word本文：10.5pt */
+  line-height: 1.7143;    /* Word行送り18pt ÷ 10.5pt */
+  letter-spacing: 0;      /* Word本文に合わせて字間を追加しない */
+  text-align: start;
+}
 
   .version-area {
     align-items: stretch;

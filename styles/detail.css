@@ -46,6 +46,23 @@ h2 {
   text-align: center;
 }
 
+
+/* ===== 作品本文：出版物風組版（Word版に合わせる） ===== */
+#story-body {
+  font-family: "Yu Mincho", "游明朝", "Hiragino Mincho ProN",
+               "Hiragino Mincho Pro", "Noto Serif JP", serif;
+  font-size: 10.5pt;      /* Word本文：10.5pt */
+  line-height: 1.7143;    /* Word行送り18pt ÷ 10.5pt */
+  letter-spacing: 0;
+  color: #292721;
+  text-align: left;
+}
+
+#story-body p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 /* 🔹 いいねボタン */
 button {
   background: #ff4081;
